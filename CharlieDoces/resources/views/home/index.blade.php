@@ -10,7 +10,11 @@
         <section>
             @include('profile.partials.header')
         </section>
-
+        
+        <section>
+            @include('profile.partials.banner')
+        </section>
+        
         <section>
             @include('profile.partials.carrousel-categoria')
         </section>
@@ -19,10 +23,7 @@
             @include('produto.index', ['produtos' => $produtos])
         </section>
 
-        <section>
-            @include('profile.partials.banner')
-        </section>
-        
+       
         <section>
             @include('profile.partials.footer')
         </section>

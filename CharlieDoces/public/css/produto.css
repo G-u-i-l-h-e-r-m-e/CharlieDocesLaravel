@@ -1,25 +1,29 @@
-body{
+
+.orientacaoCards{
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    overflow: auto;
+    justify-content: center;
 }
 .cardProduto{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    width: 15%;
     border-radius: 24px;
-    padding: 0px 20px 0px 20px; 
+    padding: 10px 20px 0px 20px; 
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 10px;
+    max-width: 20%;
 }
 
 .imagemProduto{
     width: 60%;
+    margin: 10px 0px 20px 0px;
     
 }
 .nomeProduto{
     font-weight: bold;
-    margin: 0px 0px 10px 0px;
+    margin: 10px 0px 10px 0px;
 }
 .precoProduto{
     color: #90A4AE;
@@ -46,17 +50,27 @@ body{
     cursor: pointer;
 }
 .icon{
-    width: 20px;
+    width: 30px;
     cursor: pointer;
 }
 .orientacaoIconeDesconto{
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin: 10px;
 }
 .orientacaoPreco{
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #FD7022;
+    border-radius: 50%; /* Deixa as setas arredondadas */
+}
+.carousel-control-next-icon{
+color: #FD7022;
 }

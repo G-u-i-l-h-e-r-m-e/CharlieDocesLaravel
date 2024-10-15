@@ -8,8 +8,7 @@
 </head>
 <body>
 
-    
-        
+<main class="orientacaoCards">
     @foreach($produtos as $produto)
     <section class="cardProduto">
         <div class="orientacaoIconeDesconto">
@@ -38,6 +37,7 @@
         </div>   
     </section>
     @endforeach
+</main>
 </body>
 </html>
 

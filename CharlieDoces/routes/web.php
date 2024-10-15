@@ -5,10 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/categoria', [CategoriaController::class,'index']);
 Route::get('/categoria/{categoria}', [CategoriaController::class,'show']);//passado categoria como parâmetro 

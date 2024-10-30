@@ -8,24 +8,24 @@
 <body>
     <main>
         <section>
-            @include('profile.partials.header')
+            @include('profile.partials.header',['categorias' => \App\Models\Categoria::all()]);
         </section>
         
         <section>
-            @include('profile.partials.banner')
+            @include('profile.partials.banner');
         </section>
         
         <section>
-            @include('profile.partials.carrousel-categoria')
+            @include('profile.partials.carrousel-categoria');
         </section>
 
         <section>
-            @include('produto.index', ['produtos' => $produtos])
+            @include('produto.index', ['produtos' => $produtos]);
         </section>
 
        
         <section>
-            @include('profile.partials.footer')
+            @include('profile.partials.footer');
         </section>
     </main>
 </body>

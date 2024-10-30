@@ -28,7 +28,7 @@
             <p>Nenhuma imagem disponível.</p>
         @endif
         <p class="categoriaProduto">{{$produto->Categoria->CATEGORIA_NOME}}</p>
-        <p class="nomeProduto">{{$produto->PRODUTO_NOME}}</p>
+        <a class="nomeProduto" href="/produto/{{$produto->PRODUTO_ID}}">{{$produto->PRODUTO_NOME}}</a>
         <div class="orientacaoPreco">
             <div>
             <span class="precoProduto"><s>R${{$produto->PRODUTO_PRECO}}</s></span><span class="precoFinal">R${{$produto->PRODUTO_PRECO - $produto->PRODUTO_DESCONTO}}</span>

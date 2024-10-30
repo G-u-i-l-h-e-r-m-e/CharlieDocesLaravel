@@ -9,6 +9,8 @@ class Produto extends Model
 {
     use HasFactory;
     protected $table = "PRODUTO";
+    protected  $primaryKey = "PRODUTO_ID";
+    public $timestamps = false;
 
     public function Categoria(){
         return $this->belongsTo(Categoria::class, "CATEGORIA_ID", "CATEGORIA_ID");

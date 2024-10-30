@@ -6,12 +6,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CarrinhoController;
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('carrinho/{produto}', [CarrinhoController::class, 'addCarrinho']);
+    Route::get('carrinho', [CarrinhoController::class, 'carrinho']);
+});
 
 Route::get('/categoria', [CategoriaController::class,'index']);
 Route::get('/categoria/{categoria}', [CategoriaController::class,'show']);//passado categoria como parâmetro 
 Route::get('/produtos', [ProdutoController::class,'index']);
+Route::get('produto/{produto}', [ProdutoController::class, 'show']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

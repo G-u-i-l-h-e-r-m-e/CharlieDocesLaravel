@@ -42,19 +42,19 @@
         <nav class="header-options">
             <ul>
                 <li class="dropdown">
-                    <a href="#">Ver todas as Categorias</a>
+                    <a href="#" class="dropdownTitulo">Ver todas as Categorias</a>
                     <!-- Este menu será preenchido dinamicamente -->
                     <div class="dropdown-menu">
                         <!-- Exemplo de categorias fictícias, a serem substituídas dinamicamente -->
-                        <a href="#">Categoria 1</a>
-                        <a href="#">Categoria 2</a>
-                        <a href="#">Categoria 3</a>
+                        @foreach($categorias as $categoria)
+                        <a href="/categoria/{{$categoria->CATEGORIA_ID}}">{{$categoria->CATEGORIA_NOME}}</a>
+                        @endforeach
                     </div>
                 </li>
-                <li><a href="#">Mais Vendidos</a></li>
-                <li><a href="#">Novidades</a></li>
-                <li><a href="#">Promoções</a></li>
-                <li><a href="#">Preferências</a></li>
+                <li><a href="#" class="dropdownTitulo">Mais Vendidos</a></li>
+                <li><a href="#" class="dropdownTitulo">Novidades</a></li>
+                <li><a href="#" class="dropdownTitulo">Promoções</a></li>
+                <li><a href="#" class="dropdownTitulo">Preferências</a></li>
             </ul>
         </nav>
     </header>

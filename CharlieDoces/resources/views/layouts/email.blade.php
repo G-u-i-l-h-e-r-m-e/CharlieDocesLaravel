@@ -104,7 +104,7 @@
             font-weight: 400;
             font-size: 16px;
             line-height: 20px;
-            color: #BF0B0B
+            color: #BF0B0B;
         }
 
         .login-container button:hover {
@@ -128,37 +128,14 @@
             <div id="email-section">
                 <label for="email">Email ou CPF</label>
                 <input type="text" id="email" name="email"
-                    placeholder="exemplo@exemplo.com.br">
-                {{-- <button id="botao" onclick="validateEmail()" type="button">Continuar</button> --}}
-            </div>
-            <div id="password-section">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="*********" required>
-                {{-- @error('password')
-                    <p>{{ $message }}</p>
-                    @enderror --}}
+                    placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX">
                 @error('email')
                     <p>{{ $message }}</p>
                 @enderror
-                <a href="/forgot-password" class="forgot-password">Esqueceu a senha?</a>
-                <button type="submit">Entrar</button>
+                <button id="botao" type="submit">Continuar</button>
             </div>
         </form>
     </div>
-
-    <script>
-        function validateEmail() {
-            const email = document.getElementById('email').value;
-            const emailSection = document.getElementById('email-section');
-            const passwordSection = document.getElementById('password-section');
-
-            // Simulação de validação de email
-            if (email) {
-                emailSection.classList.add('hidden');
-                passwordSection.classList.remove('hidden');
-            }
-        }
-    </script>
 </body>
 
 </html>

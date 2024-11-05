@@ -28,7 +28,7 @@
             <nav class="header-componentes">
                 <div class="user-options">
                     <img src="/img/header/logo.svg" alt="Usuário">
-                    <a href="#">Entre ou <br>Cadastre-se</a>
+                    <a href="/login">Entre ou <br>Cadastre-se</a>
                 </div>
 
                 <div class="user-options">

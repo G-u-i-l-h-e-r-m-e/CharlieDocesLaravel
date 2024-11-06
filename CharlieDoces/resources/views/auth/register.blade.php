@@ -1,181 +1,107 @@
-<!DOCTYPE html>
-<html>
+<x-cadastrousuario-layout>
+    <div class="container mx-auto px-4">
+        <div class="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-md">
+            <div class="md:flex">
+                <div class="w-full p-3 px-6 py-10">
+                    <h2 class="text-2xl font-bold text-center">Criar Conta</h2>
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
 
-<head>
-    <title>Cadastro</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+                        <!-- Nome -->
+                        <div class="mt-4">
+                            <x-input-label for="nome" :value="__('Nome')" />
+                            <x-text-input id="nome" class="block mt-1 w-full" type="text" name="nome" :value="old('nome')" required autofocus />
+                            <x-input-error :messages="$errors->get('nome')" class="mt-2" />
+                        </div>
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #FFFFFF;
-            font-family: Arial, sans-serif;
-        }
+                        <!-- Email -->
+                        <div class="mt-4">
+                            <x-input-label for="email" :value="__('Email')" />
+                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        </div>
 
-        .cadastro-container {
-            display: flex;
-            justify-content: center;
-            text-align: start;
-            width: 700px;
-            height: 700px;
-            font-family: 'Poppins', sans-serif;
-        }
+                        <!-- Senha -->
+                        <div class="mt-4">
+                            <x-text-input id="senha" class="block mt-1 w-full" type="password" name="senha" :value="old('senha')" required />
+                            <x-input-label for="senha" :value="__('Senha')" />
+                            <x-input-error :messages="$errors->get('senha')" class="mt-2" />
+                        </div>
 
-        .cadastro-container h2 {
-            font-size: 32px;
-            color: #4A2F25;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+                        <!-- CPF -->
+                        <div class="mt-4">
+                            <x-input-label for="cpf" :value="__('CPF')" />
+                            <x-text-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required  />
+                            <x-input-error :messages="$errors->get('cpf')" class="mt-2" />
+                        </div>
 
-        .cadastro-container h3 {
-            font-size: 32px;
-            color: #591F12;
-            font-weight: bold;
-            margin-bottom: 40px;
-            margin-top: 40px;
-        }
+                        <!-- Data de nascimento -->
+                        <div class="mt-4">
+                            <x-text-input id="dataNascimento" class="block mt-1 w-full" type="date" name="dataNascimento" :value="old('dataNascimento')" required />
+                            <x-input-label for="dataNascimento" :value="__('Data de nascimento')" />
+                            <x-input-error :messages="$errors->get('dataNascimento')" class="mt-2" />
+                        </div>
 
-        .cadastro-container label {
-            display: block;
-            font-size: 20px;
-            color: #8B4513;
-            margin-bottom: 8px;
-            text-align: left;
-        }
+                        <!-- CEP -->
+                        <div class="mt-4">
+                            <x-input-label for="cep" :value="__('CEP')" />
+                            <x-text-input id="cep" class="block mt-1 w-full" type="text" name="cep" :value="old('cep')" required />
+                            <x-input-error :messages="$errors->get('cep')" class="mt-2" />
+                        </div>
 
-        .cadastro-container input[type="date"],
-        .cadastro-container input[type="email"],
-        .cadastro-container input[type="password"],
-        .cadastro-container input[type="text"] {
-            width: 698px;
-            height: 42px;
-            padding: 12px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
+                        <!-- Rua -->
+                        <div class="mt-4">
+                            <x-input-label for="rua" :value="__('Rua')" />
+                            <x-text-input id="rua" class="block mt-1 w-full" type="text" name="rua" :value="old('rua')" required />
+                            <x-input-error :messages="$errors->get('rua')" class="mt-2" />
+                        </div>
 
-        .cadastro-container button {
-            width: 100%;
-            padding: 12px;
-            font-size: 24px;
-            background-color: #cccccc;
-            color: #7B7E84;
-            border: none;
-            border-radius: 8px;
-            cursor: not-allowed;
-            font-weight: bold;
-        }
-    </style>
-</head>
+                        <!-- Numero -->
+                        <div class="mt-4">
+                            <x-input-label for="numero" :value="__('Numero')" />
+                            <x-text-input id="numero" class="block mt-1 w-full" type="number" name="numero" :value="old('numero')" required />
+                            <x-input-error :messages="$errors->get('numero')" class="mt-2" />
+                        </div>
 
-<body>
-    <div class="cadastro-container">
-        <form>
-            <h2>Criar Conta</h2>
-            <label for="nome">Nome Completo:</label>
-            <input type="text" id="nome" name="nome" required />
+                        <!-- Complemento -->
+                        <div class="mt-4">
+                            <x-input-label for="complemento" :value="__('Complemento')" />
+                            <x-text-input id="complemento" class="block mt-1 w-full" type="text" name="complemento" :value="old('complemento')" required />
+                            <x-input-error :messages="$errors->get('complemento')" class="mt-2" />
+                        </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required />
+                        <!-- Bairro -->
+                        <div class="mt-4">
+                            <x-input-label for="bairro" :value="__('Bairro')" />
+                            <x-text-input id="bairro" class="block mt-1 w-full" type="text" name="bairro" :value="old('bairro')" required />
+                            <x-input-error :messages="$errors->get('bairro')" class="mt-2" />
+                        </div>
 
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required />
+                        <!-- Cidade -->
+                        <div class="mt-4">
+                            <x-input-label for="cidade" :value="__('Complemento')" />
+                            <x-text-input id="cidade" class="block mt-1 w-full" type="text" name="cidade" :value="old('cidade')" required />
+                            <x-input-error :messages="$errors->get('cidade')" class="mt-2" />
+                        </div>
 
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" required />
-
-            <label for="dataNascimento">Data de Nascimento:</label>
-            <input type="date" id="dataNascimento" name="dataNascimento" required />
-
-            <h3>Endereço Completo</h3>
-            <label for="cep">CEP:</label>
-            <input type="text" id="cep" name="cep" required />
-
-            <label for="rua">Rua:</label>
-            <input type="text" id="rua" name="rua" required />
-
-            <label for="numero">Número:</label>
-            <input type="text" id="numero" name="numero" required />
-
-            <label for="complemento">Complemento:</label>
-            <input type="text" id="complemento" name="complemento" />
-
-            <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" name="bairro" required />
-
-            <label for="cidade">Cidade:</label>
-            <input type="text" id="cidade" name="cidade" required />
-
-            <label for="estado">Estado:</label>
-            <input type="text" id="estado" name="estado" required />
-
-            <button type="submit">Continuar</button>
-        </form>
+                        <!-- Estado -->
+                        <div class="mt-4">
+                            <x-input-label for="estado" :value="__('Estado')" />
+                            <x-text-input id="estado" class="block mt-1 w-full" type="text" name="estado" :value="old('estado')" required />
+                            <x-input-error :messages="$errors->get('estado')" class="mt-2" />
+                        </div>
+                        <x-primary-button class="ml-4">
+                            {{ __('Registrar') }}
+                        </x-primary-button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
+</x-cadastrousuario-layout>
+{{-- <div class="flex items-center justify-end mt-4">
+    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+        {{ __('Já tem uma conta?') }}
+    </a>
 
-</html>
-
-
-{{-- <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
+</div> --}}

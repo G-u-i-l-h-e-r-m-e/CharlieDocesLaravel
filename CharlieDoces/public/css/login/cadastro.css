@@ -16,7 +16,7 @@ body {
 .cadastro-container {
     display: flex;
     justify-content: center;
-    text-align:start;
+    text-align: start;
     width: 700px;
     height: 700px;
     font-family: 'Poppins', sans-serif;
@@ -44,6 +44,7 @@ body {
     margin-bottom: 8px;
     text-align: left;
 }
+
 .cadastro-container input[type="date"],
 .cadastro-container input[type="email"],
 .cadastro-container input[type="password"],
@@ -61,10 +62,26 @@ body {
     width: 100%;
     padding: 12px;
     font-size: 24px;
-    background-color: #cccccc;
-    color: #7B7E84;
+    background-color: #4CAF50;
+    color: white;
     border: none;
     border-radius: 8px;
-    cursor: not-allowed;
+    cursor: pointer;
     font-weight: bold;
+}
+
+.cadastro-container button:hover {
+    background-color: #45A049;
+}
+
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 700px;
+}
+
+.cadastro-form h2 {
+    margin-bottom: 20px;
+    text-align: start;
 }

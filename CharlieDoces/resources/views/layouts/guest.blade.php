@@ -1,164 +1,30 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #FFFFFF;
-            font-family: Arial, sans-serif;
-        }
-
-        .login-container {
-            display: flex;
-            justify-content: center;
-            text-align: start;
-            width: 700px;
-            height: 700px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .login-container h2 {
-            font-size: 32px;
-            color: #4A2F25;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .login-container label {
-            display: block;
-            font-size: 24px;
-            color: #4A2F25;
-            margin-bottom: 8px;
-            text-align: left;
-        }
-
-        .login-container input[type="text"],
-        .login-container input[type="password"] {
-            width: 698px;
-            height: 52px;
-            padding: 12px;
-            font-size: 16px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-
-        .password-container {
-            position: relative;
-        }
-
-        .password-container input[type="password"] {
-            padding-right: 40px;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            font-size: 32px;
-            color: #4A2F25;
-        }
-
-        .forgot-password {
-            display: block;
-            font-size: 14px;
-            color: #007BFF;
-            text-decoration: none;
-            margin: 10px 0 20px;
-            text-align: right;
-        }
-
-        .login-container button {
-            width: 100%;
-            padding: 12px;
-            font-size: 24px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .login-container p {
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 20px;
-            color: #BF0B0B
-        }
-
-        .login-container button:hover {
-            background-color: #45A049;
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
-    <div class="login-container">
-        <form id="login-form" method="POST" action="{{ route('login') }}">
-            @csrf
-            <h2>Entrar ou Criar Conta</h2>
-            <div id="email-section">
-                <label for="email">Email ou CPF</label>
-                <input type="text" id="email" name="email"
-                    placeholder="exemplo@exemplo.com.br">
-                {{-- <button id="botao" onclick="validateEmail()" type="button">Continuar</button> --}}
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans text-gray-900 antialiased">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
+            <div>
+                <a href="/">
+                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                </a>
             </div>
-            <div id="password-section">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="*********" required>
-                {{-- @error('password')
-                    <p>{{ $message }}</p>
-                    @enderror --}}
-                @error('email')
-                    <p>{{ $message }}</p>
-                @enderror
-                <a href="/forgot-password" class="forgot-password">Esqueceu a senha?</a>
-                <button type="submit">Entrar</button>
+
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+                {{ $slot }}
             </div>
-        </form>
-    </div>
-
-    <script>
-        function validateEmail() {
-            const email = document.getElementById('email').value;
-            const emailSection = document.getElementById('email-section');
-            const passwordSection = document.getElementById('password-section');
-
-            // Simulação de validação de email
-            if (email) {
-                emailSection.classList.add('hidden');
-                passwordSection.classList.remove('hidden');
-            }
-        }
-    </script>
-</body>
-
+        </div>
+    </body>
 </html>

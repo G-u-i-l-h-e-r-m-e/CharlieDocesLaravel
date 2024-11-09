@@ -9,11 +9,21 @@ use App\Models\Categoria;
 
 class HomeController extends Controller
 {
-    public function index(){
-        return view('home.index',['produtos' => Produto::All()]);
+    public function index()
+    {
+        return view('home.index', ['produtos' => Produto::All()]);
     }
 
-    public function categoria(){
-        return view('home.index',['categorias' => Categoria::All()]);
+    public function categoria()
+    {
+        return view('home.index', ['categorias' => Categoria::All()]);
+    }
+
+    public function home()
+    {
+        return view('home.index', [
+            'produtos' => Produto::all(),
+            'categorias' => Categoria::all()
+        ]);
     }
 }

@@ -132,6 +132,20 @@ header section img:hover {
     transition: all 0.3s ease;
 }
 
+.user-options button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    top: 10px;
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+    padding: 0;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
 .dropdownTitulo {
     color: #fff;
 }
@@ -150,6 +164,7 @@ header section img:hover {
 
 /* Efeito de hover nas ancoras em user-options e header-options */
 .user-options a:hover,
+.user-options button:hover,
 .header-options ul li a:hover {
     color: #D94A4A;
     background-color: rgba(255, 255, 255, 0.8);

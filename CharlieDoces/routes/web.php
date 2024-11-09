@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoriaController;
@@ -18,9 +19,9 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('home', [HomeController::class, 'home']);
-    
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::get('enviado', [LoginController::class, 'sent']);
 

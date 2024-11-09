@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -9,9 +8,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #FFFFFF;
+    height: 120vh;
+    background-color: #ffffff;
     font-family: Arial, sans-serif;
+    overflow:hidden;
 }
 
 .login-container {
@@ -19,13 +19,13 @@ body {
     justify-content: center;
     text-align: start;
     width: 700px;
-    height: 700px;
-    font-family: 'Poppins', sans-serif;
+    height: 800px;
+    font-family: "Poppins", sans-serif;
 }
 
 .login-container h2 {
     font-size: 32px;
-    color: #4A2F25;
+    color: #4a2f25;
     font-weight: bold;
     margin-bottom: 20px;
 }
@@ -33,7 +33,7 @@ body {
 .login-container label {
     display: block;
     font-size: 24px;
-    color: #4A2F25;
+    color: #4a2f25;
     margin-bottom: 8px;
     text-align: left;
 }
@@ -53,7 +53,6 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 700px;
 }
 
 .login-form h2 {
@@ -76,13 +75,13 @@ body {
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 32px;
-    color: #4A2F25;
+    color: #4a2f25;
 }
 
 .forgot-password {
     display: block;
     font-size: 14px;
-    color: #007BFF;
+    color: #007bff;
     text-decoration: none;
     margin: 10px 0 20px;
     text-align: right;
@@ -93,7 +92,7 @@ body {
     padding: 12px;
     margin-bottom: 3%;
     font-size: 24px;
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: white;
     border: none;
     border-radius: 8px;
@@ -105,23 +104,90 @@ body {
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
-    color: #BF0B0B
+    color: #bf0b0b;
+}
+
+
+.login-container button:hover {
+    background-color: #45a049;
+}
+
+.forgotpassword-container {
+    display: flex;
+    justify-content: center;
+    text-align: start;
+    width: 700px;
+    height: 700px;
+    font-family: "Poppins", sans-serif;
+}
+
+.forgotpassword-container h2 {
+    font-size: 32px;
+    color: #4a2f25;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.forgotpassword-container label {
+    display: block;
+    font-size: 24px;
+    color: #8b4513;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.forgotpassword-container input[type="text"] {
+    width: 698px;
+    height: 52px;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.forgotpassword-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 24px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.forgotpassword-container button:hover {
+    background-color: #45a049;
+}
+
+.forgotpassword-container p {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 5px;
+    color: #591f12;
+}
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .login-container span {
-    margin-left: 38%;
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
-    color: #1343c7e7
+    color: #1343c7e7;
 }
 
 .cadastro-button {
     margin-top: 10px;
-}
-
-.login-container button:hover {
-    background-color: #45A049;
 }
 
 .hidden {

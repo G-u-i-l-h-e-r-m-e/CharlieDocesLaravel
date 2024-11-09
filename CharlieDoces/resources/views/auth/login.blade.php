@@ -4,13 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
     <link rel="stylesheet" href="{{ asset('css/login/login.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -22,14 +20,15 @@
             <form id="login-form" class="login-form" method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <div id="email-section">
+                <div>
                     <label for="email">Email ou CPF</label>
-                    <input type="text" id="email" name="email" placeholder="exemplo@exemplo.com.br" required>
+                    <input type="text" id="email" name="email" placeholder="exemplo@exemplo.com.br"
+                        value="{{ old('email') }}" required>
                     @error('email')
                         <p class="text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
-                <div id="password-section">
+                <div>
                     <label for="password">Senha</label>
                     <input type="password" id="password" name="password" placeholder="*********" required>
                     @error('password')
@@ -37,11 +36,23 @@
                     @enderror
                 </div>
                 <div>
+                    <a href="/forgot-password" class="forgot-password">Esqueceu a senha?</a>
+                </div>
+                <div>
                     <button type="submit">Entrar</button>
+                    <hr>
+                </div>
+                <div class="register-container">
+                    <span>Não tem uma conta?</span>
+                </div>
+                <div>
+                    <a href="/cadastro" class="btn btn-primary">
+                        <button type="button">Cadastre-se</button>
+                    </a>
                 </div>
             </form>
         </div>
     </div>
+    </div>
 </body>
-
 </html>

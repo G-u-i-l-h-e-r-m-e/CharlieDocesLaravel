@@ -8,7 +8,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 130vh;
     background-color: #FFFFFF;
     font-family: Arial, sans-serif;
 }
@@ -18,8 +18,9 @@ body {
     justify-content: center;
     text-align: start;
     width: 700px;
-    height: 700px;
+    height: 1000px;
     font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px;
 }
 
 .cadastro-container h2 {
@@ -45,7 +46,6 @@ body {
     text-align: left;
 }
 
-.cadastro-container input[type="date"],
 .cadastro-container input[type="email"],
 .cadastro-container input[type="password"],
 .cadastro-container input[type="text"] {

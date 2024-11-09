@@ -27,8 +27,16 @@
             <!-- Opções de usuário -->
             <nav class="header-componentes">
                 <div class="user-options">
-                    <img src="/img/header/logo.svg" alt="Usuário">
-                    <a href="/login">Entre ou <br>Cadastre-se</a>
+                    @auth
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <img src="/img/header/logo.svg" alt="Usuário">
+                            <button type="submit">Logout</button>
+                        </form>
+                    @else
+                        <img src="/img/header/logo.svg" alt="Usuário">
+                        <a href="login">Entre ou <br>Cadastre-se</a>
+                    @endauth
                 </div>
 
                 <div class="user-options">
@@ -46,8 +54,8 @@
                     <!-- Este menu será preenchido dinamicamente -->
                     <div class="dropdown-menu">
                         <!-- Exemplo de categorias fictícias, a serem substituídas dinamicamente -->
-                        @foreach($categorias as $categoria)
-                        <a href="/categoria/{{$categoria->CATEGORIA_ID}}">{{$categoria->CATEGORIA_NOME}}</a>
+                        @foreach ($categorias as $categoria)
+                            <a href="/categoria/{{ $categoria->CATEGORIA_ID }}">{{ $categoria->CATEGORIA_NOME }}</a>
                         @endforeach
                     </div>
                 </li>

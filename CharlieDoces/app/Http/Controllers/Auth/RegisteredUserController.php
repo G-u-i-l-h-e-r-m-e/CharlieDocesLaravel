@@ -71,6 +71,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // Redirecionar para a página inicial ou outra página desejada
-        return redirect()->route('login')->with('success', 'Usuário criado com sucesso.');
+        return redirect()->route('home');
     }
 }

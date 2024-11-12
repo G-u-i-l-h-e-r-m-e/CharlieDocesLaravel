@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
+
        
         $produtos = Produto::all();
 
@@ -24,21 +24,6 @@ class HomeController extends Controller
 
         
         return view('home.index', ['produtos' => $produtos, 'categoriaChocolate' => $categoriaChocolate, 'categoriaNatal' => $categoriaNatal, 'categoriaTopVendas' => $categoriaTopVendas]);
-=======
-        return view('home.index', ['produtos' => Produto::All()]);
-    }
 
-    public function categoria()
-    {
-        return view('home.index', ['categorias' => Categoria::All()]);
-    }
-
-    public function home()
-    {
-        return view('home.index', [
-            'produtos' => Produto::all(),
-            'categorias' => Categoria::all()
-        ]);
->>>>>>> 4fb1552c8a6409db0076942619d502e1134b77c3
-    }
+}
 }

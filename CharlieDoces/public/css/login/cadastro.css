@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 130vh;
+    background-color: #FFFFFF;
+    font-family: Arial, sans-serif;
+}
+
+.cadastro-container {
+    display: flex;
+    justify-content: center;
+    text-align: start;
+    width: 700px;
+    height: 1000px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 15px;
+}
+
+.cadastro-container h2 {
+    font-size: 32px;
+    color: #4A2F25;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cadastro-container h3 {
+    font-size: 32px;
+    color: #591F12;
+    font-weight: bold;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.cadastro-container label {
+    display: block;
+    font-size: 20px;
+    color: #8B4513;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.cadastro-container input[type="email"],
+.cadastro-container input[type="password"],
+.cadastro-container input[type="text"] {
+    width: 698px;
+    height: 42px;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.cadastro-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cadastro-container button:hover {
+    background-color: #45A049;
+}
+
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 700px;
+}
+
+.cadastro-form h2 {
+    margin-bottom: 20px;
+    text-align: start;
+}

@@ -18,22 +18,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('carrinho', [CarrinhoController::class, 'carrinho']);
 });
 
-<<<<<<< HEAD
 Route::get('/categoria', [CategoriaController::class,'index']);
 Route::get('/categoria/{categoria}', [CategoriaController::class,'show']);
 Route::get('/produtos', [ProdutoController::class,'index']);
-=======
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-});
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-Route::get('enviado', [LoginController::class, 'sent']);
-
-Route::get('/categoria', [CategoriaController::class, 'index']);
-Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']); //passado categoria como parâmetro 
-Route::get('/produtos', [ProdutoController::class, 'index']);
->>>>>>> 4fb1552c8a6409db0076942619d502e1134b77c3
 Route::get('produto/{produto}', [ProdutoController::class, 'show']);
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');

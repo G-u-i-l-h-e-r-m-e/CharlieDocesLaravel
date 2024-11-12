@@ -15,10 +15,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('carrinho', [CarrinhoController::class, 'carrinho']);
 });
 
+Route::get('/produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');
+
 Route::get('/categoria', [CategoriaController::class,'index']);
-Route::get('/categoria/{categoria}', [CategoriaController::class,'show']);//passado categoria como parâmetro 
+Route::get('/categoria/{categoria}', [CategoriaController::class,'show']); // Passando categoria como parâmetro 
 Route::get('/produtos', [ProdutoController::class,'index']);
-Route::get('produto/{produto}', [ProdutoController::class, 'show']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

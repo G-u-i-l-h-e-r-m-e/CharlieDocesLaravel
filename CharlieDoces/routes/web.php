@@ -33,6 +33,16 @@ Route::get('enviado', [LoginController::class, 'sent']);
 Route::get('/categoria', [CategoriaController::class, 'index']);
 Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']); //passado categoria como parâmetro 
 Route::get('/produtos', [ProdutoController::class, 'index']);
+Route::get('enviado', [LoginController::class, 'sent']);
+
+Route::get('/categoria', [CategoriaController::class, 'index']);
+Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']); //passado categoria como parâmetro 
+Route::get('/produtos', [ProdutoController::class, 'index']);
+Route::get('enviado', [LoginController::class, 'sent']);
+
+Route::get('/categoria', [CategoriaController::class, 'index']);
+Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']); //passado categoria como parâmetro 
+Route::get('/produtos', [ProdutoController::class, 'index']);
 
 Route::get('produto/{produto}', [ProdutoController::class, 'show']);
 

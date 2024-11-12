@@ -9,9 +9,10 @@ class Produto_imagem extends Model
 {
     use HasFactory;
     protected $table = "PRODUTO_IMAGEM";
-     protected $primaryKey = "IMAGEM_ID";
+    protected $primaryKey = "IMAGEM_ID";
 
-     public function Produto(){
+    public function Produto()
+    {
         return $this->belongsTo(Produto::class, "PRODUTO_ID", "PRODUTO_ID");
     }
 }

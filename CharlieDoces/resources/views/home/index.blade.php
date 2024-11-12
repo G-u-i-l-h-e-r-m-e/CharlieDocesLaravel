@@ -18,7 +18,7 @@
         </section>
         
         <section>
-            @include('profile.partials.carrousel-categoria');
+          
         </section>
         
         <section>
@@ -46,7 +46,7 @@
        
        
         <section>
-            @include('profile.partials.footer');
+            @include('profile.partials.footer')
         </section>
     </main>
     <script src="/js/produto.js"></script>

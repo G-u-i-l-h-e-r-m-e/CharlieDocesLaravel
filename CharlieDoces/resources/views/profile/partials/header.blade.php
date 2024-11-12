@@ -43,7 +43,7 @@
             <!-- Bloco 3: Navegação -->
             <div class="nav-section">
                 <!-- Redireciona para página de produtos -->
-                <a href="{{ url('/produtos') }}">Todos os Produtos</a>
+                <a href="{{ url('/todos_produtos') }}">Todos os Produtos</a>
 
                 <!-- Condicional para exibir 'Entre ou cadastre-se' ou saudação com o nome do usuário -->
                 @if (Auth::check())

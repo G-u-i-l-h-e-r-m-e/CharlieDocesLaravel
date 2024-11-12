@@ -7,11 +7,14 @@
 body {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 120vh;
-    background-color: #ffffff;
+    background-color: #EAEAEA;
     font-family: Arial, sans-serif;
-    overflow:hidden;
+}
+
+section {
+    width: 100%;
 }
 
 .login-container {

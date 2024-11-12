@@ -14,6 +14,9 @@
 </head>
 
 <body>
+    <section>
+        @include('profile.partials.header',['categorias' => \App\Models\Categoria::all()]);
+    </section>
     <div class="login-container">
         <div class="login-form">
             <h2>Entrar ou Criar Conta</h2>
@@ -54,5 +57,8 @@
         </div>
     </div>
     </div>
+    <section>
+        @include('profile.partials.footer');
+    </section>
 </body>
 </html>

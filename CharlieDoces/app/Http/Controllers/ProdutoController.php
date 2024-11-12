@@ -29,4 +29,10 @@ class ProdutoController extends Controller
             'produtosRelacionados' => $produtosRelacionados
         ]);
     }
+
+    public function todosProdutos()
+    {
+        $produtos = Produto::all();
+        return view('produto.todos_produtos', compact('produtos'));
+    }
 }

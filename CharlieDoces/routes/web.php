@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProdutoController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CarrinhoController;
 
@@ -20,10 +21,13 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');
 
-Route::get('/categoria', [CategoriaController::class,'index']);
-Route::get('/categoria/{categoria}', [CategoriaController::class,'show']);//passado categoria como parâmetro 
-Route::get('/produtos', [ProdutoController::class,'index']);
+Route::get('/categoria', [CategoriaController::class, 'index']);
+Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']);//passado categoria como parâmetro 
+Route::get('/produtos', [ProdutoController::class, 'index']);
 Route::get('produto/{produto}', [ProdutoController::class, 'show']);
+
+Route::get('/todos_produtos', [ProdutoController::class, 'todosProdutos'])->name('produtos.todos');
+
 
 Route::get('/home', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('home');
 
@@ -33,4 +37,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

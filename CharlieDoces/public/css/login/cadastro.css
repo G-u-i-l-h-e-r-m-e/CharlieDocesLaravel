@@ -8,9 +8,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 130vh;
-    background-color: #FFFFFF;
+    flex-direction: column;
+    background-color: #EAEAEA;
     font-family: Arial, sans-serif;
+}
+
+section {
+    width: 100%;
 }
 
 .cadastro-container {
@@ -18,7 +22,7 @@ body {
     justify-content: center;
     text-align: start;
     width: 700px;
-    height: 1000px;
+    height: 1500px;
     font-family: 'Poppins', sans-serif;
     margin-bottom: 15px;
 }

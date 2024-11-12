@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    <section>
+        @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()]);
+    </section>
     <div class="cadastro-container">
         <div class="cadastro-form">
             <h2>Criar Conta</h2>
@@ -116,6 +119,9 @@
             </form>
         </div>
     </div>
+    <section>
+        @include('profile.partials.footer');
+    </section>
 </body>
 
 </html>

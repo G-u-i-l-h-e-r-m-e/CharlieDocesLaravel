@@ -9,14 +9,16 @@ class Produto extends Model
 {
     use HasFactory;
     protected $table = "PRODUTO";
-    protected  $primaryKey = "PRODUTO_ID";
+    protected $primaryKey = "PRODUTO_ID";
     public $timestamps = false;
 
-    public function categoria(){
+    public function categoria()
+    {
         return $this->belongsTo(Categoria::class, "CATEGORIA_ID", "CATEGORIA_ID");
     }
 
-    public function produto_imagens(){
+    public function produto_imagens()
+    {
         return $this->hasMany(Produto_imagem::class, "PRODUTO_ID", "PRODUTO_ID");
     }
 }

@@ -3117,6 +3117,17 @@
             "time": "2024-04-27T21:32:50+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "symfony/clock",
+            "version": "v7.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/clock.git",
+                "reference": "97bebc53548684c17ed696bc8af016880f0f098d"
+            },
+            "dist": {
+                "type": "zip",
+=======
             "name": "spatie/laravel-permission",
             "version": "6.10.0",
             "source": {
@@ -3209,6 +3220,7 @@
             },
             "dist": {
                 "type": "zip",
+>>>>>>> cc2448246e1ac1ca9e20d9b172cbb7c5a678a00b
                 "url": "https://api.github.com/repos/symfony/clock/zipball/97bebc53548684c17ed696bc8af016880f0f098d",
                 "reference": "97bebc53548684c17ed696bc8af016880f0f098d",
                 "shasum": ""
@@ -5697,6 +5709,17 @@
     ],
     "packages-dev": [
         {
+<<<<<<< HEAD
+            "name": "fakerphp/faker",
+            "version": "v1.24.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FakerPHP/Faker.git",
+                "reference": "a136842a532bac9ecd8a1c723852b09915d7db50"
+            },
+            "dist": {
+                "type": "zip",
+=======
             "name": "barryvdh/laravel-debugbar",
             "version": "v3.14.6",
             "source": {
@@ -5790,6 +5813,7 @@
             },
             "dist": {
                 "type": "zip",
+>>>>>>> cc2448246e1ac1ca9e20d9b172cbb7c5a678a00b
                 "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/a136842a532bac9ecd8a1c723852b09915d7db50",
                 "reference": "a136842a532bac9ecd8a1c723852b09915d7db50",
                 "shasum": ""
@@ -6153,6 +6177,8 @@
                 "source": "https://github.com/laravel/sail"
             },
             "time": "2024-10-29T20:18:14+00:00"
+<<<<<<< HEAD
+=======
         },
         {
             "name": "lucascudo/laravel-pt-br-localization",
@@ -6280,6 +6306,7 @@
                 "source": "https://github.com/maximebf/php-debugbar/tree/v1.23.3"
             },
             "time": "2024-10-29T12:24:25+00:00"
+>>>>>>> cc2448246e1ac1ca9e20d9b172cbb7c5a678a00b
         },
         {
             "name": "mockery/mockery",
@@ -8109,12 +8136,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

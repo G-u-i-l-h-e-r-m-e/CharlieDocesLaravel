@@ -23,6 +23,7 @@
                 @endforeach
                 @else
                     <p class="imagemProduto">Nenhuma imagem disponível.</p>
+                    
             @endif
             </div>
             <button class="carousel-btn next">❯</button>

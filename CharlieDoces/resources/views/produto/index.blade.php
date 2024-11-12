@@ -17,8 +17,8 @@
         <div class="carousel">
             <button class="carousel-btn prev">❮</button>
             <div class="carousel-images">
-            @if($produto->Produto_imagem->isNotEmpty())
-                @foreach($produto->Produto_imagem as $imagem)
+            @if($produto->produto_imagens->isNotEmpty())
+                @foreach($produto->produto_imagens as $imagem)
                     <img class="imagemProduto" src="{{ $imagem->IMAGEM_URL }}" alt="Imagem do Produto">
                 @endforeach
                 @else

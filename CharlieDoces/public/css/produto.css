@@ -144,6 +144,15 @@
     width: 17%;
     font-size: 1rem;
 }
+.carousel-btn.prev {
+    left: 0; /* Fixa o botão "prev" à esquerda */
+    z-index: 1;
+}
+
+.carousel-btn.next {
+    right: 0; /* Fixa o botão "next" à direita */
+}
+
 
 
 /* carousel cards */

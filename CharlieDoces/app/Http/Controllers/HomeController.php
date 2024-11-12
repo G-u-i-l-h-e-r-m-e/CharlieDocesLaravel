@@ -9,11 +9,19 @@ use App\Models\Categoria;
 
 class HomeController extends Controller
 {
-    public function index(){
-        return view('home.index',['produtos' => Produto::All()]);
-    }
+    public function index()
+    {
+       
+        $produtos = Produto::all();
 
-    public function categoria(){
-        return view('home.index',['categorias' => Categoria::All()]);
+       
+        $categoriaChocolate = Categoria::with('produtos')->find(66);
+
+        $categoriaNatal = Categoria::with('produtos')->find(84);
+
+        $categoriaTopVendas = Categoria::with('produtos')->find(84);
+
+        
+        return view('home.index', ['produtos' => $produtos, 'categoriaChocolate' => $categoriaChocolate, 'categoriaNatal' => $categoriaNatal, 'categoriaTopVendas' => $categoriaTopVendas]);
     }
 }

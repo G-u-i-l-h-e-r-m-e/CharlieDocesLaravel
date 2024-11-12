@@ -12,11 +12,11 @@ class Produto extends Model
     protected  $primaryKey = "PRODUTO_ID";
     public $timestamps = false;
 
-    public function Categoria(){
+    public function categoria(){
         return $this->belongsTo(Categoria::class, "CATEGORIA_ID", "CATEGORIA_ID");
     }
 
-    public function Produto_imagem(){
+    public function produto_imagens(){
         return $this->hasMany(Produto_imagem::class, "PRODUTO_ID", "PRODUTO_ID");
     }
 }

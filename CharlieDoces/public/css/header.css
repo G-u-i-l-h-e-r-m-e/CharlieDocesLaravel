@@ -160,6 +160,39 @@ nav::after {
     position: relative; /* Necessário para o posicionamento do ::after */
     padding-bottom: 6px; /* Espaço entre o texto e o sublinhado */
 }
+.nav-section form button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    flex-wrap: wrap;
+    color: #591F12;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    gap: 10px;
+    position: relative; /* Necessário para o posicionamento do ::after */
+    padding-bottom: 6px; /* Espaço entre o texto e o sublinhado */
+}
+
+.nav-section form button::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px; /* Espessura do sublinhado */
+    background-color: #591F12; /* Cor do sublinhado */
+    transition: width 0.3s ease; /* Animação suave */
+}
+
+.nav-section form button:hover {
+    cursor: pointer;
+}
+.nav-section form button:hover::after {
+    width: 100%; /* Expande o sublinhado para 100% ao passar o mouse */
+}
 
 .nav-section a::after {
     content: '';

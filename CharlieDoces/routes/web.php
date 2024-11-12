@@ -12,28 +12,30 @@ use App\Http\Controllers\CarrinhoController;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::group(['middleware' => ['auth']], function () {
+    // Rotas para carrinho
     Route::get('carrinho/{produto}', [CarrinhoController::class, 'addCarrinho']);
     Route::get('carrinho', [CarrinhoController::class, 'carrinho']);
 
-Route::get('/categoria', [CategoriaController::class,'index']);
-Route::get('/categoria/{categoria}', [CategoriaController::class,'show']);
-Route::get('/produtos', [ProdutoController::class,'index']);
-
-Route::get('produto/{produto}', [ProdutoController::class, 'show']);
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-Route::middleware('auth')->group(function () {
+    // Rotas para produtos
+    Route::get('/produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');
+    Route::get('/produtos', [ProdutoController::class, 'index']);
+    Route::get('/todos_produtos', [ProdutoController::class, 'todosProdutos'])->name('produtos.todos');
+    
+    // Rotas para categorias
+    Route::get('/categoria', [CategoriaController::class, 'index']);
+    Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']);
+    
+    // Rota para perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Rota para home e logout
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
-Route::get('/produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');
-Route::get('/categoria', [CategoriaController::class, 'index']);
-Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']); //passado categoria como parâmetro
-Route::get('/produtos', [ProdutoController::class, 'index']);
+// Rota extra para login
 Route::get('enviado', [LoginController::class, 'sent']);
 
 require __DIR__.'/auth.php';

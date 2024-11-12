@@ -30,6 +30,13 @@ class ProdutoController extends Controller
         ]);
     }
 
+    public function todosProdutos()
+    {
+        // Carrega todos os produtos
+        $produtos = Produto::all();
+        return view('produto.todos_produtos', compact('produtos'));
+    }
+
     public function buscar(Request $request)
     {
         // Recebe o termo de pesquisa

@@ -56,13 +56,13 @@
 
         </div>
     </div>
+</section>
 
-    <div class="carousel-indicators">
+<div class="carousel-indicators">
         <span class="indicator active"></span>
         <span class="indicator"></span>
         <span class="indicator"></span>
     </div>
-</section>
 
     <script src="{{ asset('js/banner.js') }}"></script>
 </body>

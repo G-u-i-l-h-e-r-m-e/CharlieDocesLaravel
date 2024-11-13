@@ -58,7 +58,6 @@
     margin-bottom: 12px;
 }
 
-
 .title-natal {
     color: #BF0B0B;  /* Cor para o primeiro título */
 }
@@ -85,16 +84,10 @@
 
 .product-circle img {
     width: 100%;
-    height: auto;
-    transform: translateY(-10px); /* Ajusta a imagem para fora do círculo */
-    transition: transform 0.3s, z-index 0.3s;
+    height: 100%;
+    z-index: 1;
+    object-fit: cover;
 }
-
-.product-circle:hover img {
-    z-index: 2; /* Eleva a imagem acima das outras quando em hover */
-    transform: translateY(-15px); /* Levemente fora para destacar */
-}
-
 
 .carousel-indicators {
     display: flex;

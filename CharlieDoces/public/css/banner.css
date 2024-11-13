@@ -1,10 +1,12 @@
+@import 'animate.css';
+
 /* Estilos para o carrossel */
 .carousel-container {
     width: 1122px;
     height: 392px;
     margin: 0 auto;
     position: relative;
-    overflow: hidden;
+    overflow: visible; 
 }
 
 .carousel-item:nth-child(1) {
@@ -94,9 +96,11 @@
     justify-content: center;
     gap: 12px;
     position: absolute;
-    bottom: 10px;
+    bottom: 80px; /* Aumente ou diminua esse valor para ajustar a distância */
     width: 100%;
+    z-index: 10; /* Garante que os indicadores fiquem acima dos banners */
 }
+
 
 .indicator {
     width: 25px;
@@ -108,4 +112,60 @@
 
 .indicator.active {
     background-color: #591F12;
+}
+
+
+
+
+
+/* Estilos para os botões do carrossel */
+.carousel-button {
+    position: absolute;
+    top: 50%; /* Centraliza o botão verticalmente */
+    width: 50px;
+    height: 50px;
+    background-color: #FDC834;
+    border-radius: 50%;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    cursor: pointer;
+    z-index: 9999; /* Garante que os botões fiquem acima de outros conteúdos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #591f12;   /* Cor da seta */
+    border: none; /* Remove a borda padrão do botão */
+    outline: none; /* Remove o contorno ao focar no botão */
+    text-decoration: none; /* Remove a decoração de texto, se houver */
+}
+
+/* Botão à esquerda */
+.carousel-button.left {
+    left: -26px; /* Coloca o botão 50% para fora da div */
+}
+
+/* Botão à direita */
+.carousel-button.right {
+    right: -26px; /* Coloca o botão 50% para fora da div */
+}
+
+/* Efeito de hover nos botões */
+.carousel-button:hover {
+    background-color: #e0a828; /* Cor mais escura no hover para efeito visual */
+}
+
+
+
+
+
+
+/* A classe que inicializa a animação */
+.product-circle img {
+    transition: transform 0.5s ease;
+}
+
+/* Efeito de hover com animação */
+.product-circle:hover img {
+    animation: bounceIn 1s;
 }

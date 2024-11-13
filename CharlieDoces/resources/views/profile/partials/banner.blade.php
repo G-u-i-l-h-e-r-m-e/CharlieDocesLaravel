@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banner</title>
     <link rel="stylesheet" href="{{ asset('css/banner.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
 <section class="carousel-container">
 <div class="carousel-banner">
     <div class="carousel-item active">
-        <h2 class="carousel-subtitle title-natal">O Natal já começou na Charlie Doces</h2>
+        <h2 class="carousel-subtitle title-natal animate__animated animate__fadeInDown">O Natal já começou na Charlie Doces</h2>
         <div class="carousel-products">
             <!-- Produto 1 (ID 278) -->
             <div class="product-circle">
@@ -29,7 +30,7 @@
 </div>
 
 <div class="carousel-item">
-    <h2 class="carousel-subtitle title-chocolates">Os Melhores Chocolates Estão Aqui</h2>
+    <h2 class="carousel-subtitle title-natal animate__animated animate__fadeInDown">O Natal já começou na Charlie Doces</h2>
     <div class="carousel-products">
         <!-- Produto 1 (ID 281 - Chocolate Ao Leite Nestle) -->
         <div class="product-circle">
@@ -46,15 +47,18 @@
     </div>
 </div>
 
-        <div class="carousel-item">
-            <h2 class="carousel-subtitle title-produtos">Confira os Produtos Mais Vendidos</h2>
+        <div class="carousel-item ">
+            <h2 class="carousel-subtitle title-produtos animate__animated animate__fadeInDown">Confira os Produtos Mais Vendidos</h2>
             <div class="carousel-products">
     <div class="product-circle"><img src="{{ asset('img/banner/img-banner-3.png') }}" alt="Vendido 1"></div>
     <div class="product-circle"><img src="{{ asset('img/banner/img-banner-3.png') }}" alt="Vendido 2"></div>
     <div class="product-circle"><img src="{{ asset('img/banner/img-banner-3.png') }}" alt="Vendido 3"></div>
 </div>
 
-        </div>
+         <!-- Botões de Navegação -->
+    </div>
+        <button class="carousel-button left">&#10094;</button> <!-- Botão Esquerda -->
+        <button class="carousel-button right">&#10095;</button> <!-- Botão Direita -->
     </div>
 </section>
 

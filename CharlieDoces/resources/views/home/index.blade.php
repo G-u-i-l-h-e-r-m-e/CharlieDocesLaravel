@@ -20,13 +20,15 @@
         <section>
           
         </section>
-        
+
         <section>
             <div class="tituloHome">
-                <h2>TOP VENDAS</h2>
+                <h2>Confira nossas novidades</h2>
+                <h2>{{$categoriaNatal -> CATEGORIA_NOME}}</h2>
             </div>
-            @include('produto.index', ['produtos' => $produtos]);
+            @include('categoria.show', ['categoria' => $categoriaNatal])
         </section>
+
         
         <section>
             <div class="tituloHome">
@@ -35,16 +37,15 @@
             </div>
             @include('categoria.show', ['categoria' => $categoriaChocolate])
         </section>
-        
+               
         <section>
             <div class="tituloHome">
-                <h2>Confira nossas novidades</h2>
-                <h2>{{$categoriaNatal -> CATEGORIA_NOME}}</h2>
+                <h2>TOP VENDAS</h2>
             </div>
-            @include('categoria.show', ['categoria' => $categoriaNatal])
+            @include('produto.index', ['produtos' => $produtos]);
         </section>
-       
-       
+
+
         <section>
             @include('profile.partials.footer')
         </section>

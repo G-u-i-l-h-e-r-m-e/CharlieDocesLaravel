@@ -1,7 +1,118 @@
-.orientacaoBanner{
+/* Estilos para o carrossel */
+.carousel-container {
+    width: 1122px;
+    height: 392px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-item:nth-child(1) {
+    background-image: url('../img/banner/banner1.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.carousel-item:nth-child(2) {
+    background-image: url('../img/banner/banner2.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.carousel-item:nth-child(3) {
+    background-image: url('../img/banner/banner3.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.carousel-banner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item {
     width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+}
+
+.carousel-item.active {
+    display: flex;
+}
+
+.carousel-subtitle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    background-color: #FFFFFF;
+    padding: 6px;
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.carousel-products {
+    display: flex;
+    gap: 100px;
+    margin-bottom: 12px;
+}
+
+
+.title-natal {
+    color: #BF0B0B;  /* Cor para o primeiro título */
+}
+
+.title-chocolates {
+    color: #591F12;  /* Cor para o segundo título */
+}
+
+.title-produtos {
+    color: #010010;  /* Cor para o terceiro título */
+}
+
+
+.product-circle {
+    width: 148px;
+    height: 148px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-circle img {
+    width: 100%;
+    height: auto;
+    transform: translateY(-10px); /* Ajusta a imagem para fora do círculo */
+    transition: transform 0.3s, z-index 0.3s;
+}
+
+.product-circle:hover img {
+    z-index: 2; /* Eleva a imagem acima das outras quando em hover */
+    transform: translateY(-15px); /* Levemente fora para destacar */
+}
+
+
+.carousel-indicators {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-top: 30px;
+    gap: 12px;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+.indicator {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+.indicator.active {
+    background-color: #591F12;
 }

@@ -9,21 +9,32 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        // Carrega as relações 'produto_imagens' e 'categoria' junto com os produtos
-        $produtos = Produto::with('produto_imagens', 'categoria')->get();
+        // Filtra para exibir apenas os 3 produtos desejados (com IDs específicos)
+        $produtos = Produto::whereIn('PRODUTO_ID', [278, 279, 280]) // IDs dos produtos que você quer
+                           ->with(['produto_imagens' => function ($query) {
+                               // Ordena as imagens pela ordem e pega a primeira
+                               $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
+                           }, 'categoria']) // Inclui categorias, se necessário
+                           ->get();
+
+        // Retorna a view com os produtos e as imagens associadas
         return view('produto.index', ['produtos' => $produtos]);
     }
 
     public function show(Produto $produto)
     {
         // Carregar o produto atual com suas imagens e categoria
-        $produto = Produto::with('produto_imagens', 'categoria')->findOrFail($produto->PRODUTO_ID);
-        
+        $produto = Produto::with(['produto_imagens' => function ($query) {
+            $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
+        }, 'categoria'])->findOrFail($produto->PRODUTO_ID);
+
         // Buscar todos os produtos, exceto o atual
-        $produtosRelacionados = Produto::with('produto_imagens', 'categoria')
+        $produtosRelacionados = Produto::with(['produto_imagens' => function ($query) {
+            $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
+        }, 'categoria'])
                                        ->where('PRODUTO_ID', '!=', $produto->PRODUTO_ID) // Evitar que o próprio produto seja exibido
                                        ->get();
-        
+
         return view('produto.show', [
             'produto' => $produto,
             'produtosRelacionados' => $produtosRelacionados
@@ -32,8 +43,11 @@ class ProdutoController extends Controller
 
     public function todosProdutos()
     {
-        // Carrega todos os produtos
-        $produtos = Produto::all();
+        // Carrega todos os produtos com suas imagens (ordenadas pela ordem da imagem)
+        $produtos = Produto::with(['produto_imagens' => function ($query) {
+            $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
+        }])->get();
+
         return view('produto.todos_produtos', compact('produtos'));
     }
 
@@ -49,3 +63,4 @@ class ProdutoController extends Controller
         return response()->json($produtos);
     }
 }
+

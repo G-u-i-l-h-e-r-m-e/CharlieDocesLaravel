@@ -23,7 +23,6 @@
                 <span class="line"></span>
             </div>
 
-            <!-- Bloco 2: Campo de pesquisa e nome da loja -->
             <div class="nav-center-section">
                 <div class="search-section">
                     <div class="search-box">
@@ -40,9 +39,7 @@
 
                     <div class="store-name-arc">
                         <svg width="293.1" height="59.41" viewBox="0 0 293.1 59.41">
-                            <!-- Caminho do arco ajustado -->
                             <path id="arcPath" d="M0,59.41 Q146.55,30 293.1,59.41" fill="transparent" />
-                            <!-- Texto dentro do arco -->
                             <text font-family="Bebas Neue" font-size="48px" fill="#591F12">
                                 <textPath href="#arcPath" startOffset="50%" text-anchor="middle">
                                     LOJA DE DOCES
@@ -51,12 +48,25 @@
                         </svg>
                     </div>
 
+                    <!-- Placeholder para manter o espaço do logout quando o usuário não está logado -->
+                    @if (!Auth::check())
+                        <div class="logout-placeholder"></div>
+                    @endif
 
-                    <!-- Logout, visível somente se o usuário estiver logado -->
-                    <div class="logout-section">
-                        <p class="logout-text">Logout</p>
-                    </div>
+                    @if (Auth::check())
+                        <div class="logout-section">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="logout-icon">
+                                    <box-icon name='log-out' color='#591f12'></box-icon>
+                                </button>
+                            </form>
+                        </div>
+                    @endif
+
                 </div>
+            </div>
+            </div>
             </div>
 
             <!-- Bloco 3: Navegação -->
@@ -65,28 +75,25 @@
                     <!-- Redireciona para página de produtos -->
                     <a href="{{ url('/todos_produtos') }}">Todos os Produtos</a>
 
-                    <!-- Condicional para exibir 'Entre ou cadastre-se' ou saudação com o nome do usuário -->
                     @if (Auth::check())
-                        <a href="{{ url('/perfil') }}">
-                            <i class="bx bx-user" style="color: #591f12;"></i>
-                            Olá, {{ Auth::user()->name ?? 'Usuário' }}
+                        <!-- Saudação com o nome do usuário quando estiver logado -->
+                        <a href="{{ url('/profile') }}">
+                            Olá, {{ Auth::user()->USUARIO_NOME }}
                         </a>
                     @else
-                        <a href="{{ url('/perfil') }}">
-                            <box-icon name="user-circle" color="#591f12" width="24px" height="24px"></box-icon>
-                            Olá, {{ Auth::user()->name ?? 'Usuário' }}
+                        <!-- Exibe "Entre ou cadastre-se" quando não estiver logado -->
+                        <a href="{{ url('/login') }}">
+                            Entre ou cadastre-se
                         </a>
                     @endif
 
+
                     <!-- Ícone do carrinho -->
                     <a href="{{ Auth::check() ? url('/carrinho') : url('/login') }}">
-                        <box-icon name="cart" color="#591f12" width="24px" height="24px"></box-icon>
+                        <box-icon name='cart' color='#591f12' ></box-icon>
                         Carrinho
                     </a>
                 </div>
-            </div>
-
-
         </nav>
 
     </header>

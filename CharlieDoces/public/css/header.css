@@ -73,10 +73,10 @@ nav::after {
     width: 100%;
     height: 70px;
     display: flex;
-    justify-content: center;  
-    align-items: center;     
-    overflow: hidden;        
-    margin-right: 180px 
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-right: 133px
 }
 
 .search-section {
@@ -161,11 +161,66 @@ nav::after {
     height: 100%;
     display: block;
 }
+
 .store-name-arc text {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 48px;
     fill: #591F12;
+    letter-spacing: 5px;
+    /* Ajuste o valor conforme necessário */
 }
+
+.logout-placeholder {
+    width: 80px;
+    /* Defina a mesma largura do botão de logout */
+    height: 30px;
+    /* Defina a altura conforme necessário */
+    visibility: hidden;
+    /* Invisível, mas ainda ocupa espaço */
+}
+
+.logout-section {
+    width: 80px;
+    /* Defina a mesma largura do placeholder */
+    height: 30px;
+    /* Defina a altura conforme necessário */
+}
+
+.logout-text {
+    color: #591F12;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    background: none;
+    /* Remove o fundo do botão */
+    border: none;
+    /* Remove a borda do botão */
+    cursor: pointer;
+    /* Muda o cursor para indicar que é clicável */
+    padding: 0;
+    /* Remove qualquer padding */
+    outline: none;
+    /* Remove o contorno ao focar */
+}
+
+.logout-icon {
+    background: none;
+    /* Remove o fundo do botão */
+    border: none;
+    /* Remove a borda do botão */
+    cursor: pointer;
+    /* Muda o cursor para indicar que é clicável */
+    padding: 0;
+    /* Remove qualquer padding */
+    outline: none;
+    /* Remove o contorno ao focar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
 /* Final da Estilização somente da divisão center-section */
 
 
@@ -184,7 +239,7 @@ nav::after {
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    margin-right: 52px;
+    margin-right: 49px;
 }
 
 .nav-bottom-section a {
@@ -248,12 +303,13 @@ nav::after {
     width: 24px;
     height: 24px;
     font-size: 24px;
-    color: #591f12; /* Cor padrão para os ícones */
+    color: #591f12;
+    /* Cor padrão para os ícones */
 }
 
 .nav-bottom-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 340px
+    gap: 297px;
 }

@@ -30,7 +30,7 @@
 </div>
 
 <div class="carousel-item">
-    <h2 class="carousel-subtitle title-natal animate__animated animate__fadeInDown">O Natal já começou na Charlie Doces</h2>
+    <h2 class="carousel-subtitle title-chocolates animate__animated animate__fadeInDown">OS MELHORES CHOCOLATES ESTÃO AQUI</h2>
     <div class="carousel-products">
         <!-- Produto 1 (ID 281 - Chocolate Ao Leite Nestle) -->
         <div class="product-circle">

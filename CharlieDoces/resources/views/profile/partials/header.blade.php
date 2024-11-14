@@ -25,9 +25,9 @@
 
             <div class="nav-center-section">
                 <div class="search-section">
-                    <div class="search-box">
-                        <input type="text" placeholder="O QUE VOCÊ ESTÁ PROCURANDO?" class="search-input">
-                        <button>
+                    <form action="{{ route('search.results') }}" method="GET" class="search-box">
+                        <input type="text" name="query" placeholder="O QUE VOCÊ ESTÁ PROCURANDO?" class="search-input">
+                        <button type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 style="fill: rgba(89, 31, 18, 1);">
                                 <path
@@ -35,36 +35,37 @@
                                 </path>
                             </svg>
                         </button>
-                    </div>
-
-                    <div class="store-name-arc">
-                        <svg width="293.1" height="59.41" viewBox="0 0 293.1 59.41">
-                            <path id="arcPath" d="M0,59.41 Q146.55,30 293.1,59.41" fill="transparent" />
-                            <text font-family="Bebas Neue" font-size="48px" fill="#591F12">
-                                <textPath href="#arcPath" startOffset="50%" text-anchor="middle">
-                                    LOJA DE DOCES
-                                </textPath>
-                            </text>
-                        </svg>
-                    </div>
-
-                    <!-- Placeholder para manter o espaço do logout quando o usuário não está logado -->
-                    @if (!Auth::check())
-                        <div class="logout-placeholder"></div>
-                    @endif
-
-                    @if (Auth::check())
-                        <div class="logout-section">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="logout-icon">
-                                    <box-icon name='log-out' color='#591f12'></box-icon>
-                                </button>
-                            </form>
-                        </div>
-                    @endif
-
+                    </form>
                 </div>
+
+                <div class="store-name-arc">
+                    <svg width="293.1" height="59.41" viewBox="0 0 293.1 59.41">
+                        <path id="arcPath" d="M0,59.41 Q146.55,30 293.1,59.41" fill="transparent" />
+                        <text font-family="Bebas Neue" font-size="48px" fill="#591F12">
+                            <textPath href="#arcPath" startOffset="50%" text-anchor="middle">
+                                LOJA DE DOCES
+                            </textPath>
+                        </text>
+                    </svg>
+                </div>
+
+                <!-- Placeholder para manter o espaço do logout quando o usuário não está logado -->
+                @if (!Auth::check())
+                    <div class="logout-placeholder"></div>
+                @endif
+
+                @if (Auth::check())
+                    <div class="logout-section">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="logout-icon">
+                                <box-icon name='log-out' color='#591f12'></box-icon>
+                            </button>
+                        </form>
+                    </div>
+                @endif
+
+            </div>
             </div>
             </div>
             </div>
@@ -90,7 +91,7 @@
 
                     <!-- Ícone do carrinho -->
                     <a href="{{ Auth::check() ? url('/carrinho') : url('/login') }}">
-                        <box-icon name='cart' color='#591f12' ></box-icon>
+                        <box-icon name='cart' color='#591f12'></box-icon>
                         Carrinho
                     </a>
                 </div>

@@ -76,17 +76,18 @@ nav::after {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    margin-right: 133px
+    margin-right: 133px;
+    gap:192px;
 }
 
 .search-section {
     display: flex;
     align-items: center;
-    gap: 190px;
 }
 
 
 
+/* Ajuste para o formulário search-box */
 .nav-center-section .search-box {
     display: flex;
     align-items: center;
@@ -99,7 +100,7 @@ nav::after {
     transition: border-color 0.3s ease;
 }
 
-.nav-center-section .search-box .search-input {
+.nav-center-section .search-box input.search-input {
     padding: 6px;
     border: none;
     font-family: 'Bebas Neue', sans-serif;
@@ -109,7 +110,7 @@ nav::after {
     outline: none;
 }
 
-.nav-center-section .search-box .search-input::placeholder {
+.nav-center-section .search-box input.search-input::placeholder {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 16px;
     color: rgba(89, 31, 18, 0.2);
@@ -133,10 +134,7 @@ nav::after {
     transition: fill 0.3s ease;
 }
 
-.nav-center-section .search-box .search-input:focus {
-    color: #591F12;
-}
-
+/* Estilo para o foco no formulário e ícone */
 .nav-center-section .search-box:focus-within {
     border-color: #591F12;
 }
@@ -169,6 +167,8 @@ nav::after {
     letter-spacing: 5px;
     /* Ajuste o valor conforme necessário */
 }
+
+
 
 .logout-placeholder {
     width: 80px;

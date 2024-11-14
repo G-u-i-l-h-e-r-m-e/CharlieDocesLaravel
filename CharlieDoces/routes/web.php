@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SearchController;
+
 
 Route::middleware('auth')->group(function () {
     // Rotas para carrinho
@@ -35,4 +37,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('enviado', [LoginController::class, 'sent']);
 
 // Carregar rotas de autenticação padrão
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+Route::get('/search', [SearchController::class, 'results'])->name('search.results');

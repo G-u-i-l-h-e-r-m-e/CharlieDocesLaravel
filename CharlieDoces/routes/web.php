@@ -8,14 +8,18 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\TesteController;
 
+// Rota de teste
+Route::get('/teste-card', [TesteController::class, 'testeCard']);
 
+// Rotas protegidas por autenticação
 Route::middleware('auth')->group(function () {
     // Rotas para carrinho
     Route::get('carrinho/{produto}', [CarrinhoController::class, 'addCarrinho']);
     Route::get('carrinho', [CarrinhoController::class, 'carrinho']);
 
-    // Rotas para produtos individuais e categorias (ainda protegidas)
+    // Rotas para produtos individuais e categorias (protegidas)
     Route::get('/produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');
     Route::get('/categoria', [CategoriaController::class, 'index']);
     Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']);
@@ -30,6 +34,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/todos_produtos', [ProdutoController::class, 'todosProdutos'])->name('produtos.todos');
 
+// Rota para verificar o estoque (pública)
+Route::post('/verificar-estoque', [ProdutoController::class, 'verificarEstoque']);
+
 // Rota para logout usando LoginController
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -39,4 +46,5 @@ Route::get('enviado', [LoginController::class, 'sent']);
 // Carregar rotas de autenticação padrão
 require __DIR__ . '/auth.php';
 
+// Rota de busca
 Route::get('/search', [SearchController::class, 'results'])->name('search.results');

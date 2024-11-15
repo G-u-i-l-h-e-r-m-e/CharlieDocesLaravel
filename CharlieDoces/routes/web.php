@@ -11,7 +11,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TesteController;
 
 // Rota de teste
-Route::get('/teste-card', [TesteController::class, 'testeCard']);
+Route::get('/teste-carousel', [TesteController::class, 'carregarProdutosCarousel'])->name('teste.carousel');
 
 // Rotas protegidas por autenticação
 Route::middleware('auth')->group(function () {

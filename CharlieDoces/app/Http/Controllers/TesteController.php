@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Produto;
-
+use Illuminate\Http\Request;
+use App\Models\Produto; 
 class TesteController extends Controller
 {
-    public function testeCard()
+    public function carregarProdutosCarousel()
     {
-        // Busca o produto com ID 278
-        $produto = Produto::find(278);
+        // Buscar produtos da categoria 84 com limite e paginação
+        $produtosNatal = Produto::where('CATEGORIA_ID', 66)
+            ->where('PRODUTO_ATIVO', 1) // Apenas produtos ativos
+            ->paginate(3); // Limitar a 3 produtos por página
 
-        // Verifica se o produto foi encontrado
-        if (!$produto) {
-            return "Produto com ID 278 não encontrado.";
-        }
-
-        // Retorna a view de teste com o produto
-        return view('componentes-teste.teste-card', compact('produto'));
+        // Retornar a view com os produtos
+        return view('componentes-teste.teste-final', compact('produtosNatal'));
     }
 }

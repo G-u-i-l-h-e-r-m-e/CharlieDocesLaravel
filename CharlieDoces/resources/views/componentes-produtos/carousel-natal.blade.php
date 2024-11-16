@@ -11,7 +11,7 @@
 
 <body>
 
-    <div class="carousel-natal-container">
+    <div class="carousel-natal-container" data-total-produtos="{{ $produtosNatal->total() }}">
         <div class="tituloHome">
             <h2 class="tituloNatal">Natal</h2>
             <h2 class="subtituloNatal">CONFIRA NOSSAS NOVIDADES</h2>
@@ -19,7 +19,7 @@
 
         <div class="carousel-natal-wrapper">
             <!-- Botão Esquerda (exibido apenas se há mais de 3 produtos) -->
-            @if ($produtosNatal->count() > 3)
+            @if ($produtosNatal->total() > 3)
                 <button class="carouselNatal-button left">&#10094;</button>
             @endif
 
@@ -40,7 +40,7 @@
             </div>
 
             <!-- Botão Direita (exibido apenas se há mais de 3 produtos) -->
-            @if ($produtosNatal->count() > 3)
+            @if ($produtosNatal->total() > 3)
                 <button class="carouselNatal-button right">&#10095;</button>
             @endif
         </div>

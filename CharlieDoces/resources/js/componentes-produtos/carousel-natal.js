@@ -3,15 +3,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const prevButton = document.querySelector('.carouselNatal-button.left');
     const nextButton = document.querySelector('.carouselNatal-button.right');
     const cards = track.querySelectorAll('.card-container');
+    const totalProdutos = parseInt(document.querySelector('.carousel-natal-container').dataset.totalProdutos, 10);
 
     // Verificar se os elementos foram encontrados
     console.log('Track:', track);
     console.log('Prev Button:', prevButton);
     console.log('Next Button:', nextButton);
     console.log('Cards:', cards.length);
+    console.log('Total Produtos:', totalProdutos);
 
-    // Se houver 3 ou menos produtos, esconde os botões
-    if (cards.length <= 3) {
+    // Se o total de produtos for 3 ou menos, esconde os botões
+    if (totalProdutos <= 3) {
         if (prevButton) prevButton.style.display = 'none';
         if (nextButton) nextButton.style.display = 'none';
         return;

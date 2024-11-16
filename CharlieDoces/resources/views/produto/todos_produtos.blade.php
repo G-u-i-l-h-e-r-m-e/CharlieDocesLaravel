@@ -44,7 +44,7 @@
     </main>
 
     <section>
-            @include('profile.partials.footer');
+            @include('profile.partials.footer')
         </section>
 
     <script src="/js/produto.js"></script>

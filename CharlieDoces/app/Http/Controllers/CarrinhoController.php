@@ -29,7 +29,7 @@ class CarrinhoController extends Controller
 
     public function carrinho(){
         $items = Carrinho::where(['USUARIO_ID' => Auth::user()->USUARIO_ID])->get();
-        return view('produto.carrinho', ['items' => $items]);
+        return view('carrinho.carrinho', ['items' => $items]);
     }
     
 }

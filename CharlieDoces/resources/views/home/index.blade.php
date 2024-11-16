@@ -12,6 +12,10 @@
         <section>
             @include('profile.partials.header',['categorias' => \App\Models\Categoria::all()]);
         </section>
+
+        <section>
+            @include('carrinho.carrinho', ['items' => $items])
+        </section>
         
         <section>
             @include('profile.partials.banner');
@@ -46,7 +50,7 @@
        
        
         <section>
-            @include('profile.partials.footer');
+            @include('profile.partials.footer')
         </section>
     </main>
     <script src="/js/produto.js"></script>

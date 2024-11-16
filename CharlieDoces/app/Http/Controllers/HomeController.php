@@ -5,36 +5,36 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\Categoria;
+use App\Models\Carrinho;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function index()
     {
-       
         // Carregar produtos e categorias específicas
-
-       
         $produtos = Produto::all();
 
-        // Exemplo de categorias específicas, você pode ajustar conforme necessário
+        // Exemplo de categorias específicas
         $categoriaChocolate = Categoria::with('produtos')->find(66);
         $categoriaNatal = Categoria::with('produtos')->find(84);
         $categoriaTopVendas = Categoria::with('produtos')->find(84);
 
-        
-        return view('home.index', ['produtos' => $produtos, 'categoriaChocolate' => $categoriaChocolate, 'categoriaNatal' => $categoriaNatal, 'categoriaTopVendas' => $categoriaTopVendas]);
-        return view('home.index', ['produtos' => Produto::All()]);
-        // Retornar a view com os dados necessários
+        // Verificar se o usuário está logado e carregar os itens do carrinho
+        $items = [];
+        if (Auth::check()) {
+            // Obtém os itens do carrinho para o usuário logado
+            $items = Carrinho::where('USUARIO_ID', Auth::user()->USUARIO_ID)->get();
+        }
+
+        // Retornar a view com todos os dados necessários
         return view('home.index', [
             'produtos' => $produtos,
             'categoriaChocolate' => $categoriaChocolate,
             'categoriaNatal' => $categoriaNatal,
-            'categoriaTopVendas' => $categoriaTopVendas
+            'categoriaTopVendas' => $categoriaTopVendas,
+            'items' => $items // Passa os itens do carrinho
         ]);
-        
-        return view('home.index', ['produtos' => $produtos, 'categoriaChocolate' => $categoriaChocolate, 'categoriaNatal' => $categoriaNatal, 'categoriaTopVendas' => $categoriaTopVendas]);
-
-        return view('home.index', ['produtos' => Produto::All()]);
     }
 
     // Se precisar de outros métodos como para listar categorias:
@@ -50,6 +50,5 @@ class HomeController extends Controller
             'produtos' => Produto::all(),
             'categorias' => Categoria::all()
         ]);
-
     }
 }

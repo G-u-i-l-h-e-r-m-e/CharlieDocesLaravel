@@ -44,7 +44,7 @@
 
             <!-- Bloco 3: Navegação -->
             <div class="nav-section">
-                <a href="#">Todos os Produtos</a>
+                <a href="http://127.0.0.1:8000/todos_produtos">Todos os Produtos</a>
                 @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -75,7 +75,7 @@
                         Entre ou cadastre-se
                     </a>
                 @endauth
-                <a href="#">
+                <a href="http://127.0.0.1:8000/carrinho" class="carrinho">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         style="fill: rgba(89, 31, 18, 1);">
                         <path

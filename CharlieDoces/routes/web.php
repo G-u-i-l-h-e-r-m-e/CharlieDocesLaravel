@@ -43,6 +43,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 // Rota extra para login (fora do middleware de autenticação)
 Route::get('enviado', [LoginController::class, 'sent']);
 
+// Rota para buscar produtos por categoria (pública ou protegida conforme necessidade)
+Route::get('/produtos/categoria/{nome}', [ProdutoController::class, 'produtosPorCategoria'])->name('produtos.categoria');
+
 // Carregar rotas de autenticação padrão
 require __DIR__ . '/auth.php';
 

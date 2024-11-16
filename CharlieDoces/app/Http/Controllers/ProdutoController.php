@@ -104,4 +104,21 @@ class ProdutoController extends Controller
         // Retorna disponibilidade
         return response()->json(['estoqueDisponivel' => true], 200);
     }
+
+    // Novo método para filtrar produtos por categoria
+    public function produtosPorCategoria($categoriaNome)
+    {
+        $produtos = Produto::whereHas('categoria', function ($query) use ($categoriaNome) {
+            $query->where('CATEGORIA_NOME', $categoriaNome);
+        })
+        ->with([
+            'produto_imagens' => function ($query) {
+                $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
+            },
+            'estoque'
+        ])
+        ->get();
+
+        return view('produto.index', ['produtos' => $produtos]);
+    }
 }

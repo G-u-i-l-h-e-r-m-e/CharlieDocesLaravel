@@ -39,4 +39,21 @@ class Produto extends Model
     {
         return $this->hasOne(ProdutoEstoque::class, 'PRODUTO_ID', 'PRODUTO_ID');
     }
+
+    public function produtosPorCategoria($categoriaNome)
+    {
+        $produtos = Produto::whereHas('categoria', function ($query) use ($categoriaNome) {
+            $query->where('CATEGORIA_NOME', $categoriaNome);
+        })
+            ->with([
+                'produto_imagens' => function ($query) {
+                    $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
+                },
+                'estoque'
+            ])
+            ->get();
+
+        return view('produto.index', ['produtos' => $produtos]);
+    }
 }
+

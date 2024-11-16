@@ -1,61 +1,61 @@
-// resources/js/componentes-produtos/carousel-natal.js
-
 document.addEventListener('DOMContentLoaded', function () {
     const track = document.querySelector('.carousel-natal-track');
-    const prevButton = document.querySelector('.carouselNatal-button.left'); // Botão para ir à esquerda
-    const nextButton = document.querySelector('.carouselNatal-button.right'); // Botão para ir à direita
+    const prevButton = document.querySelector('.carouselNatal-button.left');
+    const nextButton = document.querySelector('.carouselNatal-button.right');
     const cards = track.querySelectorAll('.card-container');
 
+    // Verificar se os elementos foram encontrados
     console.log('Track:', track);
     console.log('Prev Button:', prevButton);
     console.log('Next Button:', nextButton);
     console.log('Cards:', cards.length);
 
-    // Certifique-se de que temos track e cards
-    if (!track || !cards || cards.length === 0) {
-        console.warn('Carrossel sem elementos para exibir.');
+    // Se houver 3 ou menos produtos, esconde os botões
+    if (cards.length <= 3) {
+        if (prevButton) prevButton.style.display = 'none';
+        if (nextButton) nextButton.style.display = 'none';
         return;
     }
 
-    // Calcular a largura de um card + gap
-    const gap = parseInt(getComputedStyle(track).gap) || 161; // Pegue o gap do CSS
-    const cardWidth = cards[0]?.offsetWidth + gap;
-    console.log('Card Width:', cardWidth);
+    // Configuração inicial
+    let currentIndex = 0;
+    const itemsPerPage = 3;
 
-    // Verificar se há mais de 3 cards
-    if (cards.length <= 3) {
-        if (prevButton) prevButton.style.display = 'none'; // Esconde o botão "Esquerda" se não necessário
-        if (nextButton) nextButton.style.display = 'none'; // Esconde o botão "Direita" se não necessário
-        console.log('Menos ou igual a 3 cards, botões escondidos.');
-        return; // Sem movimento necessário
-    } else {
-        if (prevButton) prevButton.style.display = 'flex'; // Exibe o botão "Esquerda"
-        if (nextButton) nextButton.style.display = 'flex'; // Exibe o botão "Direita"
-        console.log('Mais de 3 cards, botões exibidos.');
-    }
+    // Atualiza a visibilidade dos produtos
+    const updateVisibleCards = () => {
+        cards.forEach((card, index) => {
+            if (index >= currentIndex && index < currentIndex + itemsPerPage) {
+                card.style.display = 'block'; // Exibe o card
+            } else {
+                card.style.display = 'none'; // Esconde o card
+            }
+        });
 
-    // Movimento inicial
-    let currentPosition = 0;
+        // Desabilita ou habilita os botões dependendo da posição atual
+        if (prevButton) {
+            prevButton.disabled = currentIndex === 0; // Desabilita botão anterior se no início
+        }
+        if (nextButton) {
+            nextButton.disabled = currentIndex + itemsPerPage >= cards.length; // Desabilita próximo se estiver no final
+        }
+    };
 
     // Botão Próximo
-    if (nextButton) {
-        nextButton.addEventListener('click', () => {
-            if (currentPosition < (cards.length - 3) * cardWidth) { // Limitar a quantidade
-                currentPosition += cardWidth;
-                track.style.transform = `translateX(-${currentPosition}px)`;
-                console.log('Moved to position:', currentPosition);
-            }
-        });
-    }
+    nextButton.addEventListener('click', () => {
+        if (currentIndex + itemsPerPage < cards.length) {
+            currentIndex += itemsPerPage; // Avança para o próximo grupo de 3 produtos
+            updateVisibleCards();
+        }
+    });
 
     // Botão Anterior
-    if (prevButton) {
-        prevButton.addEventListener('click', () => {
-            if (currentPosition > 0) {
-                currentPosition -= cardWidth;
-                track.style.transform = `translateX(-${currentPosition}px)`;
-                console.log('Moved to position:', currentPosition);
-            }
-        });
-    }
+    prevButton.addEventListener('click', () => {
+        if (currentIndex - itemsPerPage >= 0) {
+            currentIndex -= itemsPerPage; // Volta para o grupo anterior
+            updateVisibleCards();
+        }
+    });
+
+    // Mostrar os primeiros 3 produtos inicialmente
+    updateVisibleCards();
 });

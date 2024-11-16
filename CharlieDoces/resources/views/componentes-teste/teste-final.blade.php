@@ -7,6 +7,7 @@
     <title>Teste Final</title>
     <link rel="stylesheet" href="{{ asset('css/componentes-style/component-card.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/temporario/teste-final.css') }}">
 </head>
 
 <body>

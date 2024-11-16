@@ -10,10 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-       
         // Carregar produtos e categorias específicas
-
-       
         $produtos = Produto::all();
 
         // Exemplo de categorias específicas, você pode ajustar conforme necessário
@@ -21,9 +18,6 @@ class HomeController extends Controller
         $categoriaNatal = Categoria::with('produtos')->find(84);
         $categoriaTopVendas = Categoria::with('produtos')->find(84);
 
-        
-        return view('home.index', ['produtos' => $produtos, 'categoriaChocolate' => $categoriaChocolate, 'categoriaNatal' => $categoriaNatal, 'categoriaTopVendas' => $categoriaTopVendas]);
-        return view('home.index', ['produtos' => Produto::All()]);
         // Retornar a view com os dados necessários
         return view('home.index', [
             'produtos' => $produtos,
@@ -31,10 +25,6 @@ class HomeController extends Controller
             'categoriaNatal' => $categoriaNatal,
             'categoriaTopVendas' => $categoriaTopVendas
         ]);
-        
-        return view('home.index', ['produtos' => $produtos, 'categoriaChocolate' => $categoriaChocolate, 'categoriaNatal' => $categoriaNatal, 'categoriaTopVendas' => $categoriaTopVendas]);
-
-        return view('home.index', ['produtos' => Produto::All()]);
     }
 
     // Se precisar de outros métodos como para listar categorias:

@@ -25,11 +25,13 @@ class CarrinhoController extends Controller
                 'ITEM_QTD' => 1
             ]);
         }
+
+        return redirect('/home');
     }
 
     public function carrinho(){
         $items = Carrinho::where(['USUARIO_ID' => Auth::user()->USUARIO_ID])->get();
-        return view('produto.carrinho', ['items' => $items]);
+        return view('carrinho.index', ['items' => $items]);
     }
     
 }

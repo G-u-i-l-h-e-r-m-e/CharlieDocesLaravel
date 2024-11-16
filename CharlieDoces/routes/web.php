@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProfileController;
@@ -9,6 +10,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SearchController;
 
+
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('register', [RegisteredUserController::class, 'showRegisterForm']);
 
 Route::middleware('auth')->group(function () {
     // Rotas para carrinho

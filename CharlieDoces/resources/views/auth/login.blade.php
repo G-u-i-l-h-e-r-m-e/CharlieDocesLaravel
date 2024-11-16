@@ -7,6 +7,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="{{ asset('css/login/login.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('img/header/logo.svg') }}" sizes="64x64" type="image/svg">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <!-- Scripts -->
@@ -46,7 +47,7 @@
                     <hr>
                 </div>
                 <div class="register-container">
-                    <span>Não tem uma conta?</span>
+                    <a>Não tem uma conta?</a>
                 </div>
                 <div>
                     <a href="/cadastro" class="btn btn-primary">

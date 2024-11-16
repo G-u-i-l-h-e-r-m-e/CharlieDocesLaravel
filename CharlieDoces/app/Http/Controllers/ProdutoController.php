@@ -32,7 +32,20 @@ class ProdutoController extends Controller
 
     public function todosProdutos()
     {
+        // Carrega todos os produtos
         $produtos = Produto::all();
         return view('produto.todos_produtos', compact('produtos'));
+    }
+
+    public function buscar(Request $request)
+    {
+        // Recebe o termo de pesquisa
+        $termo = $request->input('q');
+
+        // Busca no banco de dados usando o operador LIKE
+        $produtos = Produto::where('nome', 'LIKE', '%' . $termo . '%')->get();
+
+        // Retorna os produtos encontrados em formato JSON
+        return response()->json($produtos);
     }
 }

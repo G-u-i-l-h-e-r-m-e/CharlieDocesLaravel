@@ -10,31 +10,25 @@ class HomeController extends Controller
 {
     public function index()
     {
-       
-        // Carregar produtos e categorias específicas
+        // Carregar produtos da categoria "Natal" com paginação
+        $produtosNatal = Produto::whereHas('categoria', function ($query) {
+            $query->where('CATEGORIA_NOME', 'natal');
+        })->paginate(3);
 
-       
+        // Carregar outros dados, como categorias específicas
         $produtos = Produto::all();
-
-        // Exemplo de categorias específicas, você pode ajustar conforme necessário
         $categoriaChocolate = Categoria::with('produtos')->find(66);
         $categoriaNatal = Categoria::with('produtos')->find(84);
         $categoriaTopVendas = Categoria::with('produtos')->find(84);
 
-        
-        return view('home.index', ['produtos' => $produtos, 'categoriaChocolate' => $categoriaChocolate, 'categoriaNatal' => $categoriaNatal, 'categoriaTopVendas' => $categoriaTopVendas]);
-        return view('home.index', ['produtos' => Produto::All()]);
         // Retornar a view com os dados necessários
         return view('home.index', [
+            'produtosNatal' => $produtosNatal,
             'produtos' => $produtos,
             'categoriaChocolate' => $categoriaChocolate,
             'categoriaNatal' => $categoriaNatal,
             'categoriaTopVendas' => $categoriaTopVendas
         ]);
-        
-        return view('home.index', ['produtos' => $produtos, 'categoriaChocolate' => $categoriaChocolate, 'categoriaNatal' => $categoriaNatal, 'categoriaTopVendas' => $categoriaTopVendas]);
-
-        return view('home.index', ['produtos' => Produto::All()]);
     }
 
     // Se precisar de outros métodos como para listar categorias:
@@ -50,6 +44,5 @@ class HomeController extends Controller
             'produtos' => Produto::all(),
             'categorias' => Categoria::all()
         ]);
-
     }
 }

@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produto;
+
 class TesteController extends Controller
 {
-    public function carregarProdutosCarousel()
+    public function testeFinal()
     {
-        // Filtrar produtos pela categoria usando o relacionamento
-        $produtosNatal = Produto::whereHas('categoria', function ($query) {
-            $query->where('CATEGORIA_NOME', 'natal');
-        })->paginate(3);
+        // Recupera os produtos com IDs específicos na ordem desejada
+        $produtosChocolate = Produto::where('CATEGORIA_ID', 66)
+            ->where('PRODUTO_ATIVO', 1)
+            ->whereIn('PRODUTO_ID', [281, 282, 283])
+            ->orderByRaw("FIELD(PRODUTO_ID, 281, 282, 283)")
+            ->get();
 
-        return view('componentes-produtos.carousel-natal', compact('produtosNatal'));
+        return view('componentes-teste.teste-final', compact('produtosChocolate'));
     }
-
-
 
 }

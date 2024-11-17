@@ -14,14 +14,11 @@
     <div class="container">
         <h1>Teste Final</h1>
 
-        <!-- Incluindo o componente carousel-natal -->
-        @include('componentes-produtos.carousel-natal', ['produtosNatal' => $produtosNatal])
+        @include('componentes-produtos.carousel-chocolate', ['produtosChocolate' => $produtosChocolate])
 
-        <!-- Paginação -->
-        <div class="pagination">
-            {{ $produtosNatal->links() }}
-        </div>
-    </div>
+
+    @vite('resources/js/componentes-produtos/carousel-natal.js')
+
 </body>
 
 </html>

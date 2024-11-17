@@ -27,7 +27,7 @@
 
                     <div>
                         <label for="name">Nome Completo:</label>
-                        <input type="text" id="name" name="name" required />
+                        <input type="text" id="name" name="name" oninput="validateName()" />
                         @error('name')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
@@ -35,20 +35,27 @@
 
                     <div>
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required />
+                        <input type="email" id="email" name="email" />
                         @error('email')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
-                    
+
                     <div>
                         <label for="senha">Senha:</label>
-                        <input v-model="password" type="password" id="password" name="password" required />
+                        <input v-model="password" type="password" id="password" name="password" />
                         <ul v-show="password">
-                            <li :class="{ senhaValida: password.length >= 8, senhaNaoValida: password.length < 8 }">Mínimo de 8 caracteres</li>
-                            <li :class="{ senhaValida: /[A-Z]/.test(password), senhaNaoValida: !/[A-Z]/.test(password) }">Incluir ao menos uma letra maiúscula</li>
-                            <li :class="{ senhaValida: /[0-9]/.test(password), senhaNaoValida: !/[0-9]/.test(password) }">Incluir ao menos um número</li>
-                            <li :class="{ senhaValida: caracteresEspeciaisValidos, senhaNaoValida: !caracteresEspeciaisValidos }">Incluir ao menos um caractere especial</li>
+                            <li :class="{ senhaValida: password.length >= 8, senhaNaoValida: password.length < 8 }">
+                                Mínimo de 8 caracteres</li>
+                            <li
+                                :class="{ senhaValida: /[A-Z]/.test(password), senhaNaoValida: !/[A-Z]/.test(password) }">
+                                Incluir ao menos uma letra maiúscula</li>
+                            <li
+                                :class="{ senhaValida: /[0-9]/.test(password), senhaNaoValida: !/[0-9]/.test(password) }">
+                                Incluir ao menos um número</li>
+                            <li
+                                :class="{ senhaValida: caracteresEspeciaisValidos, senhaNaoValida: !caracteresEspeciaisValidos }">
+                                Incluir ao menos um caractere especial</li>
                         </ul>
 
                         @error('password')
@@ -58,7 +65,7 @@
 
                     <div>
                         <label for="password_confirmation">Confirme a Senha:</label>
-                        <input type="password" id="password_confirmation" name="password_confirmation" required />
+                        <input type="password" id="password_confirmation" name="password_confirmation" />
                         @error('password_confirmation')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
@@ -66,7 +73,7 @@
 
                     <div>
                         <label for="cpf">CPF:</label>
-                        <input type="text" id="cpf" name="cpf" required />
+                        <input type="text" id="cpf" name="cpf" />
                         @error('cpf')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
@@ -75,9 +82,6 @@
                     <h3>Endereço Completo</h3>
                     <div>
                         <label for="estado">Estado:</label>
-                        {{-- <select id="estado" name="estado">
-                            <option></option>
-                        </select> --}}
                         <select id="estado" name="estado">
                             <option></option>
                             <option v-for="estado in estados" :key="estado.sigla" :value="estado.sigla">
@@ -90,7 +94,7 @@
 
                     <div>
                         <label for="cidade">Cidade:</label>
-                        <input type="text" id="cidade" name="cidade" required />
+                        <input type="text" id="cidade" name="cidade" />
                         @error('cidade')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
@@ -98,7 +102,7 @@
 
                     <div>
                         <label for="cep">CEP:</label>
-                        <input type="text" id="cep" name="cep" required />
+                        <input type="text" id="cep" name="cep" />
                         @error('cep')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
@@ -106,7 +110,7 @@
 
                     <div>
                         <label for="logradouro">Rua:</label>
-                        <input type="text" id="logradouro" name="logradouro" required />
+                        <input type="text" id="logradouro" name="logradouro" />
                         @error('logradouro')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
@@ -114,7 +118,7 @@
 
                     <div>
                         <label for="numero">Número:</label>
-                        <input type="text" id="numero" name="numero" required />
+                        <input type="text" id="numero" name="numero" />
                         @error('numero')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
@@ -130,7 +134,7 @@
 
                     <div>
                         <label for="bairro">Bairro:</label>
-                        <input type="text" id="bairro" name="bairro" required />
+                        <input type="text" id="bairro" name="bairro" />
                         @error('bairro')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror

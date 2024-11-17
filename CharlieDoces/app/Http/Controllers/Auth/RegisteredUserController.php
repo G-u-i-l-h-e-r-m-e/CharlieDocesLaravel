@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -28,22 +29,28 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        // Validação dos dados do formulário
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:USUARIO,USUARIO_EMAIL',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'cpf' => 'required|string|max:11|unique:USUARIO,USUARIO_CPF',
-            'bairro' => 'required|string|max:255',
-            'logradouro' => 'required|string|max:255',
-            'numero' => 'required|integer',
-            'complemento' => 'nullable|string|max:255',
-            'cep' => 'required|string|max:10',
-            'cidade' => 'required|string|max:255',
-            'estado' => 'required|string|max:255',
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'regex:/^[^\d]*$/'],
+            'email' => ['required', 'string', 'email', 'unique:USUARIO,USUARIO_EMAIL'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', Rules\Password::defaults()],
+            'cpf' => ['required', 'string', 'max:11', 'unique:USUARIO,USUARIO_CPF', 'confirmed'],
+            'bairro' => ['required', 'string'],
+            'logradouro' => ['required', 'string'],
+            'estado' => ['required', 'string'],
+            'cidade' => ['required', 'string'],
+            'cep' => ['required', 'string', 'max:7'],
+            'logradouro' => ['required', 'string'],
+            'numero' => ['required', 'string'],
+            'complemento' => ['nullable', 'string'],
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         // Criação do usuário
         $user = User::create([
@@ -65,13 +72,8 @@ class RegisteredUserController extends Controller
             'ENDERECO_ESTADO' => $request->estado,
         ]);
 
-        // Disparar evento de registro
-        event(new Registered($user));
-
-        // Autenticar o usuário
-        Auth::login($user);
-
-        // Redirecionar para a página inicial ou outra página desejada
         return redirect()->route('home');
     }
+
+    
 }

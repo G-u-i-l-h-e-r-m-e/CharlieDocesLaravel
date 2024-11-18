@@ -9,27 +9,57 @@ use Illuminate\Support\Facades\Auth;
 
 class CarrinhoController extends Controller
 {
-    public function addCarrinho(Produto $produto){
-        $item = Carrinho::where(
-                ['USUARIO_ID' => Auth::user()->USUARIO_ID, 'PRODUTO_ID' => $produto->PRODUTO_ID]
-        )->first();
+    // Função para adicionar produto ao carrinho
+    public function addCarrinho(Produto $produto)
+{
+    $usuarioId = Auth::user()->USUARIO_ID;
 
-        if($item){
-            Carrinho::where(['USUARIO_ID' => Auth::user()->USUARIO_ID, 'PRODUTO_ID' => $produto->PRODUTO_ID])->update([
-                'ITEM_QTD' => $item->ITEM_QTD + 1
-            ]);
-        }else{
-            Carrinho::create([
-                'USUARIO_ID' => Auth::user()->USUARIO_ID,
-                'PRODUTO_ID' => $produto->PRODUTO_ID, 
-                'ITEM_QTD' => 1
-            ]);
-        }
+    $item = Carrinho::where([
+        'USUARIO_ID' => $usuarioId,
+        'PRODUTO_ID' => $produto->PRODUTO_ID,
+    ])->first();
+
+    if ($item) {
+        $item->ITEM_QTD += 1;
+        $item->save();
+    } else {
+        $item = Carrinho::create([
+            'USUARIO_ID' => $usuarioId,
+            'PRODUTO_ID' => $produto->PRODUTO_ID,
+            'ITEM_QTD' => 1,
+        ]);
     }
 
-    public function carrinho(){
-        $items = Carrinho::where(['USUARIO_ID' => Auth::user()->USUARIO_ID])->get();
-        return view('carrinho.carrinho', ['items' => $items]);
+    return response()->json([
+        'ITEM_QTD' => $item->ITEM_QTD,
+        'message' => 'Quantidade atualizada.',
+    ]);
+}
+
+    // Função para remover produto do carrinho
+    public function removeCarrinho(Produto $produto)
+    {
+        $usuarioId = Auth::user()->USUARIO_ID;
+    
+        $item = Carrinho::where([
+            'USUARIO_ID' => $usuarioId,
+            'PRODUTO_ID' => $produto->PRODUTO_ID,
+        ])->first();
+    
+        if ($item) {
+            if ($item->ITEM_QTD > 1) {
+                $item->ITEM_QTD -= 1;
+                $item->save();
+            } else {
+                $item->delete();
+                return response()->json(['ITEM_QTD' => 0, 'message' => 'Item removido.']);
+            }
+        }
+    
+        return response()->json([
+            'ITEM_QTD' => $item->ITEM_QTD ?? 0,
+            'message' => 'Quantidade atualizada.',
+        ]);
     }
     
 }

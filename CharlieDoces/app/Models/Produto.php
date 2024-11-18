@@ -21,4 +21,12 @@ class Produto extends Model
     {
         return $this->hasMany(Produto_imagem::class, "PRODUTO_ID", "PRODUTO_ID");
     }
+    public function imagemPrincipal()
+    {
+        return $this->hasOne(Produto_imagem::class, 'PRODUTO_ID', 'PRODUTO_ID')
+                    ->orderBy('IMAGEM_ID', 'desc'); // Use a coluna correta para ordenar
+    }
+    
+    
+
 }

@@ -12,9 +12,13 @@ use App\Http\Controllers\CarrinhoController;
 Route::get('/', [HomeController::class, 'index']);
 
 Route::group(['middleware' => ['auth']], function () {
-    // Rotas para carrinho
-    Route::get('carrinho/{produto}', [CarrinhoController::class, 'addCarrinho']);
-    Route::get('carrinho', [CarrinhoController::class, 'carrinho']);
+
+    Route::post('carrinho/{produto}/adicionar', [CarrinhoController::class, 'addCarrinho'])->name('carrinho.adicionar');
+    Route::post('carrinho/{produto}/remover', [CarrinhoController::class, 'removeCarrinho'])->name('carrinho.remover');
+    
+    
+
+
 
     // Rotas para produtos
     Route::get('/produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');

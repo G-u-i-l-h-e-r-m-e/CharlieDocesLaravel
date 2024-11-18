@@ -12,10 +12,6 @@
 <body>
 
     <div class="carousel-natal-container" data-total-produtos="{{ $produtosNatal->total() }}">
-        <div class="tituloHome">
-            <h2 class="tituloNatal">Natal</h2>
-            <h2 class="subtituloNatal">CONFIRA NOSSAS NOVIDADES</h2>
-        </div>
 
         <div class="carousel-natal-wrapper">
             @if ($produtosNatal->total() > 3)

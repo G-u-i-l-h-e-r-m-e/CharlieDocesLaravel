@@ -13,10 +13,6 @@
 <body>
 
     <div class="carousel-chocolate-container">
-        <div class="tituloHome">
-            <h2 class="tituloChocolate">Ofertas Imperdíveis</h2>
-            <h2 class="subtituloChocolate">Confira as promoções irresistíveis de nossos chocolates e faça a festa!</h2>
-        </div>
 
         <div class="carousel-chocolate-wrapper">
 

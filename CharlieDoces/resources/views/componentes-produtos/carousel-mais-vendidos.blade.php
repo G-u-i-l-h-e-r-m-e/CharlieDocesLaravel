@@ -1,12 +1,7 @@
 <!-- resources/views/componentes-produtos/carousel-mais-vendidos.blade.php -->
 
 <div class="carousel-mais-vendidos">
-    <div class="tituloHome">
-        <h2 class="tituloMaisVendidos">Top Vendas</h2>
-        <h2 class="subtituloMaisVendidos">Conheça o pódio de
-            preferidos e experimente as escolhas que fazem sucesso.</h2>
-    </div>
-
+  
     <div class="carousel-track">
         @foreach ($produtosMaisVendidos as $produto)
             @include('componentes-produtos.component-card', ['produto' => $produto])

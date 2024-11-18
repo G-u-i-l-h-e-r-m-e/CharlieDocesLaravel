@@ -38,6 +38,8 @@
             @include('componentes-produtos.component-title', ['titulo' => 'Ofertas Imperdíveis', 'subtitulo' => 'Confira as promoções irresistíveis de nossos chocolates e faça a festa!'])
         </div>
 
+        <div class="circles-background"></div>
+
         <div class="background-carousel-chocolate">
             @include('componentes-produtos.carousel-chocolate', ['produtosChocolate' => $produtosChocolate])
 

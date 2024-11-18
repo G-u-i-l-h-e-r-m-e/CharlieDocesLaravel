@@ -12,7 +12,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TesteController;
 
 // Rota de teste
-Route::get('/teste-carousel', [TesteController::class, 'carregarProdutosCarousel'])->name('teste.carousel');
+Route::get('/teste-final', [TesteController::class, 'testeFinal']);
 
 // Rotas protegidas por autenticação
 Route::get('/', [HomeController::class, 'index']);

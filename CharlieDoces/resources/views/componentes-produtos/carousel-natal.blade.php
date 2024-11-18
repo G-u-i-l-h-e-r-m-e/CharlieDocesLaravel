@@ -12,21 +12,14 @@
 <body>
 
     <div class="carousel-natal-container" data-total-produtos="{{ $produtosNatal->total() }}">
-        <div class="tituloHome">
-            <h2 class="tituloNatal">Natal</h2>
-            <h2 class="subtituloNatal">CONFIRA NOSSAS NOVIDADES</h2>
-        </div>
 
         <div class="carousel-natal-wrapper">
-            <!-- Botão Esquerda (exibido apenas se há mais de 3 produtos) -->
             @if ($produtosNatal->total() > 3)
                 <button class="carouselNatal-button left">&#10094;</button>
             @endif
 
-            <!-- Track para os slides -->
             <div class="carousel-natal-track">
                 @php
-                    // Divide os produtos em grupos de 3
                     $produtosAgrupados = $produtosNatal->chunk(3);
                 @endphp
 
@@ -39,14 +32,12 @@
                 @endforeach
             </div>
 
-            <!-- Botão Direita (exibido apenas se há mais de 3 produtos) -->
             @if ($produtosNatal->total() > 3)
                 <button class="carouselNatal-button right">&#10095;</button>
             @endif
         </div>
     </div>
 
-    <!-- Inclua o JavaScript -->
     @vite('resources/js/componentes-produtos/carousel-natal.js')
 
 </body>

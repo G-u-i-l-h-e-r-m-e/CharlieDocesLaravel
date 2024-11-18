@@ -13,13 +13,13 @@
 
   <footer class="footer">
     <div class="footer-content">
-    <img src="{{ asset(path: 'img/footer/Charlie_logo.png') }}" alt="Logo Charlie Doces" class="logo1">
-      <nav>
+      <img src="{{ asset(path: 'img/footer/Charlie_logo.png') }}" alt="Logo Charlie Doces" class="logo1">
+      <div class="footer-links">
         <a href="#home">Home</a>
         <a href="#produtos">Página de Produtos</a>
         <a href="#carrinho">Carrinho</a>
         <a href="#perfil">Perfil</a>
-      </nav>
+      </div>
     </div>
   </footer>
 </body>

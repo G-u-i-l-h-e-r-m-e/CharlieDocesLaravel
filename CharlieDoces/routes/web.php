@@ -18,6 +18,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('carrinho', [CarrinhoController::class, 'carrinho']);
 });
 
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
@@ -28,6 +29,8 @@ Route::get('enviado', [LoginController::class, 'sent']);
 Route::get('/categoria', [CategoriaController::class, 'index']);
 Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']); //passado categoria como parâmetro 
 Route::get('/produtos', [ProdutoController::class, 'index']);
+Route::get('enviado', [LoginController::class, 'sent']);
+
 
 Route::get('produto/{produto}', [ProdutoController::class, 'show']);
 

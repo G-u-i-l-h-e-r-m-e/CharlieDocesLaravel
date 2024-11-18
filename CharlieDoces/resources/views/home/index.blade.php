@@ -20,6 +20,13 @@
         <section>
             @include('profile.partials.carrousel-categoria');
         </section>
+        <section>
+            <div class="tituloHome">
+                <h2>Confira nossas novidades</h2>
+                <h2>{{$categoriaNatal -> CATEGORIA_NOME}}</h2>
+            </div>
+            @include('categoria.show', ['categoria' => $categoriaNatal])
+        </section>
         
         <section>
             <div class="tituloHome">
@@ -36,13 +43,6 @@
             @include('categoria.show', ['categoria' => $categoriaChocolate])
         </section>
         
-        <section>
-            <div class="tituloHome">
-                <h2>Confira nossas novidades</h2>
-                <h2>{{$categoriaNatal -> CATEGORIA_NOME}}</h2>
-            </div>
-            @include('categoria.show', ['categoria' => $categoriaNatal])
-        </section>
        
        
         <section>

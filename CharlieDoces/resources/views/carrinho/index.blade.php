@@ -16,30 +16,52 @@
     <section>
         @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()])
     </section>
+
     <div class="carrinho-container">
         <table>
             <thead class="header-table">
                 <tr>
+                    {{-- <th scope="col">Id Produto</th> --}}
                     <th scope="col">Produto</th>
                     <th scope="col">Preço</th>
                     <th scope="col">Quantidade</th>
                     <th scope="col">Total</th>
-                    <th scope="col">Excluir</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($items as $item)
-                <tr data-item-id="{{ $item->id }}">
-                    <td>{{ $item->Produto->PRODUTO_NOME }}</td>
-                    <td>{{ $item->Produto->PRODUTO_PRECO }}</td>
-                    <td class="campo-quantidade">
-                        <button class="decrease-quantity">-</button>
-                        <span class="item-quantity">{{ $item->ITEM_QTD }}</span>
-                        <button class="increase-quantity">+</button>
-                    </td>
-                    <td class="item-total">{{ $item->Produto->PRODUTO_PRECO * $item->ITEM_QTD }}</td>
-                    <td><button class="delete-item">Excluir</button></td>
-                </tr>
+                    <tr data-item-id="{{ $item->id }}">
+                        {{-- <td>{{ $item->Produto->PRODUTO_ID }}</td> --}}
+                        <td>{{ $item->Produto->PRODUTO_NOME }}</td>
+                        <td>{{ $item->Produto->PRODUTO_PRECO }}</td>
+                        <td class="campo-quantidade">
+                            <form
+                                action="{{ route('carrinho.delQuantidadeItens', ['produto' => $item->Produto->PRODUTO_ID]) }}"
+                                method="POST">
+                                @csrf
+
+                                <input type="submit" value="-">
+                            </form>
+                            <span class="item-quantity">{{ $item->ITEM_QTD }}</span>
+                            <form
+                                action="{{ route('carrinho.addQuantidadeItens', ['produto' => $item->Produto->PRODUTO_ID]) }}"
+                                method="POST">
+                                @csrf
+
+                                <input type="submit" value="+">
+                            </form>
+                        </td>
+                        <td class="item-total">{{ $item->Produto->PRODUTO_PRECO * $item->ITEM_QTD }}</td>
+                        <td>
+                            <form
+                                action="{{ route('carrinho.deleteCarrinho', ['produto' => $item->Produto->PRODUTO_ID]) }}"
+                                method="POST">
+                                @csrf
+
+                                <button type="submit">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -47,8 +69,7 @@
     <section>
         @include('profile.partials.footer')
     </section>
-
-    <script src="/js/carrinho.js"></script>
+    {{-- <script src="/js/carrinho.js"></script> --}}
 </body>
 
 </html>

@@ -18,9 +18,9 @@ section {
 }
 
 .header-table {
-    background-color: #591F12; 
-    color: white; 
-    font-size: 20px; 
+    background-color: #591f12;
+    color: white;
+    font-size: 20px;
     padding: 10px;
 }
 
@@ -34,17 +34,41 @@ section {
     font-family: "Poppins", sans-serif;
 }
 
+form {
+    display: inline;
+}
+
 .carrinho-container table {
     display: table;
     align-items: center;
     width: 1200px;
-    height: 500px;
+    height: 100px;
     border-collapse: collapse;
     text-align: center;
     margin-top: 20px;
 }
 
+.acompanhar-pedido-button {
+    width: 200px;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.acompanhar-pedido-button:hover {
+    background-color: #45a049;
+}
+
 tr {
+    height: 30px; /* Defina a altura desejada */
+    padding: 5px; /* Ajuste o padding conforme necessário */
     border-bottom: 2px solid #ddd;
 }
 
@@ -52,8 +76,17 @@ tbody tr:hover {
     background-color: #afafafb4;
 }
 
+
 .campo-quantidade {
     text-align: center;
+}
+
+.campo-quantidade input[type="submit"] {
+    margin: 0 10px; /* Adiciona margem horizontal aos botões */
+}
+
+.campo-quantidade input[type="submit"]:hover {
+    cursor: pointer;
 }
 
 .campo-quantidade button {
@@ -62,180 +95,6 @@ tbody tr:hover {
 
 .campo-quantidade .item-quantity {
     margin: 0 10px; /* Adiciona margem horizontal ao texto da quantidade */
-}
-
-.login-container h2 {
-    font-size: 32px;
-    color: #4a2f25;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.login-container label {
-    display: block;
-    font-size: 24px;
-    color: #4a2f25;
-    margin-bottom: 8px;
-    text-align: left;
-}
-
-.login-container input[type="text"],
-.login-container input[type="password"] {
-    width: 698px;
-    height: 52px;
-    padding: 12px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.login-form h2 {
-    margin-bottom: 20px;
-    text-align: start;
-}
-
-.password-container {
-    position: relative;
-}
-
-.password-container input[type="password"] {
-    padding-right: 40px;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 32px;
-    color: #4a2f25;
-}
-
-.forgot-password {
-    display: block;
-    font-size: 14px;
-    color: rgb(0, 123, 255);
-    text-decoration: none;
-    margin: 10px 0 20px;
-    text-align: right;
-}
-
-.register-container a {
-    text-decoration: none;
-    color: rgb(0, 123, 255);
-}
-.register-container a:hover {
-    cursor: auto;
-}
-
-.login-container button {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 3%;
-    font-size: 24px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.login-container p {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #bf0b0b;
-}
-
-.login-container button:hover {
-    background-color: #45a049;
-}
-
-.forgotpassword-container {
-    display: flex;
-    justify-content: center;
-    text-align: start;
-    width: 700px;
-    height: 700px;
-    font-family: "Poppins", sans-serif;
-}
-
-.forgotpassword-container h2 {
-    font-size: 32px;
-    color: #4a2f25;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.forgotpassword-container label {
-    display: block;
-    font-size: 24px;
-    color: #8b4513;
-    margin-bottom: 8px;
-    text-align: left;
-}
-
-.forgotpassword-container input[type="text"] {
-    width: 698px;
-    height: 52px;
-    padding: 12px;
-    font-size: 16px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-.forgotpassword-container button {
-    width: 100%;
-    padding: 12px;
-    font-size: 24px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.forgotpassword-container button:hover {
-    background-color: #45a049;
-}
-
-.forgotpassword-container p {
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 30px;
-    margin-bottom: 5px;
-    color: #591f12;
-}
-
-.register-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
-.login-container span {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #1343c7e7;
-}
-
-.cadastro-button {
-    margin-top: 10px;
 }
 
 .hidden {

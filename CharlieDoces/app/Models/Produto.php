@@ -22,6 +22,12 @@ class Produto extends Model
         'PRODUTO_ATIVO',
     ];
 
+    protected $casts = [
+        'PRODUTO_ID' => 'integer',
+        // ... other casts ...
+    ];
+    
+
     // Relacionamento com a tabela de categorias
     public function categoria()
     {
@@ -39,6 +45,8 @@ class Produto extends Model
     {
         return $this->hasOne(ProdutoEstoque::class, 'PRODUTO_ID', 'PRODUTO_ID');
     }
+    
+
 
     public function produtosPorCategoria($categoriaNome)
     {

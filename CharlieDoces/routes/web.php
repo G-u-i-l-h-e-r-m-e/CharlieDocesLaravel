@@ -16,8 +16,11 @@ Route::get('/teste-final', [TesteController::class, 'testeFinal']);
 // Rotas protegidas por autenticação
 Route::middleware('auth')->group(function () {
     // Rotas para carrinho
-    Route::get('carrinho/{produto}', [CarrinhoController::class, 'addCarrinho']);
-    Route::get('carrinho', [CarrinhoController::class, 'carrinho']);
+    Route::get('carrinho', [CarrinhoController::class, 'carrinho'])->name('carrinho.exibir');
+    Route::post('carrinho/atualizar/{produto}', [CarrinhoController::class, 'atualizarCarrinho'])->name('carrinho.atualizar');
+    Route::post('carrinho/remover/{produto}', [CarrinhoController::class, 'removerDoCarrinho'])->name('carrinho.remover');
+    Route::post('/carrinho/adicionar', [CarrinhoController::class, 'addCarrinho'])->name('carrinho.adicionar');
+
 
     // Rotas para produtos individuais e categorias (protegidas)
     Route::get('/produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');

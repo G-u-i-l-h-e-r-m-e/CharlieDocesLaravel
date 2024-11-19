@@ -1,5 +1,3 @@
-<?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -12,10 +10,15 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Carregar produtos e categorias específicas
+        // Carregar produtos da categoria "Natal" com paginação
+        $produtosNatal = Produto::whereHas('categoria', function ($query) {
+            $query->where('CATEGORIA_NOME', 'natal');
+        })->paginate(3);
+
+        // Carregar todos os produtos
         $produtos = Produto::all();
 
-        // Exemplo de categorias específicas
+        // Carregar categorias específicas
         $categoriaChocolate = Categoria::with('produtos')->find(66);
         $categoriaNatal = Categoria::with('produtos')->find(84);
         $categoriaTopVendas = Categoria::with('produtos')->find(84);
@@ -29,6 +32,7 @@ class HomeController extends Controller
 
         // Retornar a view com todos os dados necessários
         return view('home.index', [
+            'produtosNatal' => $produtosNatal,
             'produtos' => $produtos,
             'categoriaChocolate' => $categoriaChocolate,
             'categoriaNatal' => $categoriaNatal,

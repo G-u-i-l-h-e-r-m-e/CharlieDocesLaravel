@@ -17,56 +17,46 @@
             <p>Categoria: {{ $produto->Categoria ? $produto->Categoria->CATEGORIA_NOME : 'Categoria não disponível' }}
             </p>
 
-            <div class="carousel-images">
-                @if($produto->produto_imagens && $produto->produto_imagens->isNotEmpty())
-                    @foreach($produto->produto_imagens as $imagem)
-                        <img src="{{ $imagem->IMAGEM_URL }}" alt="Imagem do Produto">
-                    @endforeach
-                @else
-                    <p>Nenhuma imagem disponível.</p>
-                @endif
+            <div class="orientacao">
+            <div class="carousel">
+                            <button class="carousel-btn prev">❮</button>
+                            <div class="carousel-images">
+                                @if($produto->produto_imagens && $produto->produto_imagens->isNotEmpty())
+                                    @foreach($produto->produto_imagens as $imagem)
+                                        <img class="imagemProduto" src="{{ $imagem->IMAGEM_URL }}" alt="Imagem do Produto">
+                                    @endforeach
+                                @else
+                                    <p class="imagemProduto">Nenhuma imagem disponível.</p>
+                                @endif
+                            </div>
+                            <button class="carousel-btn next">❯</button>
+                        </div>
+
+                        <div class="precoDesc">
+                            <p><strong>Preço:</strong> R${{ $produto->PRODUTO_PRECO - $produto->PRODUTO_DESCONTO }}</p>
+                            <p>{{ $produto->PRODUTO_DESC }}</p>
+                            
+                       
+                        <div class="botaoTamanho">
+                        <div class="qtdItens">
+                            <button class="btn-qtdItens btnMenos">-</button>
+                            <span class="countItens">0</span>
+                            <button class="btn-qtdItens btnMais">+</button>
+                            </div>
+                            <button class="btn-AddCarrinho" type="button"><a href="/carrinho/{{$produto->PRODUTO_ID}}">Adicionar ao
+                             carrinho</a></button>
+                        </div>
+                        </div>
+                        
             </div>
 
-            <p>Preço: R${{ $produto->PRODUTO_PRECO - $produto->PRODUTO_DESCONTO }}</p>
-            <p>Descrição: {{ $produto->PRODUTO_DESCRICAO }}</p>
-
-            <button class="btn-AddCarrinho" type="button"><a href="/carrinho/{{$produto->PRODUTO_ID}}">Adicionar ao
-                    carrinho</a></button>
+            
         </section>
 
         <!-- Carrossel de Produtos Relacionados -->
         <section class="carouselProdutosRelacionados">
             <h2>Produtos Relacionados</h2>
-            <div class="carousel-cards">
-                <button class="carousel-btn-cards prev-card">❮</button>
-                <div class="carousel-cards-inner">
-                    @foreach($produtosRelacionados as $produtoRelacionado)
-                        <section class="cardProduto">
-                            <div class="carousel">
-                                <div class="carousel-images">
-                                    @if($produtoRelacionado->produto_imagens && $produtoRelacionado->produto_imagens->isNotEmpty())
-                                        @foreach($produtoRelacionado->produto_imagens as $imagem)
-                                            <img src="{{ $imagem->IMAGEM_URL }}" alt="Imagem do Produto">
-                                        @endforeach
-                                    @else
-                                        <p>Nenhuma imagem disponível.</p>
-                                    @endif
-                                </div>
-                            </div>
-                            <p class="categoriaProduto">{{ $produtoRelacionado->Categoria->CATEGORIA_NOME }}</p>
-                            <a class="nomeProduto"
-                                href="/produto/{{ $produtoRelacionado->PRODUTO_ID }}">{{ $produtoRelacionado->PRODUTO_NOME }}</a>
-                            <div class="orientacaoPreco">
-                                <span class="precoProduto">
-                                    <span
-                                        class="precoFinal">R${{ $produtoRelacionado->PRODUTO_PRECO - $produtoRelacionado->PRODUTO_DESCONTO }}</span>
-                                </span>
-                            </div>
-                        </section>
-                    @endforeach
-                </div>
-                <button class="carousel-btn-cards next-card">❯</button>
-            </div>
+            
         </section>
     </main>
 
@@ -101,36 +91,67 @@
             });
 
             // Carrossel de Imagens dentro de cada card de produto
-            document.querySelectorAll('.cardProduto').forEach(card => {
-                const imagesContainer = card.querySelector('.carousel-images');
-                const images = imagesContainer.querySelectorAll('img');
-                const prevImageBtn = card.querySelector('.carousel-btn.prev');
-                const nextImageBtn = card.querySelector('.carousel-btn.next');
-                let imageIndex = 0;
-
-                function updateImageCarousel() {
-                    const offset = -(imageIndex * (images[0].offsetWidth + 10));
-                    imagesContainer.style.transform = `translateX(${offset}px)`;
-                }
-
-                prevImageBtn.addEventListener('click', function () {
-                    if (imageIndex > 0) {
-                        imageIndex--;
-                        updateImageCarousel();
-                    }
-                });
-
-                nextImageBtn.addEventListener('click', function () {
-                    if (imageIndex < images.length - 1) {
-                        imageIndex++;
-                        updateImageCarousel();
-                    }
-                });
-            });
+           
         });
 
-    </script>
+        document.querySelectorAll('.orientacao').forEach(card => {
+    const imagesContainer = card.querySelector('.carousel-images');
+    const images = imagesContainer.querySelectorAll('.imagemProduto');
+    const nextBtn = card.querySelector('.next');
+    const prevBtn = card.querySelector('.prev');
+    let currentIndex = 0;
 
+    function updateCarousel() {
+        const offset = -currentIndex * 100;
+        imagesContainer.style.transform = `translateX(${offset}%)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+        if (currentIndex < images.length - 1) {
+            currentIndex++;
+        } else {
+            currentIndex = 0; // Volta para a primeira imagem
+        }
+        updateCarousel();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = images.length - 1; // Vai para a última imagem
+        }
+        updateCarousel();
+    });
+
+    updateCarousel();
+});
+
+document.querySelectorAll('.orientacao').forEach(card => {
+    let count = 0;
+    const countDisplay = card.querySelector('.countItens');
+    const btnMais = card.querySelector('.btnMais');
+    const btnMenos = card.querySelector('.btnMenos');
+
+    function updateCounter() {
+        countDisplay.innerText = count;
+    }
+
+    btnMais.addEventListener('click', () => {
+        count++;
+        updateCounter();
+    });
+
+    btnMenos.addEventListener('click', () => {
+        if (count > 0) {
+            count--;
+            updateCounter();
+        }
+    });
+});
+
+    </script>
+<script src="/js/produto.js"></script>
 </body>
 
 </html>

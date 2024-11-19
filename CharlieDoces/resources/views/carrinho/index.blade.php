@@ -17,6 +17,14 @@
         @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()])
     </section>
 
+    <!-- Botão Histórico de compras -->
+    <div class="botao-historico-container">
+        <button class="botao-historico" onclick="window.location.href='/historico_pedidos'">
+            Histórico de compras
+        </button>
+    </div>
+
+
     <div class="carrinho-container">
         <table>
             <thead class="header-table">
@@ -33,7 +41,7 @@
                     <tr data-item-id="{{ $item->id }}">
                         {{-- <td>{{ $item->Produto->PRODUTO_ID }}</td> --}}
                         <td>{{ $item->Produto->PRODUTO_NOME }}</td>
-                        <td>{{ $item->Produto->PRODUTO_PRECO }}</td>
+                        <td>{{ 'R$ ' . number_format($item->Produto->PRODUTO_PRECO, 2, ',', '.') }}</td>
                         <td class="campo-quantidade">
                             <form
                                 action="{{ route('carrinho.delQuantidadeItens', ['produto' => $item->Produto->PRODUTO_ID]) }}"
@@ -51,7 +59,7 @@
                                 <input type="submit" value="+">
                             </form>
                         </td>
-                        <td class="item-total">{{ $item->Produto->PRODUTO_PRECO * $item->ITEM_QTD }}</td>
+                        <td class="item-total">{{ 'R$ ' . number_format($item->Produto->PRODUTO_PRECO * $item->ITEM_QTD, 2, ',', '.') }}</td>
                         <td>
                             <form
                                 action="{{ route('carrinho.deleteCarrinho', ['produto' => $item->Produto->PRODUTO_ID]) }}"

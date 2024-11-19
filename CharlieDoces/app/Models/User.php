@@ -26,18 +26,17 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // Especificar o nome da coluna que deve ser usada para autenticação
+
     public function getAuthIdentifierName()
     {
-        return 'USUARIO_EMAIL';
+        return 'USUARIO_ID'; 
     }
 
-    // Especificar o nome da coluna que deve ser usada para a senha
     public function getAuthPassword()
     {
         return $this->USUARIO_SENHA;
     }
-
+    
     public function endereco()
     {
         return $this->hasOne(Endereco::class, 'USUARIO_ID');

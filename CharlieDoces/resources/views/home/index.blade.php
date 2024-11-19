@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/componentes-style/content-title.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body>
@@ -23,7 +24,7 @@
 
     <div class="home-carousels-container">
 
-        <div class="home-component-title-01">
+        <div class="home-component-title-01 animate__animated animate__headShake">
             @include('componentes-produtos.component-title', ['titulo' => 'Ofertas Imperdíveis', 'subtitulo' => 'CONFIRA NOSSAS NOVIDADES'])       
         </div>
 
@@ -36,7 +37,7 @@
 
 
     <div class="home-carousels-container">
-        <div class="home-component-title-02">
+        <div class="home-component-title-02 animate__animated animate__headShake">
             @include('componentes-produtos.component-title', ['titulo' => 'Ofertas Imperdíveis', 'subtitulo' => 'Confira as promoções irresistíveis de nossos chocolates e faça a festa!'])
         </div>
 
@@ -52,7 +53,7 @@
     </div>
 
     <div class="home-carousels-container">
-        <div class="home-component-title-03">
+        <div class="home-component-title-03 animate__animated animate__headShake">
             @include('componentes-produtos.component-title', ['titulo' => 'Top Vendas', 'subtitulo' => 'Conheça o pódio de preferidos e experimente as escolhas que fazem sucesso.'])
         </div>
 

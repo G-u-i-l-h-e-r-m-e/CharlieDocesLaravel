@@ -29,7 +29,7 @@
                         <td>{{ $item->Produto->PRODUTO_NOME }}</td>
                         <td>{{ $item->Pedido->Status->STATUS_DESC }}</td>
                         <td>{{ $item->ITEM_QTD }}</td>
-                        <td>{{ $item->ITEM_QTD * $item->ITEM_PRECO }}</td>
+                        <td>{{ 'R$ ' . number_format($item->ITEM_QTD * $item->ITEM_PRECO, 2, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>

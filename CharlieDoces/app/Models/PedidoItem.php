@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class PedidoItem extends Model
 {
     use HasFactory;
-
     protected $table = "PEDIDO_ITEM";
-    protected $primaryKey = "PRODUTO_ID";
     public $timestamps = false;
 
     protected $fillable = [
         'PEDIDO_ID',
+        'PRODUTO_ID',
         'ITEM_QTD',
         'ITEM_PRECO'
     ];

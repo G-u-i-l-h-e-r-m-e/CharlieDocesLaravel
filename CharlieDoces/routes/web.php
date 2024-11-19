@@ -29,7 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::get('carrinho', [CarrinhoController::class, 'carrinho']);
     Route::post('carrinho/addQuantidadeItens/{produto}', [CarrinhoController::class, 'addQuantidadeItens'])->name('carrinho.addQuantidadeItens');
     Route::post('carrinho/delQuantidadeItens/{produto}', [CarrinhoController::class, 'delQuantidadeItens'])->name('carrinho.delQuantidadeItens');
-    Route::patch('carrinho/{produto}', [CarrinhoController::class, 'updateQuantidadeItens'])->name('carrinho.updateQuantidadeItens');
     Route::post('carrinho/deleteCarrinho/{produto}', [CarrinhoController::class, 'deleteCarrinho'])->name('carrinho.deleteCarrinho');
 
     // Rotas para produtos individuais e categorias (protegidas)

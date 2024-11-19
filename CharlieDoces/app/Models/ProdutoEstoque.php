@@ -1,4 +1,5 @@
 <?php
+// app/Models/ProdutoEstoque.php
 
 namespace App\Models;
 
@@ -12,13 +13,20 @@ class ProdutoEstoque extends Model
     protected $table = 'PRODUTO_ESTOQUE';
     protected $primaryKey = 'PRODUTO_ID';
     public $timestamps = false;
+    public $incrementing = false;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'PRODUTO_ID',
-        'PRODUTO_QTD',
+        'PRODUTO_QTD', // Corrected field name
     ];
 
-    // Relacionamento inverso com Produto
+    protected $casts = [
+        'PRODUTO_ID' => 'integer',
+        'PRODUTO_QTD' => 'integer',
+    ];
+
+    // Inverse relationship with Produto
     public function produto()
     {
         return $this->belongsTo(Produto::class, 'PRODUTO_ID', 'PRODUTO_ID');

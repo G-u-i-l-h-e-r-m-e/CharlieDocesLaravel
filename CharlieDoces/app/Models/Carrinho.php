@@ -13,7 +13,8 @@ class Carrinho extends Model
     protected $fillable = ['USUARIO_ID','PRODUTO_ID', 'ITEM_QTD'];
     public $timestamps = false;
 
-    public function Produto() {
-       return $this->belongsTo(Produto::class, 'PRODUTO_ID');
-    }
+    public function produto() {
+        return $this->belongsTo(Produto::class, 'PRODUTO_ID', 'PRODUTO_ID');
+     }
+     
 }

@@ -90,3 +90,49 @@ prevBtn.addEventListener('click', () => {
     offset = Math.max(offset, 0);
     containerInner.style.transform = `translateX(-${offset}px)`;
 });
+
+
+//Adiciona itens no carrinho via ajax
+
+document.addEventListener('DOMContentLoaded', function () {
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    // Função para atualizar o carrinho dinamicamente
+    function atualizarCarrinho() {
+        fetch('/carrinho/dinamico', {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('carrinho-dinamico').innerHTML = html;
+        })
+        .catch(error => console.error('Erro ao atualizar o carrinho:', error));
+    }
+
+    // Evento para adicionar ao carrinho
+    document.querySelectorAll('.btn-AddCarrinho').forEach(button => {
+        button.addEventListener('click', function () {
+            const produtoId = this.getAttribute('data-produtos-id');
+
+            fetch(`/carrinho/${produtoId}/adicionar`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token,
+                },
+                body: JSON.stringify({}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message); // Mensagem de feedback
+                    atualizarCarrinho(); // Atualiza o carrinho dinamicamente
+                }
+            })
+            .catch(error => console.error('Erro ao adicionar ao carrinho:', error));
+        });
+    });
+});

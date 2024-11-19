@@ -15,10 +15,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('carrinho/{produto}/adicionar', [CarrinhoController::class, 'addCarrinho'])->name('carrinho.adicionar');
     Route::post('carrinho/{produto}/remover', [CarrinhoController::class, 'removeCarrinho'])->name('carrinho.remover');
-    
-    
 
 
+    Route::get('/carrinho/dinamico', function () {
+        $items = \App\Models\Carrinho::with('Produto')->where('USUARIO_ID', auth()->id())->get();
+        return view('carrinho.carrinho', ['items' => $items]);
+    })->middleware('auth');
+    
 
     // Rotas para produtos
     Route::get('/produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');

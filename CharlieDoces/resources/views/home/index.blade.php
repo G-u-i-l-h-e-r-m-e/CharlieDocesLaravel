@@ -13,9 +13,10 @@
             @include('profile.partials.header',['categorias' => \App\Models\Categoria::all()]);
         </section>
 
-        <section>
+        <section id="carrinho-dinamico">
             @include('carrinho.carrinho', ['items' => $items])
         </section>
+
         
         <section>
             @include('profile.partials.banner');

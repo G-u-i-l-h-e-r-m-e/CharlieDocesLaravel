@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
     <link rel="stylesheet" href="/css/produto.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -30,11 +31,13 @@
                             <button class="carousel-btn next">❯</button>
                         </div>
                         <p class="categoriaProduto">{{ $produto->categoria->CATEGORIA_NOME }}</p>
-                        <a class="nomeProduto" href="/produto/{{ $produto->PRODUTO_ID }}">{{ $produto->PRODUTO_NOME }} - {{ $produto->PRODUTO_ID }}</a>
+                        <a class="nomeProduto" href="/produto/{{ $produto->PRODUTO_ID }}">{{ $produto->PRODUTO_NOME }} -
+                            {{ $produto->PRODUTO_ID }}</a>
                         <div class="orientacaoPreco">
                             <div>
                                 <span class="precoProduto">
-                                    <span class="precoFinal">R${{ $produto->PRODUTO_PRECO - $produto->PRODUTO_DESCONTO }}</span>
+                                    <span
+                                        class="precoFinal">R${{ $produto->PRODUTO_PRECO - $produto->PRODUTO_DESCONTO }}</span>
                                 </span>
                             </div>
                         </div>
@@ -43,7 +46,11 @@
                             <span class="countItens">0</span>
                             <button class="btn-qtdItens btnMais">+</button>
                         </div>
-                        <button class="btn-AddCarrinho" type="submit"><a href="/carrinho/{{ $produto->PRODUTO_ID }}">Adicionar ao carrinho</a></button>
+                        <button class="btn-AddCarrinho" data-produtos-id="{{ $produto->PRODUTO_ID }}">
+                            Adicionar ao carrinho
+                        </button>
+
+
                     </section>
                 @endforeach
             </div>

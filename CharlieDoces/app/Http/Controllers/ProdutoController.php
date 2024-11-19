@@ -69,7 +69,7 @@ class ProdutoController extends Controller
             ])->get();
         }
 
-        return view('categoria.show', compact('produtos'));
+        return view('produto.todos_produtos', compact('produtos'));
     }
 
     public function buscar(Request $request)

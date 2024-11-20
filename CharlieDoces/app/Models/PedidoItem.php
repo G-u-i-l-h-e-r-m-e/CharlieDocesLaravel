@@ -8,23 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class PedidoItem extends Model
 {
     use HasFactory;
-    protected $table = "PEDIDO_ITEM";
+
+    protected $table = 'PEDIDO_ITEM';
     public $timestamps = false;
 
     protected $fillable = [
         'PEDIDO_ID',
         'PRODUTO_ID',
         'ITEM_QTD',
-        'ITEM_PRECO'
+        'ITEM_PRECO',
     ];
 
-
-    public function pedido() {
+    public function pedido()
+    {
         return $this->belongsTo(Pedido::class, 'PEDIDO_ID', 'PEDIDO_ID');
     }
 
-    public function produto() {
+    public function produto()
+    {
         return $this->belongsTo(Produto::class, 'PRODUTO_ID', 'PRODUTO_ID');
     }
 }
-

@@ -9,18 +9,33 @@ class Pedido extends Model
 {
     use HasFactory;
 
-    protected $table = "PEDIDO";
-    protected $primaryKey = "PEDIDO_ID";
+    protected $table = 'PEDIDO';
+    protected $primaryKey = 'PEDIDO_ID';
     public $timestamps = false;
 
     protected $fillable = [
         'USUARIO_ID',
         'ENDERECO_ID',
         'STATUS_ID',
-        'PEDIDO_DATA'
+        'PEDIDO_DATA',
     ];
 
-    // Relacionamento com a tabela de categorias
+    public function itens()
+    {
+        return $this->hasMany(PedidoItem::class, 'PEDIDO_ID', 'PEDIDO_ID');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'USUARIO_ID', 'USUARIO_ID');
+    }
+
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class, 'ENDERECO_ID', 'ENDERECO_ID');
+    }
+
+	// Relacionamento com a tabela de categorias
     public function categoria()
     {
         return $this->belongsTo(Categoria::class, "CATEGORIA_ID", "CATEGORIA_ID");
@@ -42,4 +57,3 @@ class Pedido extends Model
         return $this->belongsTo(Status::class, 'STATUS_ID', 'STATUS_ID');
     }
 }
-

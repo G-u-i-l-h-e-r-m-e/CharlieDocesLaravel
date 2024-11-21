@@ -16,8 +16,8 @@
             <thead>
                 <tr>
                     <th>Pedido</th>
-                    <th>Produto</th>
                     <th>Data</th>
+                    <th>Produto</th>
                     <th>Quantidade</th>
                     <th>Valor total</th>
                     <th>Status</th>
@@ -27,8 +27,8 @@
                 @foreach($pedidoItems as $item)
                     <tr>
                         <td>{{ $item->Pedido->PEDIDO_ID }}</td>
-                        <td>{{ $item->Produto->PRODUTO_NOME }}</td>
                         <td>{{ \Carbon\Carbon::parse($item->Pedido->PEDIDO_DATA)->format('d/m/Y') }}</td>
+                        <td>{{ $item->Produto->PRODUTO_NOME }}</td>
                         <td>{{ $item->ITEM_QTD }}</td>
                         <td>{{ 'R$ ' . number_format($item->ITEM_QTD * $item->ITEM_PRECO, 2, ',', '.') }}</td>
                         <td>{{ $item->Pedido->Status->STATUS_DESC }}</td>

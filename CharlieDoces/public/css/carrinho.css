@@ -7,8 +7,8 @@
 body {
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
     background-color: #eaeaea;
     font-family: Arial, sans-serif;
 }
@@ -34,6 +34,36 @@ section {
     font-family: "Poppins", sans-serif;
 }
 
+.carrinho-container h1 {
+    font-size: 32px;
+    color: #4a2f25;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: start; /* Alinha o texto para o início */
+    width: 100%; /* Garante que o título ocupe toda a largura do contêiner */
+}
+
+.titulo-carrinho {
+    display: flex;
+    align-items: flex-start; /* Alinha os itens ao início */
+    margin-left: 16%;
+    width: 100%; /* Garante que o contêiner ocupe toda a largura */
+}
+
+.carrinho-vazio {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+}
+
+.carrinho-vazio p {
+    font-size: 24px;
+    color: #4a2f25;
+    font-weight: bold;
+}
+
 form {
     display: inline;
 }
@@ -46,6 +76,35 @@ form {
     border-collapse: collapse;
     text-align: center;
     margin-top: 20px;
+}
+
+.btn-refresh {
+    display: inline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.btn-remover {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-remover svg {
+    fill: #591F12; /* Cor do ícone */
+    width: 20px;
+    height: 20px;
+    transition: fill 0.3s ease;
+}
+
+form button img {
+    margin-left: 50px;
 }
 
 .acompanhar-pedido-button {
@@ -124,4 +183,33 @@ tbody tr:hover {
 
 .botao-historico:hover {
     background-color: #A0522D; /* Cor marrom mais clara no hover */
+}
+
+.atualizar form button {
+    border: none;
+    width: 20px;
+    cursor: none;
+}
+
+.atualizar form button img {
+    cursor: pointer;
+}
+
+.carrinho-total {
+    margin-left: 90px;
+    margin-top: 50px;
+}
+
+.botao-finalizar {
+    background-color: #45a049;
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+}
+
+.carrinho-total .botao-finalizar button:hover {
+    background-color: #45a049;
 }

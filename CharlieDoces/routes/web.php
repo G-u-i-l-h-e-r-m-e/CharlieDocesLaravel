@@ -12,7 +12,6 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TesteController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\AcompanharController;
-use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PedidoItemController;
 use App\Http\Controllers\StatusController;
 

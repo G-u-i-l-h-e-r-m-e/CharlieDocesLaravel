@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="{{ asset('css/carrinho.css') }}">
     <!-- Adicione o CSS do Bootstrap para estilização e modal -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
     <section>
-      @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()])
+        @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()])
     </section>
 
     @if (session('success'))
@@ -28,9 +31,9 @@
 
 
     <div class="carrinho-container">
-      <div class="titulo-carrinho">
-        <h1>Meu Carrinho</h1>
-      </div>
+        <div class="titulo-carrinho">
+            <h1>Meu Carrinho</h1>
+        </div>
 
         <div class="carrinho-vazio">
             @if ($items->isEmpty())
@@ -56,15 +59,16 @@
                             {{ $item->produto->PRODUTO_NOME }}
                         </td>
                         <td>
-                          <div class="atualizar">
-                            <form action="{{ route('carrinho.atualizar', $item->PRODUTO_ID) }}" method="POST">
-                              @csrf
-                              <input type="number" name="ITEM_QTD" value="{{ $item->ITEM_QTD }}" min="1">
-                              <button type="submit" class="btn-refresh">
-                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAVFJREFUSEvt1D0oRWEcx/HP3WRTFqNFSYwGg0wmUgbJpMhoMchLXsrbZlPKYrBJFgaLwcBiExMmg2K2EOfUuTr3Om/3lu2e5emc83t+3+f5Pf//U/LPT+mf/TUAuQkXiagNU+hDb+R4g2vs4y2LkgeYwS6aU0zeMY3TNEgWYAJH0cQHDOMxeu/ECsaxiO1aAWEsT2jCHmbxlWAyGER3UU9EO5jHGYZyT5K1SFMef6ekRXSPMIZ+XOUAQtPVSLMejBWQOCAurPb8MzG24rJ5eU6FtnoHSZBazP9AkiLK3HJCXCNRmd6hu/p/2hmkHloC4BID2MRyUUBcl1WKW1gIKu4D7XitFbCEDRwgNHuODDowh7DTvzGG46Rqy7sqRiPzloxSnQxWf1hrJ8f1rQgrqQddQc6fwbVxG1x858G3E7zU08kFmreYJC+iYi4ZqgYgN8IfeHU3GfDcU2wAAAAASUVORK5CYII="/>
-                              </button>
-                            </form>
-                          </div>
+                            <div class="atualizar">
+                                <form action="{{ route('carrinho.atualizar', $item->PRODUTO_ID) }}" method="POST">
+                                    @csrf
+                                    <input type="number" name="ITEM_QTD" value="{{ $item->ITEM_QTD }}" min="1">
+                                    <button type="submit" class="btn-refresh">
+                                        <img
+                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAVFJREFUSEvt1D0oRWEcx/HP3WRTFqNFSYwGg0wmUgbJpMhoMchLXsrbZlPKYrBJFgaLwcBiExMmg2K2EOfUuTr3Om/3lu2e5emc83t+3+f5Pf//U/LPT+mf/TUAuQkXiagNU+hDb+R4g2vs4y2LkgeYwS6aU0zeMY3TNEgWYAJH0cQHDOMxeu/ECsaxiO1aAWEsT2jCHmbxlWAyGER3UU9EO5jHGYZyT5K1SFMef6ekRXSPMIZ+XOUAQtPVSLMejBWQOCAurPb8MzG24rJ5eU6FtnoHSZBazP9AkiLK3HJCXCNRmd6hu/p/2hmkHloC4BID2MRyUUBcl1WKW1gIKu4D7XitFbCEDRwgNHuODDowh7DTvzGG46Rqy7sqRiPzloxSnQxWf1hrJ8f1rQgrqQddQc6fwbVxG1x858G3E7zU08kFmreYJC+iYi4ZqgYgN8IfeHU3GfDcU2wAAAAASUVORK5CYII=" />
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                         <td>R$
                             {{ number_format($item->produto->PRODUTO_PRECO - $item->produto->PRODUTO_DESCONTO, 2, ',', '.') }}
@@ -76,8 +80,9 @@
                             <form action="{{ route('carrinho.remover', $item->PRODUTO_ID) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn-remover">
-                                  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAKBJREFUSEvtlTEOwjAMRV9O0a1S1aHcppfpwg3ohTgISzcEG7egQmo6BKwfgrygZHXs5287ccD5BOf4KMAInICDkcgCTMDZSlQBHkAjVF6BvhTw3BytRJRdlkgFUPY3QHT4tfe74lS6OyBmLqUnEs37xc2rgNqDfQbqFMmH+b8lugPtl1/qDehSH6tEr1U5A0Mm5AIcP61OtTIz49vX3AErpWYoGUsMhGoAAAAASUVORK5CYII="/>
-                              </button>
+                                    <img
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAKBJREFUSEvtlTEOwjAMRV9O0a1S1aHcppfpwg3ohTgISzcEG7egQmo6BKwfgrygZHXs5287ccD5BOf4KMAInICDkcgCTMDZSlQBHkAjVF6BvhTw3BytRJRdlkgFUPY3QHT4tfe74lS6OyBmLqUnEs37xc2rgNqDfQbqFMmH+b8lugPtl1/qDehSH6tEr1U5A0Mm5AIcP61OtTIz49vX3AErpWYoGUsMhGoAAAAASUVORK5CYII=" />
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -97,13 +102,13 @@
                 ) }}
             </p>
             <!-- Botão que abre o modal -->
-            <button class="botao-finalizar" data-toggle="modal" data-target="#finalizarCompraModal">Finalizar
+            <button data-toggle="modal" data-target="#finalizarCompraModal">Finalizar
                 Compra</button>
         </div>
         @endif
     </div>
     <section>
-      @include('profile.partials.footer')
+        @include('profile.partials.footer')
     </section>
 
     <!-- Modal -->
@@ -191,6 +196,9 @@
             </div>
         </div>
     </div>
+
+
+    <script src="/resources/js/AJAX/carrinho.js"></script>
 
     <!-- Scripts necessários -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

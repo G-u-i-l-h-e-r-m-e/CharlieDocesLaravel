@@ -77,13 +77,48 @@ form {
     text-align: center;
     margin-top: 20px;
 }
+.table {
+    display: flex;
+    justify-content: center;
+    width: 1200px;
+    height: 100px;
+    border-collapse: collapse;
+    text-align: center;
+    margin-top: 20px;
+}
+/* Centralizar o texto na célula da tabela */
+.table td, .table th {
+    text-align: center;
+    vertical-align: middle;
+}
 
 .btn-refresh {
     display: inline;
+    width: 5px;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
+}
+
+input.btn-refresh {
+    cursor: none;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+/* Remove o cursor pointer do botão */
+button.btn-refresh {
+    cursor: none;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+/* Adiciona o cursor pointer apenas na imagem dentro do botão */
+button.btn-refresh img {
+    cursor: pointer;
 }
 
 .btn-remover {
@@ -210,6 +245,27 @@ tbody tr:hover {
     border: none;
 }
 
-.carrinho-total .botao-finalizar button:hover {
+.carrinho-total button {
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.carrinho-tabela {
+    display: flex;
+    justify-content: center;
+}
+
+.carrinho-tabela input[type="number"] {
+    justify-content: center;
+    text-align: center;
+    width: 140px;
+}
+
+.carrinho-total button:hover {
     background-color: #45a049;
 }

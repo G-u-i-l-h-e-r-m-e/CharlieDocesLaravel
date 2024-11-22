@@ -9,6 +9,7 @@ use App\Models\PedidoItem;
 use App\Models\ProdutoEstoque;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PedidoController extends Controller
 {
@@ -35,6 +36,8 @@ class PedidoController extends Controller
             $pedido->PEDIDO_DATA = now();
             $pedido->save();
 
+            Log::info('Pedido criado: ', ['PEDIDO_ID' => $pedido->PEDIDO_ID]);
+
             // Criar itens do pedido e atualizar estoque
             foreach ($items as $item) {
                 // Verificar se há estoque suficiente
@@ -50,6 +53,8 @@ class PedidoController extends Controller
                 $estoque->PRODUTO_QTD -= $item->ITEM_QTD;
                 $estoque->save();
 
+                Log::info('Estoque atualizado para produto: ', ['PRODUTO_ID' => $item->PRODUTO_ID, 'PRODUTO_QTD' => $estoque->PRODUTO_QTD]);
+
                 // Criar item do pedido
                 $pedidoItem = new PedidoItem();
                 $pedidoItem->PEDIDO_ID = $pedido->PEDIDO_ID;
@@ -57,6 +62,8 @@ class PedidoController extends Controller
                 $pedidoItem->ITEM_QTD = $item->ITEM_QTD;
                 $pedidoItem->ITEM_PRECO = $item->produto->PRODUTO_PRECO - $item->produto->PRODUTO_DESCONTO;
                 $pedidoItem->save();
+
+                Log::info('Item do pedido criado: ', ['PEDIDO_ITEM_ID' => $pedidoItem->PEDIDO_ITEM_ID ?? 'N/A', 'PEDIDO_ID' => $pedido->PEDIDO_ID, 'PRODUTO_ID' => $item->PRODUTO_ID]);
             }
 
             // Limpar o carrinho do usuário
@@ -70,6 +77,7 @@ class PedidoController extends Controller
         } catch (\Exception $e) {
             // Reverter transação em caso de erro
             DB::rollBack();
+            Log::error('Erro ao finalizar o pedido: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Ocorreu um erro ao finalizar o pedido. Tente novamente.');
         }
     }

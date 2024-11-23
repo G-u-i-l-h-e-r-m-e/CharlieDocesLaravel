@@ -86,7 +86,7 @@ form {
     text-align: center;
     margin-top: 20px;
 }
-/* Centralizar o texto na célula da tabela */
+
 .table td, .table th {
     text-align: center;
     vertical-align: middle;
@@ -119,6 +119,8 @@ button.btn-refresh {
 /* Adiciona o cursor pointer apenas na imagem dentro do botão */
 button.btn-refresh img {
     cursor: pointer;
+    background: none;
+    border: none;
 }
 
 .btn-remover {
@@ -268,4 +270,5 @@ tbody tr:hover {
 
 .carrinho-total button:hover {
     background-color: #45a049;
+    outline: none;
 }

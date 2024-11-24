@@ -21,8 +21,6 @@ Route::get('/teste-carousel', [TesteController::class, 'carregarProdutosCarousel
 // Rotas protegidas por autenticação
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('register', [RegisteredUserController::class, 'showRegisterForm']);
-
 Route::middleware('auth')->group(function () {
     // Rotas para carrinho
     Route::get('carrinho/{produto}', [CarrinhoController::class, 'addCarrinho']);

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -7,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -15,7 +17,25 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        return view('auth.login-email');
+    }
+
+    public function login(): View
+    {
         return view('auth.login');
+    }
+
+    public function emailAuthenticate(Request $request): RedirectResponse
+    {
+        $email = $request->input('email');
+
+        $user = User::where('USUARIO_EMAIL', $email)->first();
+
+        if ($user) {
+            return redirect()->route('login')->withInput(['email' => $email]);
+        } else {
+            return redirect('cadastro');
+        }
     }
 
     /**
@@ -44,5 +64,4 @@ class AuthenticatedSessionController extends Controller
         // Redireciona para /home após o logout
         return redirect('/home');
     }
-
 }

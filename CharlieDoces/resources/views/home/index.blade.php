@@ -40,7 +40,6 @@
         <div class="home-component-title-02 animate__animated animate__headShake">
             @include('componentes-produtos.component-title', ['titulo' => 'Ofertas Imperdíveis', 'subtitulo' => 'Confira as promoções irresistíveis de nossos chocolates e faça a festa!'])
         </div>
-
         <div class="circles-background"></div>
 
         <div class="background-carousel-chocolate">

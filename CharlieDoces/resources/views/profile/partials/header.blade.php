@@ -13,7 +13,7 @@
 
 <body>
     <header>
-        <nav>
+        <nav class="navegacao">
             <!-- Bloco 1: Linhas decorativas e logo -->
             <div class="nav-top-section">
                 <span class="line"></span>

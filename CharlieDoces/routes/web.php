@@ -48,6 +48,9 @@ Route::get('enviado', [LoginController::class, 'sent']);
 
 // Rota para buscar produtos por categoria (pública ou protegida conforme necessidade)
 Route::get('/produtos/categoria/{nome}', [ProdutoController::class, 'produtosPorCategoria'])->name('produtos.categoria');
+Route::get('/produtos/filtrar', [ProdutoController::class, 'produtosPorCategoria'])->name('produtos.filtrar');
+
+
 
 // Carregar rotas de autenticação padrão
 require __DIR__ . '/auth.php';

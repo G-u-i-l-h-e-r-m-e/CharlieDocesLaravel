@@ -13,7 +13,7 @@ header {
     padding: 24px;
 }
 
-nav {
+.navegacao {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, #FEDB37 0%, #FED336 24%, #FDC834 55%, #FDB931 100%);
@@ -24,8 +24,8 @@ nav {
     position: relative;
 }
 
-nav::before,
-nav::after {
+.navegacao::before,
+.navegacao::after {
     content: "";
     position: absolute;
     top: 0;
@@ -36,11 +36,11 @@ nav::after {
     background-size: 10px 13px;
 }
 
-nav::before {
+.navegacao::before {
     left: -5px;
 }
 
-nav::after {
+.navegacao::after {
     right: -5px;
 }
 

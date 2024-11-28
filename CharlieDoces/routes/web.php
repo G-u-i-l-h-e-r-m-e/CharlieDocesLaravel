@@ -14,6 +14,9 @@ use App\Http\Controllers\PedidoController;
 // Rota de teste
 Route::get('/teste-final', [TesteController::class, 'testeFinal']);
 
+Route::get('/', function () {
+    return redirect('/home');
+});
 // Rotas protegidas por autenticação
 Route::middleware('auth')->group(function () {
     // Rotas para carrinho

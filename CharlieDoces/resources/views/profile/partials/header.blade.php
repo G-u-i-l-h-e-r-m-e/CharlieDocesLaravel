@@ -17,7 +17,7 @@
             <!-- Bloco 1: Linhas decorativas e logo -->
             <div class="nav-top-section">
                 <span class="line"></span>
-                <a href="{{ url('/') }}">
+                <a href="{{ url('/home') }}">
                     <img src="{{ asset('img/header/logo.svg') }}" alt="Logo Charlie Loja de Doces">
                 </a>
                 <span class="line"></span>

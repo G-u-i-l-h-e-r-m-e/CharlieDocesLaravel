@@ -1,0 +1,108 @@
+.carousel-chocolate-container .card-container {
+    box-shadow: -16px 16px 0px 0px #D94A4A;
+}
+
+.carousel-chocolate-container .add-cart {
+    background-color: #FDB931 !important;
+}
+
+.carousel-chocolate-track {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 159px;
+}
+
+
+
+.carousel-chocolate-container .tituloHome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 694px;
+    margin-bottom: 143px;
+}
+
+.tituloChocolate {
+    font-family: 'Caveat', cursive;
+    font-size: 48px;
+    font-weight: 400;
+    color: #591F12;
+    margin-bottom: 12px;
+}
+
+.subtituloChocolate {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: #591F12;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+
+
+    .desconto {
+        position: relative;
+        margin-top: -100px;
+        margin-left: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+        gap: 237px;
+    }
+    
+
+
+.desconto-content {
+    display: flex;
+    margin-left: 6px;
+    align-items: center;
+}
+
+.desconto p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.badge {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px; /* Ajuste o tamanho da badge */
+    height: 80px;
+    background-color: transparent; /* Retira o fundo fixo do .badge */
+}
+
+.badge i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px; /* Define o tamanho do ícone */
+    color: #fedb37; /* Cor do ícone */
+    z-index: 0; /* Coloca o ícone atrás do texto */
+}
+
+.badge span {
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px; /* Ajuste do tamanho do texto */
+    font-weight: 400;
+    color: #591F12;
+    z-index: 1; /* Garante que o texto esteja na frente */
+    text-transform: uppercase;
+}
+
+
+.carousel-chocolate-container .settings-container {
+gap: 82px;
+}

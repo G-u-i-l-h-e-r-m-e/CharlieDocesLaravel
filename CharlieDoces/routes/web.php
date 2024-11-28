@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TesteController;
+use App\Http\Controllers\PedidoController;
 
 // Rota de teste
 Route::get('/teste-final', [TesteController::class, 'testeFinal']);
@@ -20,6 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::post('carrinho/atualizar/{produto}', [CarrinhoController::class, 'atualizarCarrinho'])->name('carrinho.atualizar');
     Route::post('carrinho/remover/{produto}', [CarrinhoController::class, 'removerDoCarrinho'])->name('carrinho.remover');
     Route::post('/carrinho/adicionar', [CarrinhoController::class, 'addCarrinho'])->name('carrinho.adicionar');
+
+    Route::post('/pedido/finalizar', [PedidoController::class, 'finalizarPedido'])->name('pedido.finalizar');
+
 
 
     // Rotas para produtos individuais e categorias (protegidas)

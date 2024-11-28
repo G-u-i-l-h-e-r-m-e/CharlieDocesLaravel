@@ -10,11 +10,16 @@ class HomeController extends Controller
 {
     public function index()
     {
+       
+        // Carregar produtos e categorias específicas
+
+       
         // Carregar produtos da categoria "Natal" com paginação
         $produtosNatal = Produto::whereHas('categoria', function ($query) {
             $query->where('CATEGORIA_NOME', 'natal');
         })->paginate(3);
 
+        // Carregar outros dados, como categorias específicas
         // Carregar produtos de chocolate com paginação
         $produtosChocolate = Produto::where('CATEGORIA_ID', 66)
             ->where('PRODUTO_ATIVO', 1)
@@ -39,7 +44,10 @@ class HomeController extends Controller
         })->values(); // Reindexa os índices da coleção
 
         // Carregar todos os produtos e categorias específicas
+        // Carregar outros dados, como categorias específicas
+        // Carregar produtos e categorias específicas
         $produtos = Produto::all();
+
         $categoriaChocolate = Categoria::with('produtos')->find(66);
         $categoriaNatal = Categoria::with('produtos')->find(84);
         $categoriaTopVendas = Categoria::with('produtos')->find(84);

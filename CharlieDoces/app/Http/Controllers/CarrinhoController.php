@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\Carrinho;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class CarrinhoController extends Controller
@@ -33,7 +34,7 @@ class CarrinhoController extends Controller
 
         $estoqueQtd = $estoque->PRODUTO_QTD; // Use the correct attribute
 
-        \Log::info('Stock quantity for produto_id ' . $produtoId . ': ' . $estoqueQtd);
+        Log::info('Stock quantity for produto_id ' . $produtoId . ': ' . $estoqueQtd);
 
         if ($estoqueQtd < $quantidade) {
             return response()->json(['message' => 'Quantidade solicitada indisponível no estoque.'], 400);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> 
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -16,14 +16,13 @@
 
 <body>
     <section>
-        @include('profile.partials.header',['categorias' => \App\Models\Categoria::all()]);
+        @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()]);
     </section>
     <div class="login-container">
         <div class="login-form">
             <h2>Entrar ou Criar Conta</h2>
-            <form id="login-form" class="login-form" method="POST" action="{{ route('login') }}">
+            <form id="login-form" class="login-form" method="POST" action="{{ route('email') }}">
                 @csrf
-
                 <div>
                     <label for="email">Email ou CPF</label>
                     <input type="text" id="email" name="email" placeholder="exemplo@exemplo.com.br"
@@ -33,25 +32,14 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" placeholder="*********" required>
-                    @error('password')
-                        <p class="text-red-500">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div>
-                    <a href="/forgot-password" class="forgot-password">Esqueceu a senha?</a>
-                </div>
-                <div>
                     <button type="submit">Entrar</button>
-                    <hr>
                 </div>
-            </form>
         </div>
-    </div>
+        </form>
     </div>
     <section>
         @include('profile.partials.footer');
     </section>
 </body>
+
 </html>

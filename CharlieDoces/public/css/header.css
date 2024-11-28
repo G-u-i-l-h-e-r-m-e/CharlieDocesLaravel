@@ -4,6 +4,8 @@
     box-sizing: border-box;
 }
 
+/* Estilização somente do Header e do Nav sem ser das sessões dentro do Nav*/
+
 header {
     width: 100%;
     height: 200px;
@@ -11,7 +13,7 @@ header {
     padding: 24px;
 }
 
-nav {
+.navegacao {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, #FEDB37 0%, #FED336 24%, #FDC834 55%, #FDB931 100%);
@@ -22,9 +24,8 @@ nav {
     position: relative;
 }
 
-/* Círculos arredondados nas laterais */
-nav::before,
-nav::after {
+.navegacao::before,
+.navegacao::after {
     content: "";
     position: absolute;
     top: 0;
@@ -35,23 +36,59 @@ nav::after {
     background-size: 10px 13px;
 }
 
-nav::before {
+.navegacao::before {
     left: -5px;
 }
 
-nav::after {
+.navegacao::after {
     right: -5px;
 }
-/* Estilos específicos do header de pesquisa */
-.header-search .search-section {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 219px;
+
+/* Final da Estilização somente do Header e do Nav sem ser de nenhuma Divisão dentro do Nav */
+
+
+
+/* Inicio da Estilização somente da divisão top-section */
+
+.nav-top-section {
     width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 84px;
+
+    .line {
+        width: 430px;
+        height: 5px;
+        background-color: #591F12;
+    }
 }
 
-.header-search .search-box {
+/* Final da Estilização somente da divisão top-section */
+
+
+/* Inicio da Estilização somente da divisão center-section */
+.nav-center-section {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-right: 133px;
+    gap:192px;
+}
+
+.search-section {
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* Ajuste para o formulário search-box */
+.nav-center-section .search-box {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -59,27 +96,27 @@ nav::after {
     cursor: pointer;
     border-radius: 6px;
     padding: 6px;
-    border: 2px solid transparent; /* Borda inicial invisível */
-    transition: border-color 0.3s ease; /* Transição suave para a borda */
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
 }
 
-.header-search .search-box .search-input {
+.nav-center-section .search-box input.search-input {
     padding: 6px;
     border: none;
     font-family: 'Bebas Neue', sans-serif;
     font-size: 17px;
-    color: #591F12; /* Cor do texto digitado */
+    color: #591F12;
     border-radius: 6px;
-    outline: none; /* Remove a borda padrão ao focar */
+    outline: none;
 }
 
-.header-search .search-box .search-input::placeholder {
+.nav-center-section .search-box input.search-input::placeholder {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 16px;
-    color: rgba(89, 31, 18, 0.2); /* #591F12 com 20% de opacidade */
+    color: rgba(89, 31, 18, 0.2);
 }
 
-.header-search .search-box button {
+.nav-center-section .search-box button {
     padding: 8px;
     background-color: white;
     border: none;
@@ -90,65 +127,122 @@ nav::after {
     border-radius: 6px;
 }
 
-.header-search .search-box button svg {
+.nav-center-section .search-box button svg {
     width: 20px;
     height: 20px;
-    fill: rgba(89, 31, 18, 1); /* Cor padrão do ícone */
-    transition: fill 0.3s ease; /* Transição suave para o ícone */
+    fill: rgba(89, 31, 18, 1);
+    transition: fill 0.3s ease;
 }
 
-/* Estilo ao focar no input */
-.header-search .search-box .search-input:focus {
-    color: #591F12; /* Cor do texto digitado em foco */
+/* Estilo para o foco no formulário e ícone */
+.nav-center-section .search-box:focus-within {
+    border-color: #591F12;
 }
 
-.header-search .search-box:focus-within {
-    border-color: #591F12; /* Muda a borda da caixa ao focar no input */
-}
-
-.header-search .search-box:focus-within button svg {
-    fill: #591F12; /* Muda a cor do ícone ao focar no input */
-}
-
-/* Nome da loja com arco */
-.header-search .store-name-arc svg {
-    display: block;
-    margin: 0 auto;
-}
-
-.header-search .store-name-arc text {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 48px;
+.nav-center-section .search-box:focus-within button svg {
     fill: #591F12;
 }
 
-/* Seção de Logo */
-.logo-section {
+
+
+.store-name-arc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 293.1px;
+    height: 59.41px;
+    overflow: hidden;
+}
+
+.store-name-arc svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.store-name-arc text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    fill: #591F12;
+    letter-spacing: 5px;
+    /* Ajuste o valor conforme necessário */
+}
+
+
+
+.logout-placeholder {
+    width: 80px;
+    /* Defina a mesma largura do botão de logout */
+    height: 30px;
+    /* Defina a altura conforme necessário */
+    visibility: hidden;
+    /* Invisível, mas ainda ocupa espaço */
+}
+
+.logout-section {
+    width: 80px;
+    /* Defina a mesma largura do placeholder */
+    height: 30px;
+    /* Defina a altura conforme necessário */
+}
+
+.logout-text {
+    color: #591F12;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    background: none;
+    /* Remove o fundo do botão */
+    border: none;
+    /* Remove a borda do botão */
+    cursor: pointer;
+    /* Muda o cursor para indicar que é clicável */
+    padding: 0;
+    /* Remove qualquer padding */
+    outline: none;
+    /* Remove o contorno ao focar */
+}
+
+.logout-icon {
+    background: none;
+    /* Remove o fundo do botão */
+    border: none;
+    /* Remove a borda do botão */
+    cursor: pointer;
+    /* Muda o cursor para indicar que é clicável */
+    padding: 0;
+    /* Remove qualquer padding */
+    outline: none;
+    /* Remove o contorno ao focar */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 84px;
-    margin-bottom: 6px;
-    height: 18px;
 }
 
-.line {
-    width: 430px;
-    height: 5px;
-    background-color: #591F12;
-}
 
-.ney {
-    display: none;
-}
 
-/* Navegação */
-.nav-section {
+/* Final da Estilização somente da divisão center-section */
+
+
+
+
+.nav-bottom-section {
+    width: 100%;
+    height: 40px;
     display: flex;
-    gap: 274px;
-    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
 }
-.nav-section a {
+
+.nav-bottom-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-right: 49px;
+}
+
+.nav-bottom-section a {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -157,10 +251,11 @@ nav::after {
     font-weight: bold;
     font-size: 16px;
     gap: 12px;
-    position: relative; /* Necessário para o posicionamento do ::after */
-    padding-bottom: 6px; /* Espaço entre o texto e o sublinhado */
+    position: relative;
+    padding-bottom: 6px;
 }
-.nav-section form button {
+
+.nav-bottom-section form button {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -172,45 +267,49 @@ nav::after {
     font-weight: bold;
     font-size: 16px;
     gap: 10px;
-    position: relative; /* Necessário para o posicionamento do ::after */
-    padding-bottom: 6px; /* Espaço entre o texto e o sublinhado */
+    position: relative;
+    padding-bottom: 6px;
 }
 
-.nav-section form button::after {
+.nav-bottom-section form button::after,
+.nav-bottom-section a::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 0;
-    height: 2px; /* Espessura do sublinhado */
-    background-color: #591F12; /* Cor do sublinhado */
-    transition: width 0.3s ease; /* Animação suave */
+    height: 2px;
+    background-color: #591F12;
+    transition: width 0.3s ease;
 }
 
-.nav-section form button:hover {
+.nav-bottom-section form button:hover,
+.nav-bottom-section a:hover {
     cursor: pointer;
 }
-.nav-section form button:hover::after {
-    width: 100%; /* Expande o sublinhado para 100% ao passar o mouse */
+
+.nav-bottom-section form button:hover::after,
+.nav-bottom-section a:hover::after {
+    width: 100%;
 }
 
-.nav-section a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px; /* Espessura do sublinhado */
-    background-color: #591F12; /* Cor do sublinhado */
-    transition: width 0.3s ease; /* Animação suave */
-}
-
-.nav-section a:hover::after {
-    width: 100%; /* Expande o sublinhado para 100% ao passar o mouse */
-}
-
-.nav-section svg {
+.nav-bottom-section svg {
     width: 20px;
     height: 20px;
     fill: rgba(89, 31, 18, 1);
+}
+
+.icon-24px {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    color: #591f12;
+    /* Cor padrão para os ícones */
+}
+
+.nav-bottom-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 297px;
 }

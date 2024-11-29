@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Rotas públicas
+Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/todos_produtos', [ProdutoController::class, 'todosProdutos'])->name('produtos.todos');
 

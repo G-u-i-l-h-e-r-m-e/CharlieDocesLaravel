@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -6,11 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esqueceu a senha</title>
-    <link rel="stylesheet" href="{{ asset('css/login/login.css') }}">
+    <link rel="icon" href="{{ asset('img/header/logo.svg') }}" sizes="64x64" type="image/svg">
+    <link rel="stylesheet" href="{{ asset('css/login/forgotPassword.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <section>
+        @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()]);
+    </section>
     <div class="forgotpassword-container">
         <form>
             <h2>Esqueceu a senha</h2>
@@ -22,6 +25,9 @@
             </a>
         </form>
     </div>
+    <section>
+        @include('profile.partials.footer');
+    </section>
 </body>
 
 </html>

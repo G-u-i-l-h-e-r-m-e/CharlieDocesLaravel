@@ -22,7 +22,7 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'USUARIO_SENHA',
+        'password',
         'remember_token',
     ];
 
@@ -37,8 +37,11 @@ class User extends Authenticatable
         return $this->USUARIO_SENHA;
     }
     
-    public function endereco()
-    {
-        return $this->hasOne(Endereco::class, 'USUARIO_ID');
-    }
+// app/Models/User.php
+
+public function endereco()
+{
+    return $this->hasOne(Endereco::class, 'USUARIO_ID', 'USUARIO_ID');
+}
+
 }

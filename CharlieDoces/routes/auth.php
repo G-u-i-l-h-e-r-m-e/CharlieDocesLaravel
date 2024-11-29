@@ -12,14 +12,18 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('cadastro', [RegisteredUserController::class, 'create'])
-        ->name('register');
+    Route::get('cadastro', [RegisteredUserController::class, 'create'])->name('cadastro');
 
     Route::post('cadastro', [RegisteredUserController::class, 'store']);
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    Route::get('email', [AuthenticatedSessionController::class, 'create'])
+        ->name('email');
+    Route::post('email', [AuthenticatedSessionController::class, 'emailAuthenticate'])->name('email');
+
+    Route::get('login', [AuthenticatedSessionController::class, 'login'])
         ->name('login');
 
+    Route::post('email', [AuthenticatedSessionController::class, 'emailAuthenticate']);
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])

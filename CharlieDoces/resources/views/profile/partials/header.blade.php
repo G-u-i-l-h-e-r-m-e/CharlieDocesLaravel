@@ -26,7 +26,8 @@
             <div class="nav-center-section">
                 <div class="search-section">
                     <form action="{{ route('search.results') }}" method="GET" class="search-box">
-                        <input type="text" name="query" placeholder="O QUE VOCÊ ESTÁ PROCURANDO?" class="search-input">
+                        <input type="text" name="query" placeholder="O QUE VOCÊ ESTÁ PROCURANDO?"
+                            class="search-input">
                         <button type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 style="fill: rgba(89, 31, 18, 1);">
@@ -83,7 +84,7 @@
                         </a>
                     @else
                         <!-- Exibe "Entre ou cadastre-se" quando não estiver logado -->
-                        <a href="{{ url('/login') }}">
+                        <a href="{{ Auth::check() ? url('/login') : url('/email') }}">
                             Entre ou cadastre-se
                         </a>
                     @endif

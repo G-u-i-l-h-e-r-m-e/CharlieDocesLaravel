@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/css/componentes-style/component-card.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src='https://unpkg.com/boxicons@2.1.4/dist/boxicons.js'></script>
 </head>
 
 <body>

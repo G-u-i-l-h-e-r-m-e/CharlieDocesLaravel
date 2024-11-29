@@ -22,7 +22,7 @@
         <div class="cadastro-container">
             <div class="cadastro-form">
                 <h2>Criar Conta</h2>
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('cadastro') }}">
                     @csrf
 
                     <div>

@@ -26,15 +26,15 @@
 
                 <div>
                     <label for="email">Email ou CPF</label>
-                    <input type="text" id="email" name="email" placeholder="exemplo@exemplo.com.br"
-                        value="{{ old('email') }}" required>
+                    <input type="text" id="email" name="email" placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX"
+                        value="{{ old('email') }}" readonly>
                     @error('email')
                         <p class="text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
                 <div>
                     <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" placeholder="*********" required>
+                    <input type="password" id="password" name="password" placeholder="*********">
                     @error('password')
                         <p class="text-red-500">{{ $message }}</p>
                     @enderror

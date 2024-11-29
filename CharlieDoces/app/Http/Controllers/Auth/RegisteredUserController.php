@@ -32,17 +32,30 @@ class RegisteredUserController extends Controller
     {
         // Validação dos dados do formulário
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|regex:/^[^\d]*$/',
             'email' => 'required|string|email|max:255|unique:USUARIO,USUARIO_EMAIL',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', 'min:8', 'regex:/[0-9]/', 'regex:/[@$#!¨$%*?&]/', 'regex:/[A-Z]/', Rules\Password::defaults()],
             'cpf' => 'required|string|max:11|unique:USUARIO,USUARIO_CPF',
             'bairro' => 'required|string|max:255',
             'logradouro' => 'required|string|max:255',
-            'numero' => 'required|integer',
+            'numero' => 'required|numeric',
             'complemento' => 'nullable|string|max:255',
             'cep' => 'required|string|max:10',
             'cidade' => 'required|string|max:255',
             'estado' => 'required|string|max:255',
+        ], [
+            'name.required' => 'Por favor, insira um nome válido',
+            'name.regex' => 'Por favor, insira um nome válido',
+            'email.required' => 'Email inválido ou já cadastrado',
+            'email.unique:USUARIO,USUARIO_EMAIL' => 'Email inválido ou já cadastrado',
+            'password.min:8' => 'Mínimo de 8 caracteres',
+            'password.regex' => 'A senha deve conter pelo menos um número, um caractere especial e uma letra maiúscula',
+            'cpf.unique:USUARIO,USUARIO_CPF' => 'CPF inválido ou já cadastrado',
+            'cep.regex' => 'CEP inválido. Use o formato XXXXX-XXX',
+            'logradouro.required' => 'Por favor, insira o nome da rua',
+            'numero.numeric' => 'Por favor, insira um número válido',
+            'bairro.required' => 'Por favor, insira o bairro',
+            'cidade.required' => 'Por favor, insira a cidade',
         ]);
 
         // Criação do usuário

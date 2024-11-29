@@ -1,10 +1,7 @@
-// Remove the import statement
-// import axios from 'axios';
-
 document.addEventListener("DOMContentLoaded", function () {
     console.log("component-card.js carregado");
 
-    const axios = window.axios; // Use the global axios instance
+    const axios = window.axios; // Usa a instância global do axios
 
     // Seleciona todos os botões "Adicionar ao carrinho"
     const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
@@ -30,6 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         showConfirmButton: false,
                         timer: 1500
                     });
+
+                    // Atualizar o contador do carrinho no header
+                    updateCartItemCount(response.data.totalItems);
                 })
                 .catch(error => {
                     // Exibir notificação de erro
@@ -41,6 +41,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         });
     });
+
+    // Função para atualizar o contador do carrinho
+    function updateCartItemCount(totalItems) {
+        const cartBadge = document.querySelector('.cart-badge');
+
+        if (cartBadge) {
+            cartBadge.textContent = totalItems;
+        } else {
+            // Se o badge não existe, cria um novo
+            const cartLink = document.querySelector('.cart-link');
+            if (cartLink) {
+                const newBadge = document.createElement('span');
+                newBadge.classList.add('cart-badge');
+                newBadge.textContent = totalItems;
+                cartLink.appendChild(newBadge);
+            }
+        }
+    }
 
     // Controle de quantidade e outras funcionalidades
     const settingsContainers = document.querySelectorAll(".settings-container");
@@ -93,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         }
+
         // Função para verificar o estoque no backend
         function verificarEstoque(produtoId, quantidade) {
             console.log(`Verificando estoque para produto_id: ${produtoId}, quantidade: ${quantidade}`);

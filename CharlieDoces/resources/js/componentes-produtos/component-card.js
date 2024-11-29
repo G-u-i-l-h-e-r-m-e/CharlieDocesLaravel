@@ -22,23 +22,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 produto_id: productId,
                 quantidade: quantidade,
             })
-            .then(response => {
-                // Exibir notificação de sucesso
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Produto adicionado ao carrinho!',
-                    showConfirmButton: false,
-                    timer: 1500
+                .then(response => {
+                    // Exibir notificação de sucesso
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Produto adicionado ao carrinho!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                })
+                .catch(error => {
+                    // Exibir notificação de erro
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro ao adicionar ao carrinho',
+                        text: 'Por favor, tente novamente.',
+                    });
                 });
-            })
-            .catch(error => {
-                // Exibir notificação de erro
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Erro ao adicionar ao carrinho',
-                    text: 'Por favor, tente novamente.',
-                });
-            });
         });
     });
 
@@ -65,15 +65,34 @@ document.addEventListener("DOMContentLoaded", function () {
                 addToCartButton.style.backgroundColor = "#D94A4A";
                 addToCartButton.style.border = "none";
                 addToCartButton.style.cursor = "pointer";
+
+                // Remover o ícone e mostrar o texto
+                const textContainer = addToCartButton.querySelector('.cart-button-text');
+                const iconContainer = addToCartButton.querySelector('.cart-button-icon');
+                if (textContainer) {
+                    textContainer.style.display = 'inline';
+                }
+                if (iconContainer) {
+                    iconContainer.style.display = 'none';
+                }
             } else {
                 addToCartButton.classList.add("disabled");
                 addToCartButton.disabled = true;
                 addToCartButton.style.backgroundColor = "transparent";
                 addToCartButton.style.border = "1px solid #D94A4A";
                 addToCartButton.style.cursor = "not-allowed";
+
+                // Mostrar o ícone e ocultar o texto
+                const textContainer = addToCartButton.querySelector('.cart-button-text');
+                const iconContainer = addToCartButton.querySelector('.cart-button-icon');
+                if (textContainer) {
+                    textContainer.style.display = 'none';
+                }
+                if (iconContainer) {
+                    iconContainer.style.display = 'flex';
+                }
             }
         }
-
         // Função para verificar o estoque no backend
         function verificarEstoque(produtoId, quantidade) {
             console.log(`Verificando estoque para produto_id: ${produtoId}, quantidade: ${quantidade}`);
@@ -99,9 +118,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Função para redirecionar ao clicar nas áreas com data-url
         const clickableElements = cardContainer.querySelectorAll('[data-url]');
 
-        clickableElements.forEach(function(element) {
+        clickableElements.forEach(function (element) {
             element.style.cursor = 'pointer';
-            element.addEventListener('click', function() {
+            element.addEventListener('click', function () {
                 window.location.href = element.getAttribute('data-url');
             });
         });
@@ -110,8 +129,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const carouselImages = cardContainer.querySelectorAll('.carousel-image');
         const carouselIndicators = cardContainer.querySelectorAll('.indicator');
 
-        carouselIndicators.forEach(function(indicator) {
-            indicator.addEventListener('click', function(event) {
+        carouselIndicators.forEach(function (indicator) {
+            indicator.addEventListener('click', function (event) {
                 event.stopPropagation(); // Impede a propagação do evento para o pai
                 const index = parseInt(indicator.getAttribute('data-index'));
 

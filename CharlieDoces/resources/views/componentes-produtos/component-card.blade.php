@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Card</title>
@@ -56,7 +56,9 @@
 
         <!-- Botão para adicionar ao carrinho -->
         <button class="add-to-cart-btn" type="button" data-produto-id="{{ $produto->PRODUTO_ID }}">
-            Adicionar ao carrinho
+            <span class="cart-button-text">Adicionar ao carrinho</span>
+            <span class="cart-button-icon" style="display: none;">
+            <box-icon name='block' color='#d94a4a' ></box-icon></span>
         </button>
 
     </div>

@@ -14,6 +14,9 @@ use App\Http\Controllers\PedidoController;
 // Rota de teste
 Route::get('/teste-final', [TesteController::class, 'testeFinal']);
 
+Route::get('/', function () {
+    return redirect('/home');
+});
 // Rotas protegidas por autenticação
 Route::middleware('auth')->group(function () {
     // Rotas para carrinho
@@ -52,6 +55,9 @@ Route::get('enviado', [LoginController::class, 'sent']);
 
 // Rota para buscar produtos por categoria (pública ou protegida conforme necessidade)
 Route::get('/produtos/categoria/{nome}', [ProdutoController::class, 'produtosPorCategoria'])->name('produtos.categoria');
+Route::get('/produtos/filtrar', [ProdutoController::class, 'produtosPorCategoria'])->name('produtos.filtrar');
+
+
 
 // Carregar rotas de autenticação padrão
 require __DIR__ . '/auth.php';

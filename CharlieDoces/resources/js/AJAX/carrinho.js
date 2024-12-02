@@ -1,45 +1,61 @@
-$(document).ready(function() {
-    $('.item-quantity').on('change', function() {
-        var produtoId = $(this).data('produto-id');
-        var quantidade = $(this).val();
-        var token = $('meta[name="csrf-token"]').attr('content');
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.item-quantity').forEach(function(element) {
+        element.addEventListener('change', function() {
+            var produtoId = this.getAttribute('data-produto-id');
+            var quantidade = this.value;
+            var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        $.ajax({
-            url: '{{ route("carrinho.updateQuantidadeItens", ":produtoId") }}'.replace(':produtoId', produtoId),
-            type: 'PATCH',
-            data: {
+            var xhr = new XMLHttpRequest();
+            xhr.open('PATCH', '{{ route("carrinho.updateQuantidadeItens", ":produtoId") }}'.replace(':produtoId', produtoId), true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        document.getElementById('total-' + produtoId).textContent = response.novoTotal;
+                        document.getElementById('subtotal').textContent = response.subtotal;
+                        document.getElementById('total').textContent = response.total;
+                    } else {
+                        console.log(xhr.responseText);
+                    }
+                }
+            };
+
+            xhr.send(JSON.stringify({
                 _token: token,
                 ITEM_QTD: quantidade
-            },
-            success: function(response) {
-                $('#total-' + produtoId).text(response.novoTotal);
-                $('#subtotal').text(response.subtotal);
-                $('#total').text(response.total);
-            },
-            error: function(xhr) {
-                console.log(xhr.responseText);
-            }
+            }));
         });
     });
 
-    $('.btn-remover').on('click', function() {
-        var produtoId = $(this).data('produto-id');
-        var token = $('meta[name="csrf-token"]').attr('content');
+    document.querySelectorAll('.btn-remover').forEach(function(element) {
+        element.addEventListener('click', function() {
+            var produtoId = this.getAttribute('data-produto-id');
+            var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        $.ajax({
-            url: '{{ route("carrinho.deleteCarrinho", ":produtoId") }}'.replace(':produtoId', produtoId),
-            type: 'DELETE',
-            data: {
+            var xhr = new XMLHttpRequest();
+            xhr.open('DELETE', '{{ route("carrinho.deleteCarrinho", ":produtoId") }}'.replace(':produtoId', produtoId), true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.setRequestHeader('X-CSRF-TOKEN', token);
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        document.getElementById('item-' + produtoId).remove();
+                        document.getElementById('subtotal').textContent = response.subtotal;
+                        document.getElementById('total').textContent = response.total;
+                    } else {
+                        console.log(xhr.responseText);
+                    }
+                }
+            };
+
+            xhr.send(JSON.stringify({
                 _token: token
-            },
-            success: function(response) {
-                $('#item-' + produtoId).remove();
-                $('#subtotal').text(response.subtotal);
-                $('#total').text(response.total);
-            },
-            error: function(xhr) {
-                console.log(xhr.responseText);
-            }
+            }));
         });
     });
 });

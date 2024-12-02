@@ -8,6 +8,9 @@ use App\Models\Categoria;
 
 class HomeController extends Controller
 {
+    public function create() {
+        return view('home.index');
+    }
     public function index()
     {
        

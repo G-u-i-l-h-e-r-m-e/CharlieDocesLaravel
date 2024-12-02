@@ -27,14 +27,18 @@ class AuthenticatedSessionController extends Controller
 
     public function emailAuthenticate(Request $request): RedirectResponse
     {
-        $email = $request->input('email');
-
-        $user = User::where('USUARIO_EMAIL', $email)->first();
+        $input = $request->input('email');
+        
+        if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
+            $user = User::where('USUARIO_EMAIL', $input)->first();
+        } else {
+            $user = User::where('USUARIO_CPF', $input)->first();
+        }
 
         if ($user) {
-            return redirect()->route('login')->withInput(['email' => $email]);
+            return redirect()->route('login')->withInput(['email' => $input]);
         } else {
-            return redirect('cadastro');
+            return redirect()->route('cadastro');
         }
     }
 

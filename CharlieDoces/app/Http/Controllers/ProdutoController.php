@@ -7,6 +7,7 @@ use App\Models\Produto;
 use App\Models\Categoria;
 
 
+
 class ProdutoController extends Controller
 {
     public function index()
@@ -53,6 +54,8 @@ class ProdutoController extends Controller
     public function todosProdutos(Request $request)
     {
         $query = $request->input('query');
+       
+       
     
         if ($query) {
             $produtos = Produto::where('PRODUTO_NOME', 'like', '%' . $query . '%')
@@ -142,7 +145,6 @@ class ProdutoController extends Controller
     // Retorna a lista de produtos em formato HTML
     return view('produto.categoria', compact('produtos'));
 }
-
 
 
 }

@@ -25,8 +25,8 @@
                 @csrf
                 <div>
                     <label for="email">Email ou CPF</label>
-                    <input type="text" id="email" name="email" placeholder="exemplo@exemplo.com.br"
-                        value="{{ old('email') }}" required>
+                    <input type="text" id="email" name="email" placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX"
+                        value="{{ old('email') }}">
                     @error('email')
                         <p class="text-red-500">{{ $message }}</p>
                     @enderror

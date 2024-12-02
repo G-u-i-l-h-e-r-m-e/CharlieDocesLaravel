@@ -40,7 +40,7 @@
                 <p>Seu carrinho está vazio. Continue comprando!</p>
             @else
         </div>
-        <table class="carrinho-tabela">
+        <table>
             <thead>
                 <tr>
                     <th>Produto</th>
@@ -62,7 +62,7 @@
                             <div class="atualizar">
                                 <form action="{{ route('carrinho.atualizar', $item->PRODUTO_ID) }}" method="POST">
                                     @csrf
-                                    <input type="number" name="ITEM_QTD" value="{{ $item->ITEM_QTD }}" min="1">
+                                    <input style="text-align: center;" type="number" name="ITEM_QTD" value="{{ $item->ITEM_QTD }}" min="1">
                                     <button type="submit" class="btn-refresh">
                                         <img
                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAVFJREFUSEvt1D0oRWEcx/HP3WRTFqNFSYwGg0wmUgbJpMhoMchLXsrbZlPKYrBJFgaLwcBiExMmg2K2EOfUuTr3Om/3lu2e5emc83t+3+f5Pf//U/LPT+mf/TUAuQkXiagNU+hDb+R4g2vs4y2LkgeYwS6aU0zeMY3TNEgWYAJH0cQHDOMxeu/ECsaxiO1aAWEsT2jCHmbxlWAyGER3UU9EO5jHGYZyT5K1SFMef6ekRXSPMIZ+XOUAQtPVSLMejBWQOCAurPb8MzG24rJ5eU6FtnoHSZBazP9AkiLK3HJCXCNRmd6hu/p/2hmkHloC4BID2MRyUUBcl1WKW1gIKu4D7XitFbCEDRwgNHuODDowh7DTvzGG46Rqy7sqRiPzloxSnQxWf1hrJ8f1rQgrqQddQc6fwbVxG1x858G3E7zU08kFmreYJC+iYi4ZqgYgN8IfeHU3GfDcU2wAAAAASUVORK5CYII=" />

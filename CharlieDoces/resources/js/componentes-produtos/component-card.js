@@ -1,10 +1,7 @@
-// Remove the import statement
-// import axios from 'axios';
-
 document.addEventListener("DOMContentLoaded", function () {
     console.log("component-card.js carregado");
 
-    const axios = window.axios; // Use the global axios instance
+    const axios = window.axios; // Usa a instância global do axios
 
     // Seleciona todos os botões "Adicionar ao carrinho"
     const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
@@ -22,25 +19,46 @@ document.addEventListener("DOMContentLoaded", function () {
                 produto_id: productId,
                 quantidade: quantidade,
             })
-            .then(response => {
-                // Exibir notificação de sucesso
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Produto adicionado ao carrinho!',
-                    showConfirmButton: false,
-                    timer: 1500
+                .then(response => {
+                    // Exibir notificação de sucesso
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Produto adicionado ao carrinho!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+
+                    // Atualizar o contador do carrinho no header
+                    updateCartItemCount(response.data.totalItems);
+                })
+                .catch(error => {
+                    // Exibir notificação de erro
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Erro ao adicionar ao carrinho',
+                        text: 'Por favor, tente novamente.',
+                    });
                 });
-            })
-            .catch(error => {
-                // Exibir notificação de erro
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Erro ao adicionar ao carrinho',
-                    text: 'Por favor, tente novamente.',
-                });
-            });
         });
     });
+
+    // Função para atualizar o contador do carrinho
+    function updateCartItemCount(totalItems) {
+        const cartBadge = document.querySelector('.cart-badge');
+
+        if (cartBadge) {
+            cartBadge.textContent = totalItems;
+        } else {
+            // Se o badge não existe, cria um novo
+            const cartLink = document.querySelector('.cart-link');
+            if (cartLink) {
+                const newBadge = document.createElement('span');
+                newBadge.classList.add('cart-badge');
+                newBadge.textContent = totalItems;
+                cartLink.appendChild(newBadge);
+            }
+        }
+    }
 
     // Controle de quantidade e outras funcionalidades
     const settingsContainers = document.querySelectorAll(".settings-container");
@@ -65,12 +83,32 @@ document.addEventListener("DOMContentLoaded", function () {
                 addToCartButton.style.backgroundColor = "#D94A4A";
                 addToCartButton.style.border = "none";
                 addToCartButton.style.cursor = "pointer";
+
+                // Remover o ícone e mostrar o texto
+                const textContainer = addToCartButton.querySelector('.cart-button-text');
+                const iconContainer = addToCartButton.querySelector('.cart-button-icon');
+                if (textContainer) {
+                    textContainer.style.display = 'inline';
+                }
+                if (iconContainer) {
+                    iconContainer.style.display = 'none';
+                }
             } else {
                 addToCartButton.classList.add("disabled");
                 addToCartButton.disabled = true;
                 addToCartButton.style.backgroundColor = "transparent";
                 addToCartButton.style.border = "1px solid #D94A4A";
                 addToCartButton.style.cursor = "not-allowed";
+
+                // Mostrar o ícone e ocultar o texto
+                const textContainer = addToCartButton.querySelector('.cart-button-text');
+                const iconContainer = addToCartButton.querySelector('.cart-button-icon');
+                if (textContainer) {
+                    textContainer.style.display = 'none';
+                }
+                if (iconContainer) {
+                    iconContainer.style.display = 'flex';
+                }
             }
         }
 
@@ -99,9 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Função para redirecionar ao clicar nas áreas com data-url
         const clickableElements = cardContainer.querySelectorAll('[data-url]');
 
-        clickableElements.forEach(function(element) {
+        clickableElements.forEach(function (element) {
             element.style.cursor = 'pointer';
-            element.addEventListener('click', function() {
+            element.addEventListener('click', function () {
                 window.location.href = element.getAttribute('data-url');
             });
         });
@@ -110,8 +148,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const carouselImages = cardContainer.querySelectorAll('.carousel-image');
         const carouselIndicators = cardContainer.querySelectorAll('.indicator');
 
-        carouselIndicators.forEach(function(indicator) {
-            indicator.addEventListener('click', function(event) {
+        carouselIndicators.forEach(function (indicator) {
+            indicator.addEventListener('click', function (event) {
                 event.stopPropagation(); // Impede a propagação do evento para o pai
                 const index = parseInt(indicator.getAttribute('data-index'));
 

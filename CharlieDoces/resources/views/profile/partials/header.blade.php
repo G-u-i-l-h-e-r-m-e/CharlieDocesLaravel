@@ -91,10 +91,19 @@
 
 
                     <!-- Ícone do carrinho -->
-                    <a href="{{ Auth::check() ? url('/carrinho') : url('/login') }}">
+                    <a href="{{ Auth::check() ? url('/carrinho') : url('/login') }}" class="cart-link">
                         <box-icon name='cart' color='#591f12'></box-icon>
                         Carrinho
+                        @if(Auth::check())
+                                                @php
+                                                    $cartItemCount = \App\Models\Carrinho::where('USUARIO_ID', Auth::id())->sum('ITEM_QTD');
+                                                @endphp
+                                                @if($cartItemCount > 0)
+                                                    <span class="cart-badge">{{ $cartItemCount }}</span>
+                                                @endif
+                        @endif
                     </a>
+
                 </div>
         </nav>
 

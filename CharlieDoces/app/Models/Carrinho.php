@@ -8,13 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Carrinho extends Model
 {
     use HasFactory;
+
     protected $table = "CARRINHO_ITEM";
+    protected $fillable = ['USUARIO_ID', 'PRODUTO_ID', 'ITEM_QTD'];
     protected $primaryKey = 'PRODUTO_ID';
-    protected $fillable = ['USUARIO_ID','PRODUTO_ID', 'ITEM_QTD'];
     public $timestamps = false;
 
-    public function produto() {
+    // Informa que a tabela não possui chave primária padrão
+    protected $primaryKey = null;
+    public $incrementing = false;
+
+    public function produto()
+    {
         return $this->belongsTo(Produto::class, 'PRODUTO_ID', 'PRODUTO_ID');
-     }
-     
+    }
 }

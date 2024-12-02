@@ -7,7 +7,6 @@
     <title>Carrossel Chocolate</title>
     <link rel="stylesheet" href="{{ asset('css/componentes-style/carousel-chocolate.css') }}">
     <link rel="stylesheet" href="{{ asset('css/componentes-style/component-card.css') }}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>

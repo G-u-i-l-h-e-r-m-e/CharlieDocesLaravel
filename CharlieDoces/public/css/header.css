@@ -13,7 +13,7 @@ header {
     padding: 24px;
 }
 
-nav {
+.navegacao {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, #FEDB37 0%, #FED336 24%, #FDC834 55%, #FDB931 100%);
@@ -24,8 +24,8 @@ nav {
     position: relative;
 }
 
-nav::before,
-nav::after {
+.navegacao::before,
+.navegacao::after {
     content: "";
     position: absolute;
     top: 0;
@@ -36,11 +36,11 @@ nav::after {
     background-size: 10px 13px;
 }
 
-nav::before {
+.navegacao::before {
     left: -5px;
 }
 
-nav::after {
+.navegacao::after {
     right: -5px;
 }
 
@@ -312,4 +312,29 @@ nav::after {
     justify-content: center;
     align-items: center;
     gap: 297px;
+}
+
+
+
+
+.cart-link {
+    position: relative;
+    /* Outros estilos existentes */
+}
+
+.cart-badge {
+    position: absolute;
+    top: -24px;
+    right: 83px;
+    width: 25px;
+    height: 25px;
+    background-color: #D94A4A;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

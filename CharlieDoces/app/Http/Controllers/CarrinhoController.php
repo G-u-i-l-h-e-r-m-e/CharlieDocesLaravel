@@ -32,44 +32,71 @@ class CarrinhoController extends Controller
             return response()->json(['message' => 'Estoque não encontrado para este produto.'], 404);
         }
 
-        $estoqueQtd = $estoque->PRODUTO_QTD; // Use the correct attribute
+        $estoqueQtd = $estoque->PRODUTO_QTD;
 
+        \Log::info('Stock quantity for produto_id ' . $produtoId . ': ' . $estoqueQtd);
+        \Log::info('Quantidade em estoque para produto_id ' . $produtoId . ': ' . $estoqueQtd);
         Log::info('Stock quantity for produto_id ' . $produtoId . ': ' . $estoqueQtd);
 
         if ($estoqueQtd < $quantidade) {
             return response()->json(['message' => 'Quantidade solicitada indisponível no estoque.'], 400);
         }
 
-        // Proceed to add the product to the cart
-        $item = Carrinho::firstOrNew([
+        // Verifica se o item já está no carrinho
+        $item = Carrinho::where([
             'USUARIO_ID' => $usuarioId,
             'PRODUTO_ID' => $produtoId,
-        ]);
+        ])->first();
 
-        // Update the item quantity
-        $item->ITEM_QTD = ($item->ITEM_QTD ?? 0) + $quantidade;
-        $item->save();
+        if ($item) {
+            // Atualiza a quantidade usando o Query Builder
+            Carrinho::where([
+                'USUARIO_ID' => $usuarioId,
+                'PRODUTO_ID' => $produtoId,
+            ])->update([
+                'ITEM_QTD' => $item->ITEM_QTD + $quantidade,
+            ]);
+
+            $item->ITEM_QTD += $quantidade;
+        } else {
+            // Cria um novo registro
+            $item = new Carrinho();
+            $item->USUARIO_ID = $usuarioId;
+            $item->PRODUTO_ID = $produtoId;
+            $item->ITEM_QTD = $quantidade;
+            $item->save();
+        }
+
+        // Obtém a quantidade total de itens no carrinho
+        $totalItems = Carrinho::where('USUARIO_ID', $usuarioId)->sum('ITEM_QTD');
 
         return response()->json([
-
-
-            'ITEM_QTD' => $item->ITEM_QTD,
-            'message' => 'Produto adicionado ao carrinho!',
+            'ITEM_QTD'   => $item->ITEM_QTD,
+            'message'    => 'Produto adicionado ao carrinho!',
+            'totalItems' => $totalItems,
         ]);
     }
 
+    // Método para exibir o carrinho
     public function carrinho()
     {
-        $items = Carrinho::where('USUARIO_ID', Auth::user()->USUARIO_ID)
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        $usuarioId = Auth::id();
+
+        $items = Carrinho::where('USUARIO_ID', $usuarioId)
             ->with('produto.produto_imagens', 'produto.estoque')
             ->get();
 
         return view('carrinho.carrinho', ['items' => $items]);
     }
 
+    // Método para atualizar a quantidade de um item no carrinho
     public function atualizarCarrinho(Request $request, Produto $produto)
     {
-        $usuarioId = Auth::user()->USUARIO_ID;
+        $usuarioId = Auth::id();
         $novaQuantidade = $request->input('ITEM_QTD');
 
         // Atualizar a quantidade do item no carrinho
@@ -81,9 +108,10 @@ class CarrinhoController extends Controller
         return redirect()->route('carrinho.exibir');
     }
 
+    // Método para remover um item do carrinho
     public function removerDoCarrinho(Produto $produto)
     {
-        $usuarioId = Auth::user()->USUARIO_ID;
+        $usuarioId = Auth::id();
 
         // Remover o item do carrinho
         Carrinho::where([
@@ -93,7 +121,4 @@ class CarrinhoController extends Controller
 
         return redirect()->route('carrinho.exibir');
     }
-
-
-
 }

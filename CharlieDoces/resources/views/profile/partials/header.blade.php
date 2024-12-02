@@ -13,11 +13,11 @@
 
 <body>
     <header>
-        <nav>
+        <nav class="navegacao">
             <!-- Bloco 1: Linhas decorativas e logo -->
             <div class="nav-top-section">
                 <span class="line"></span>
-                <a href="{{ url('/') }}">
+                <a href="{{ url('/home') }}">
                     <img src="{{ asset('img/header/logo.svg') }}" alt="Logo Charlie Loja de Doces">
                 </a>
                 <span class="line"></span>
@@ -91,10 +91,19 @@
 
 
                     <!-- Ícone do carrinho -->
-                    <a href="{{ Auth::check() ? url('/carrinho') : url('/login') }}">
+                    <a href="{{ Auth::check() ? url('/carrinho') : url('/login') }}" class="cart-link">
                         <box-icon name='cart' color='#591f12'></box-icon>
                         Carrinho
+                        @if(Auth::check())
+                                                @php
+                                                    $cartItemCount = \App\Models\Carrinho::where('USUARIO_ID', Auth::id())->sum('ITEM_QTD');
+                                                @endphp
+                                                @if($cartItemCount > 0)
+                                                    <span class="cart-badge">{{ $cartItemCount }}</span>
+                                                @endif
+                        @endif
                     </a>
+
                 </div>
         </nav>
 

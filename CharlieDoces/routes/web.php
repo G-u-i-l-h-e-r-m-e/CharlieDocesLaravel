@@ -18,6 +18,9 @@ use App\Http\Controllers\StatusController;
 // Rota de teste
 Route::get('/teste-carousel', [TesteController::class, 'carregarProdutosCarousel'])->name('teste.carousel');
 
+Route::get('/', function () {
+    return redirect('/home');
+});
 // Rotas protegidas por autenticação
 Route::get('/', [HomeController::class, 'index']);
 
@@ -73,6 +76,9 @@ Route::get('enviado', [LoginController::class, 'sent']);
 
 // Rota para buscar produtos por categoria (pública ou protegida conforme necessidade)
 Route::get('/produtos/categoria/{nome}', [ProdutoController::class, 'produtosPorCategoria'])->name('produtos.categoria');
+Route::get('/produtos/filtrar', [ProdutoController::class, 'produtosPorCategoria'])->name('produtos.filtrar');
+
+
 
 // Carregar rotas de autenticação padrão
 require __DIR__ . '/auth.php';

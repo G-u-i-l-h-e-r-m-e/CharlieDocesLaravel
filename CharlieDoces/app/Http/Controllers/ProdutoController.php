@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produto;
+use App\Models\Categoria;
+
 
 class ProdutoController extends Controller
 {
@@ -51,7 +53,7 @@ class ProdutoController extends Controller
     public function todosProdutos(Request $request)
     {
         $query = $request->input('query');
-
+    
         if ($query) {
             $produtos = Produto::where('PRODUTO_NOME', 'like', '%' . $query . '%')
                 ->with([
@@ -59,19 +61,23 @@ class ProdutoController extends Controller
                         $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
                     },
                     'estoque'
-                ])->get();
+                ])
+                ->paginate(9); // Define o número de itens por página
         } else {
             $produtos = Produto::with([
                 'produto_imagens' => function ($query) {
                     $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
                 },
                 'estoque'
-            ])->get();
+            ])
+            ->paginate(9); // Define o número de itens por página
         }
 
-        return view('produto.todos_produtos', compact('produtos'));
+        $categorias = Categoria::all();
+    
+        return view('produto.todos_produtos', compact('produtos','categorias'));
     }
-
+    
     public function buscar(Request $request)
     {
         $termo = $request->input('q');
@@ -106,10 +112,14 @@ class ProdutoController extends Controller
     }
 
     // Novo método para filtrar produtos por categoria
-    public function produtosPorCategoria($categoriaNome)
-    {
-        $produtos = Produto::whereHas('categoria', function ($query) use ($categoriaNome) {
-            $query->where('CATEGORIA_NOME', $categoriaNome);
+    public function produtosPorCategoria(Request $request)
+{
+    $categorias = $request->input('categorias', []);  // Recebe as categorias selecionadas
+
+    if (count($categorias) > 0) {
+        // Filtra os produtos pelas categorias selecionadas
+        $produtos = Produto::whereHas('categoria', function ($query) use ($categorias) {
+            $query->whereIn('CATEGORIA_NOME', $categorias);  // Usando whereIn para múltiplas categorias
         })
         ->with([
             'produto_imagens' => function ($query) {
@@ -117,8 +127,22 @@ class ProdutoController extends Controller
             },
             'estoque'
         ])
-        ->get();
-
-        return view('produto.index', ['produtos' => $produtos]);
+        ->paginate(9);
+    } else {
+        // Se nenhuma categoria for selecionada, retorna todos os produtos
+        $produtos = Produto::with([
+            'produto_imagens' => function ($query) {
+                $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
+            },
+            'estoque'
+        ])
+        ->paginate(9);
     }
+
+    // Retorna a lista de produtos em formato HTML
+    return view('produto.categoria', compact('produtos'));
+}
+
+
+
 }

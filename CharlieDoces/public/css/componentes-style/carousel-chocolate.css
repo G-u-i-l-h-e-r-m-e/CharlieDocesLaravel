@@ -1,9 +1,9 @@
 .carousel-chocolate-container .card-container {
-    box-shadow: -16px 16px 0px 0px #D94A4A;
+    box-shadow: -16px 16px 0px 0px #d94a4a;
 }
 
 .carousel-chocolate-container .add-cart {
-    background-color: #FDB931 !important;
+    background-color: #fdb931 !important;
 }
 
 .carousel-chocolate-track {
@@ -12,8 +12,6 @@
     align-items: center;
     gap: 159px;
 }
-
-
 
 .carousel-chocolate-container .tituloHome {
     display: flex;
@@ -25,37 +23,32 @@
 }
 
 .tituloChocolate {
-    font-family: 'Caveat', cursive;
+    font-family: "Caveat", cursive;
     font-size: 48px;
     font-weight: 400;
-    color: #591F12;
+    color: #591f12;
     margin-bottom: 12px;
 }
 
 .subtituloChocolate {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 32px;
     font-weight: 300;
-    color: #591F12;
+    color: #591f12;
     text-transform: uppercase;
     text-align: center;
 }
 
-
-
-
-    .desconto {
-        position: relative;
-        margin-top: -100px;
-        margin-left: 24px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10;
-        gap: 237px;
-    }
-    
-
+.desconto {
+    position: relative;
+    margin-top: -100px;
+    margin-left: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    gap: 237px;
+}
 
 .desconto-content {
     display: flex;
@@ -64,7 +57,7 @@
 }
 
 .desconto p {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: white;
@@ -94,15 +87,14 @@
 
 .badge span {
     position: relative;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 18px; /* Ajuste do tamanho do texto */
     font-weight: 400;
-    color: #591F12;
+    color: #591f12;
     z-index: 1; /* Garante que o texto esteja na frente */
     text-transform: uppercase;
 }
 
-
 .carousel-chocolate-container .settings-container {
-gap: 82px;
+    gap: 82px;
 }

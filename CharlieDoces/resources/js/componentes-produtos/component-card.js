@@ -1,3 +1,24 @@
+// Remove a declaração de importação
+// import axios from 'axios';
+
+// Função para atualizar o contador do carrinho
+function updateCartItemCount(totalItems) {
+    const cartBadge = document.querySelector('.cart-badge');
+
+    if (cartBadge) {
+        cartBadge.textContent = totalItems;
+    } else {
+        // Se o badge não existe, cria um novo
+        const cartLink = document.querySelector('.cart-link');
+        if (cartLink) {
+            const newBadge = document.createElement('span');
+            newBadge.classList.add('cart-badge');
+            newBadge.textContent = totalItems;
+            cartLink.appendChild(newBadge);
+        }
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("component-card.js carregado");
 
@@ -41,24 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         });
     });
-
-    // Função para atualizar o contador do carrinho
-    function updateCartItemCount(totalItems) {
-        const cartBadge = document.querySelector('.cart-badge');
-
-        if (cartBadge) {
-            cartBadge.textContent = totalItems;
-        } else {
-            // Se o badge não existe, cria um novo
-            const cartLink = document.querySelector('.cart-link');
-            if (cartLink) {
-                const newBadge = document.createElement('span');
-                newBadge.classList.add('cart-badge');
-                newBadge.textContent = totalItems;
-                cartLink.appendChild(newBadge);
-            }
-        }
-    }
 
     // Controle de quantidade e outras funcionalidades
     const settingsContainers = document.querySelectorAll(".settings-container");

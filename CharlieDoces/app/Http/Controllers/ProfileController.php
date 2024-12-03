@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
+use App\Models\PedidoItem;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProfileController extends Controller
 {
@@ -22,19 +21,60 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's profile information.
+     * Display the user's profile along with order history.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function show(): View
     {
-        $request->user()->fill($request->validated());
+        $user = Auth::user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if (!$user) {
+            return redirect()->route('login');
         }
 
-        $request->user()->save();
+        $endereco = $user->endereco;
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        $pedidoItems = PedidoItem::whereHas('pedido', function ($query) use ($user) {
+            $query->where('USUARIO_ID', $user->USUARIO_ID);
+        })->paginate(6);
+
+        return view('profile.show', compact('user', 'endereco', 'pedidoItems'));
+    }
+
+    /**
+     * Update the user's profile information.
+     */
+    public function update(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+    
+        $request->validate([
+            'USUARIO_NOME' => 'required|string|max:255',
+            'USUARIO_EMAIL' => 'required|email|max:255|unique:usuario,USUARIO_EMAIL,' . $user->USUARIO_ID . ',USUARIO_ID',
+            'USUARIO_CPF' => 'required|string|max:14',
+            // Validações para endereço, se necessário
+            'ENDERECO_LOGRADOURO' => 'required_if:endereco,1|string|max:255',
+            'ENDERECO_NUMERO' => 'required_if:endereco,1|string|max:10',
+            'ENDERECO_COMPLEMENTO' => 'nullable|string|max:255',
+            'ENDERECO_CEP' => 'required_if:endereco,1|string|max:10',
+            'ENDERECO_CIDADE' => 'required_if:endereco,1|string|max:100',
+            'ENDERECO_ESTADO' => 'required_if:endereco,1|string|max:100',
+        ]);
+    
+        $user->update($request->only(['USUARIO_NOME', 'USUARIO_EMAIL', 'USUARIO_CPF']));
+    
+        // Atualizar ou criar endereço
+        $enderecoData = $request->only([
+            'ENDERECO_LOGRADOURO', 'ENDERECO_NUMERO', 'ENDERECO_COMPLEMENTO', 
+            'ENDERECO_CEP', 'ENDERECO_CIDADE', 'ENDERECO_ESTADO'
+        ]);
+
+        if ($user->endereco) {
+            $user->endereco->update($enderecoData);
+        } else {
+            $user->endereco()->create($enderecoData);
+        }
+    
+        return redirect()->route('profile.show')->with('success', 'Informações atualizadas com sucesso.');
     }
 
     /**
@@ -52,9 +92,6 @@ class ProfileController extends Controller
 
         $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return redirect('/')->with('success', 'Conta excluída com sucesso.');
     }
 }

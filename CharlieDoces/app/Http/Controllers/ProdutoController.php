@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\Categoria;
 
-
 class ProdutoController extends Controller
 {
     public function index()
@@ -21,14 +20,20 @@ class ProdutoController extends Controller
             ])
             ->get();
 
-        return view('produto.index', ['produtos' => $produtos]);
+        // Breadcrumbs
+        $breadcrumbs = [
+            ['title' => 'Home', 'url' => route('home')],
+            ['title' => 'Destaques', 'url' => route('home')],
+        ];
+
+        return view('produto.index', ['produtos' => $produtos, 'breadcrumbs' => $breadcrumbs]);
     }
 
     public function show(Produto $produto)
     {
         $produto = Produto::with([
             'produto_imagens' => function ($query) {
-                $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
+                $query->orderBy('IMAGEM_ORDEM', 'asc');
             },
             'categoria',
             'estoque'
@@ -44,16 +49,24 @@ class ProdutoController extends Controller
             ->where('PRODUTO_ID', '!=', $produto->PRODUTO_ID)
             ->get();
 
+        // Breadcrumbs
+        $breadcrumbs = [
+            ['title' => 'Home', 'url' => route('home')],
+            ['title' => 'Todos os Produtos', 'url' => route('produtos.todos')],
+            ['title' => $produto->PRODUTO_NOME, 'url' => route('produto.show', $produto->PRODUTO_ID)],
+        ];
+
         return view('produto.show', [
             'produto' => $produto,
-            'produtosRelacionados' => $produtosRelacionados
+            'produtosRelacionados' => $produtosRelacionados,
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
     public function todosProdutos(Request $request)
     {
         $query = $request->input('query');
-    
+
         if ($query) {
             $produtos = Produto::where('PRODUTO_NOME', 'like', '%' . $query . '%')
                 ->with([
@@ -62,7 +75,7 @@ class ProdutoController extends Controller
                     },
                     'estoque'
                 ])
-                ->paginate(9); // Define o número de itens por página
+                ->paginate(9);
         } else {
             $produtos = Produto::with([
                 'produto_imagens' => function ($query) {
@@ -70,14 +83,21 @@ class ProdutoController extends Controller
                 },
                 'estoque'
             ])
-            ->paginate(9); // Define o número de itens por página
+                ->orderBy('PRODUTO_PRECO', 'asc') // Ordenar por preço ascendente por padrão
+                ->paginate(9);
         }
 
         $categorias = Categoria::all();
-    
-        return view('produto.todos_produtos', compact('produtos','categorias'));
+
+        // Breadcrumbs
+        $breadcrumbs = [
+            ['title' => 'Home', 'url' => route('home')],
+            ['title' => 'Todos os Produtos', 'url' => route('produtos.todos')],
+        ];
+
+        return view('produto.todos_produtos', compact('produtos', 'categorias', 'breadcrumbs'));
     }
-    
+
     public function buscar(Request $request)
     {
         $termo = $request->input('q');
@@ -90,7 +110,6 @@ class ProdutoController extends Controller
 
     public function verificarEstoque(Request $request)
     {
-        // Valida os dados recebidos
         $validated = $request->validate([
             'produto_id' => 'required|integer|exists:PRODUTO,PRODUTO_ID',
             'quantidade' => 'required|integer|min:1',
@@ -99,50 +118,90 @@ class ProdutoController extends Controller
         $produtoId = $validated['produto_id'];
         $quantidade = $validated['quantidade'];
 
-        // Busca o produto e seu estoque
         $produto = Produto::with('estoque')->find($produtoId);
 
-        // Verifica se a quantidade no estoque é suficiente
         if (!$produto || !$produto->estoque || $produto->estoque->PRODUTO_QTD < $quantidade) {
             return response()->json(['estoqueDisponivel' => false], 200);
         }
 
-        // Retorna disponibilidade
         return response()->json(['estoqueDisponivel' => true], 200);
     }
 
-    // Novo método para filtrar produtos por categoria
-    public function produtosPorCategoria(Request $request)
-{
-    $categorias = $request->input('categorias', []);  // Recebe as categorias selecionadas
+    // Método 'filtrar' 
+    public function filtrar(Request $request)
+    {
+        $categoriaSelecionada = $request->input('categoria', '');
+        $ordenacao = $request->input('ordenacao', 'menor_preco');
+        $page = $request->input('page', 1);
 
-    if (count($categorias) > 0) {
-        // Filtra os produtos pelas categorias selecionadas
-        $produtos = Produto::whereHas('categoria', function ($query) use ($categorias) {
-            $query->whereIn('CATEGORIA_NOME', $categorias);  // Usando whereIn para múltiplas categorias
-        })
-        ->with([
+        if ($categoriaSelecionada) {
+            // Buscar a categoria pelo nome
+            $categoria = Categoria::where('CATEGORIA_NOME', $categoriaSelecionada)->first();
+        }
+
+        // Query base
+        $query = Produto::with([
             'produto_imagens' => function ($query) {
                 $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
             },
             'estoque'
-        ])
-        ->paginate(9);
-    } else {
-        // Se nenhuma categoria for selecionada, retorna todos os produtos
-        $produtos = Produto::with([
-            'produto_imagens' => function ($query) {
-                $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
-            },
-            'estoque'
-        ])
-        ->paginate(9);
+        ]);
+
+        if (isset($categoria)) {
+            // Filtrar os produtos pela categoria
+            $query->where('CATEGORIA_ID', $categoria->CATEGORIA_ID);
+            $titulo_categoria = $categoria->CATEGORIA_NOME;
+        } else {
+            // Se nenhuma categoria selecionada, mostrar 'Todos os Produtos'
+            $titulo_categoria = 'Todos os Produtos';
+        }
+
+        // Aplicar ordenação
+        switch ($ordenacao) {
+            case 'menor_preco':
+                $query->orderBy('PRODUTO_PRECO', 'asc');
+                break;
+            case 'maior_preco':
+                $query->orderBy('PRODUTO_PRECO', 'desc');
+                break;
+            case 'a_z':
+                $query->orderBy('PRODUTO_NOME', 'asc');
+                break;
+            case 'z_a':
+                $query->orderBy('PRODUTO_NOME', 'desc');
+                break;
+            default:
+                $query->orderBy('PRODUTO_PRECO', 'asc');
+                break;
+        }
+
+        // Paginar os resultados
+        $produtos = $query->paginate(9, ['*'], 'page', $page);
+
+        // Breadcrumbs
+        $breadcrumbs = [
+            ['title' => 'Home', 'url' => route('home')],
+            ['title' => 'Todos os Produtos', 'url' => route('produtos.todos')],
+        ];
+
+        if (isset($categoria)) {
+            $breadcrumbs[] = ['title' => $categoria->CATEGORIA_NOME, 'url' => '#'];
+        }
+
+        // Renderizar os breadcrumbs e os produtos como HTML
+        $breadcrumbs_html = view('components.breadcrumbs', compact('breadcrumbs'))->render();
+        $produtos_html = view('produto.produtos_list', ['produtos' => $produtos])->render();
+
+        // Renderizar a paginação
+        $pagination_html = $produtos->links('pagination::bootstrap-4')->toHtml();
+
+        return response()->json([
+            'breadcrumbs_html' => $breadcrumbs_html,
+            'produtos_html' => $produtos_html,
+            'titulo_categoria' => $titulo_categoria,
+            'pagination_html' => $pagination_html,
+            'current_page' => $produtos->currentPage(),
+            'last_page' => $produtos->lastPage(),
+        ]);
     }
-
-    // Retorna a lista de produtos em formato HTML
-    return view('produto.categoria', compact('produtos'));
-}
-
-
-
 }

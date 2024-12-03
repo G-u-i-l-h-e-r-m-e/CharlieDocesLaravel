@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrossel Chocolate</title>
-    <link rel="stylesheet" href="{{ asset('css/componentes-style/carousel-chocolate.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/componentes-style/component-card.css') }}">
-</head>
-
-<body>
-
-    <div class="carousel-chocolate-container">
+<div class="carousel-chocolate-container">
 
         <div class="carousel-chocolate-wrapper">
 
@@ -61,11 +48,3 @@
         </div>
 
     </div>
-
-    <!-- Inclua o JavaScript, se necessário -->
-    @vite('resources/js/componentes-produtos/carousel-chocolate.js')
-
-
-</body>
-
-</html>

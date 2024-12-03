@@ -13,7 +13,7 @@ class Carrinho extends Model
     protected $fillable = ['USUARIO_ID', 'PRODUTO_ID', 'ITEM_QTD'];
     public $timestamps = false;
 
-    // Informa que a tabela não possui chave primária padrão
+    // Indica que a tabela não possui chave primária padrão
     protected $primaryKey = null;
     public $incrementing = false;
 

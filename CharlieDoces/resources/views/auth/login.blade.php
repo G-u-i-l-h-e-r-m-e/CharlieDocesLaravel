@@ -20,7 +20,7 @@
     </section>
     <div class="login-container">
         <div class="login-form">
-            <h2>Entrar ou Criar Conta</h2>
+            <h2>Entrar</h2>
             <form id="login-form" class="login-form" method="POST" action="{{ route('login') }}">
                 @csrf
 

@@ -53,12 +53,12 @@
             <tbody>
                 @foreach ($items as $item)
                     <tr>
-                        <td style="display: flex; justify-content: center; align-items: center; text-align: center; border 1px solid">
+                        <td style="display: flex; justify-content: center; align-items: center;">
                             <img src="{{ $item->produto->produto_imagens->first()->IMAGEM_URL }}"
                                 alt="{{ $item->produto->PRODUTO_NOME }}" width="50">
-                            {{ $item->produto->PRODUTO_NOME }}
+                                {{ $item->produto->PRODUTO_NOME }}
                         </td>
-                        <td>
+                        <td style="border: 2px solid #ddd">
                             <div class="atualizar">
                                 <form action="{{ route('carrinho.atualizar', $item->PRODUTO_ID) }}" method="POST">
                                     @csrf
@@ -70,13 +70,13 @@
                                 </form>
                             </div>
                         </td>
-                        <td>R$
+                        <td style="border: 2px solid #ddd">R$
                             {{ number_format($item->produto->PRODUTO_PRECO - $item->produto->PRODUTO_DESCONTO, 2, ',', '.') }}
                         </td>
-                        <td>R$
+                        <td style="border: 2px solid #ddd">R$
                             {{ number_format(($item->produto->PRODUTO_PRECO - $item->produto->PRODUTO_DESCONTO) * $item->ITEM_QTD, 2, ',', '.') }}
                         </td>
-                        <td>
+                        <td style="border: 2px solid #ddd">
                             <form action="{{ route('carrinho.remover', $item->PRODUTO_ID) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn-remover">

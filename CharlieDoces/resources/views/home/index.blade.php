@@ -45,16 +45,13 @@
     <div class="home-carousels-container">
         <div class="home-component-title-01 animate__animated animate__headShake">
             @include('componentes-produtos.component-title', [
-    'titulo' => 'Ofertas Imperdíveis',
+    'titulo' => 'NATAL',
     'subtitulo' => 'CONFIRA NOSSAS NOVIDADES',
 ])
         </div>
 
         @include('componentes-produtos.carousel-natal', ['produtosNatal' => $produtosNatal])
 
-        <div class="pagination">
-            {{ $produtosNatal->links() }}
-        </div>
     </div>
 
     <!-- Seção de Promoções de Chocolates -->

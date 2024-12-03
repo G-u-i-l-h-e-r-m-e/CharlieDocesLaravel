@@ -40,7 +40,7 @@ $(document).ready(function () {
                     e.preventDefault();
                     var url = $(this).attr('href');
                     var page = url.split('page=')[1];
-                    carregarProdutos(page, true); // Carregar mais produtos
+                    carregarProdutos(page, false); // Carregar a página selecionada
                 });
 
                 // Atualizar o botão "Ver Mais"
@@ -48,6 +48,13 @@ $(document).ready(function () {
                     $('#ver-mais').hide();
                 } else {
                     $('#ver-mais').show();
+                }
+
+                // Re-inicializar os cartões de produto
+                if (typeof initializeProductCards === 'function') {
+                    initializeProductCards();
+                } else {
+                    console.error('initializeProductCards is not defined');
                 }
             },
             error: function (xhr, status, error) {
@@ -67,11 +74,11 @@ $(document).ready(function () {
     });
 
     // Inicializar a paginação com AJAX
-    $('#paginacao').find('a').on('click', function (e) {
+    $('#paginacao').on('click', 'a', function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
         var page = url.split('page=')[1];
-        carregarProdutos(page, true);
+        carregarProdutos(page, false);
     });
 
     // Evento para o botão "Ver Mais"

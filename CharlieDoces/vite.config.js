@@ -2,7 +2,6 @@
 
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import vue from '@vitejs/plugin-vue'; // Se estiver usando Vue.js
 
 export default defineConfig({
   plugins: [
@@ -20,14 +19,15 @@ export default defineConfig({
         'resources/css/header.css',
         'resources/css/footer.css',
         'resources/css/todos_produtos.css',
-        'resources/css/profile.css',               // Novo CSS para o perfil
-        'resources/css/historicoPedidos.css',      // Novo CSS para histórico de pedidos
-        'resources/css/login/cadastro.css',        // Novo CSS para cadastro
-        'resources/css/login/forgotPassword.css',  // Novo CSS para forgot password
-        'resources/css/login/login.css',           // Novo CSS para login
-        'resources/css/login/password.css',        // Novo CSS para password
-        'resources/css/carrinho.css',              // Novo CSS para carrinho
-        'resources/css/bootstrap.css',             // Importando Bootstrap CSS via Vite
+        'resources/css/profile.css',              
+        'resources/css/historicoPedidos.css',    
+        'resources/css/login/cadastro.css',       
+        'resources/css/login/forgotPassword.css',  
+        'resources/css/login/login.css',          
+        'resources/css/login/password.css',        
+        'resources/css/carrinho.css',              
+        'resources/css/bootstrap.css',          
+        'resources/css/card-produto-todos-produtos.css',   
         // JS files
         'resources/js/app.js',
         'resources/js/componentes-produtos/carousel-natal.js',
@@ -37,12 +37,12 @@ export default defineConfig({
         'resources/js/carrousel-categoria.js',
         'resources/js/categoria.js',
         'resources/js/header.js',
-        'resources/js/login.js',                    // Novo JS para login
+        'resources/js/login.js',                   
         'resources/js/produto.js',
         'resources/js/todos_produtos.js',
-        'resources/js/componentes-produtos/carrinho.js', // Novo JS para carrinho
-        'resources/js/AJAX/carrinho.js',           // JS AJAX para carrinho
-        'resources/js/bootstrap.js',               // Importando Bootstrap JS via Vite
+        'resources/js/componentes-produtos/carrinho.js', 
+        'resources/js/AJAX/carrinho.js',           
+        'resources/js/bootstrap.js',              
       ],
       refresh: true,
     }),

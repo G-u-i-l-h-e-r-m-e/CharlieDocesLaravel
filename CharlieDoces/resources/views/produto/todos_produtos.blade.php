@@ -1,4 +1,5 @@
 <!-- resources/views/produto/todos_produtos.blade.php -->
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -24,6 +25,7 @@
     'resources/css/header.css',
     'resources/css/footer.css',
     'resources/css/todos_produtos.css',
+    'resources/css/card-produto-todos-produtos.css',
     // JS files
     'resources/js/app.js',
     'resources/js/componentes-produtos/component-card.js',
@@ -84,16 +86,24 @@
             </div>
 
             <main class="produtos-container" id="produtos-lista">
-                @include('produto.produtos_list', ['produtos' => $produtos])
+                @foreach ($produtos as $produto)
+                                @include('componentes-produtos.component-card', [
+                        'produto' => $produto,
+                        'contexto' => 'todos_produtos'
+                    ])
+                @endforeach
             </main>
+
+            <section id="paginacao" data-current-page="{{ $produtos->currentPage() }}">
+            {{ $produtos->links('pagination::bootstrap-4') }}
+            <button id="ver-mais" type="button">Ver Mais</button>
         </section>
 
-    </section>
-    <section id="paginacao" data-current-page="{{ $produtos->currentPage() }}">
-        {{ $produtos->links('pagination::bootstrap-4') }}
-        <button id="ver-mais" type="button">Ver Mais</button>
-    </section>
+        </section>
 
+
+
+    </section>
     <!-- Inclui o footer -->
     <section>
         @include('profile.partials.footer')

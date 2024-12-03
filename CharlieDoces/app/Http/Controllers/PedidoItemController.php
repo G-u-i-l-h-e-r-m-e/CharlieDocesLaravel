@@ -22,7 +22,7 @@ class PedidoItemController extends Controller
         $user = Auth::user();
 
         if (!$user) {
-            return redirect()->route('email');
+            return redirect()->route('login');
         }
 
         $pedidos = Pedido::where('USUARIO_ID', $user->USUARIO_ID)->get();

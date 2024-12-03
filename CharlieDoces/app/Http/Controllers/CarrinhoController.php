@@ -13,7 +13,7 @@ class CarrinhoController extends Controller
     public function addCarrinho(Request $request)
     {
         if (!Auth::check()) {
-            return response()->json(['message' => 'UsuÃ¡rio nÃ£o autenticado!'], 401);
+            return response()->json(['message' => 'Usuário não autenticado!'], 401);
         }
 
         $usuarioId = Auth::id();
@@ -23,26 +23,26 @@ class CarrinhoController extends Controller
         $produto = Produto::with('estoque')->find($produtoId);
 
         if (!$produto) {
-            return response()->json(['message' => 'Produto nÃ£o encontrado.'], 404);
+            return response()->json(['message' => 'Produto não encontrado.'], 404);
         }
 
         $estoque = $produto->estoque;
 
         if (!$estoque) {
-            return response()->json(['message' => 'Estoque nÃ£o encontrado para este produto.'], 404);
+            return response()->json(['message' => 'Estoque não encontrado para este produto.'], 404);
         }
 
         $estoqueQtd = $estoque->PRODUTO_QTD;
 
-        Log::info('Stock quantity for produto_id ' . $produtoId . ': ' . $estoqueQtd);
-        Log::info('Quantidade em estoque para produto_id ' . $produtoId . ': ' . $estoqueQtd);
+        \Log::info('Stock quantity for produto_id ' . $produtoId . ': ' . $estoqueQtd);
+        \Log::info('Quantidade em estoque para produto_id ' . $produtoId . ': ' . $estoqueQtd);
         Log::info('Stock quantity for produto_id ' . $produtoId . ': ' . $estoqueQtd);
 
         if ($estoqueQtd < $quantidade) {
-            return response()->json(['message' => 'Quantidade solicitada indisponÃ­vel no estoque.'], 400);
+            return response()->json(['message' => 'Quantidade solicitada indisponível no estoque.'], 400);
         }
 
-        // Verifica se o item jÃ¡ estÃ¡ no carrinho
+        // Verifica se o item já está no carrinho
         $item = Carrinho::where([
             'USUARIO_ID' => $usuarioId,
             'PRODUTO_ID' => $produtoId,
@@ -67,7 +67,7 @@ class CarrinhoController extends Controller
             $item->save();
         }
 
-        // ObtÃ©m a quantidade total de itens no carrinho
+        // Obtém a quantidade total de itens no carrinho
         $totalItems = Carrinho::where('USUARIO_ID', $usuarioId)->sum('ITEM_QTD');
 
         return response()->json([
@@ -77,11 +77,11 @@ class CarrinhoController extends Controller
         ]);
     }
 
-    // MÃ©todo para exibir o carrinho
+    // Método para exibir o carrinho
     public function carrinho()
     {
         if (!Auth::check()) {
-            return redirect('/email');
+            return redirect('/login');
         }
 
         $usuarioId = Auth::id();
@@ -93,7 +93,7 @@ class CarrinhoController extends Controller
         return view('carrinho.carrinho', ['items' => $items]);
     }
 
-    // MÃ©todo para atualizar a quantidade de um item no carrinho
+    // Método para atualizar a quantidade de um item no carrinho
     public function atualizarCarrinho(Request $request, Produto $produto)
     {
         $usuarioId = Auth::id();
@@ -108,7 +108,7 @@ class CarrinhoController extends Controller
         return redirect()->route('carrinho.exibir');
     }
 
-    // MÃ©todo para remover um item do carrinho
+    // Método para remover um item do carrinho
     public function removerDoCarrinho(Produto $produto)
     {
         $usuarioId = Auth::id();

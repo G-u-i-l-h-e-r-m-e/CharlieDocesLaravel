@@ -28,7 +28,7 @@
 </aside>
 
     <main class="produtos-container" id="produtos-lista">
-    
+
         @foreach($produtos as $produto)
         <section class="card-produto">
             <div class="carousel">

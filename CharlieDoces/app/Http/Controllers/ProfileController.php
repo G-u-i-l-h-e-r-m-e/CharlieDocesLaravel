@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Models\PedidoItem;
+
 
 class ProfileController extends Controller
 {
@@ -23,18 +25,28 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(Request $request): RedirectResponse
+    public function update(Request $request)
     {
-        $request->validate([
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-        $user = User::find(Auth::id());
         $user = Auth::user();
-        $user->password = Hash::make($request->password);
-        // $user->save();
-
-        return redirect()->route('profile.edit')->with('success', 'Senha atualizada com sucesso.');
+    
+        $request->validate([
+            'USUARIO_NOME' => 'required|string|max:255',
+            'USUARIO_EMAIL' => 'required|email|max:255|unique:USUARIO,USUARIO_EMAIL,' . $user->USUARIO_ID . ',USUARIO_ID',
+            'USUARIO_CPF' => 'required|string|max:14',
+        ]);
+    
+        $user->update($request->only(['USUARIO_NOME', 'USUARIO_EMAIL', 'USUARIO_CPF']));
+    
+        if ($user->endereco) {
+            $user->endereco->update($request->only([
+                'ENDERECO_LOGRADOURO', 'ENDERECO_NUMERO', 'ENDERECO_COMPLEMENTO', 
+                'ENDERECO_CEP', 'ENDERECO_CIDADE', 'ENDERECO_ESTADO'
+            ]));
+        }
+    
+        return redirect()->route('profile.show')->with('success', 'Informações atualizadas com sucesso.');
     }
+    
 
     /**
      * Delete the user's account.
@@ -53,4 +65,24 @@ class ProfileController extends Controller
 
         return redirect('/')->with('success', 'Conta excluída com sucesso.');
     }
+
+    public function show()
+    {
+        $user = Auth::user();
+    
+        if (!$user) {
+            return redirect()->route('login');
+        }
+    
+        $endereco = $user->endereco; 
+    
+ 
+        $pedidoItems = PedidoItem::whereHas('pedido', function ($query) use ($user) {
+            $query->where('USUARIO_ID', $user->USUARIO_ID);
+        })->paginate(6); 
+    
+        return view('profile.show', compact('user', 'endereco', 'pedidoItems'));
+    }
+    
+
 }

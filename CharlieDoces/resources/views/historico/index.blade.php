@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/historicoPedidos.css">
+    <link rel="stylesheet" href="/css/pagination.css">
     <title>Histórico de Pedidos</title>
 </head>
 <body>
-    <section>
-        @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()])
-    </section>
     <div class="container">
         <h1>Histórico de Pedidos</h1>
         <table>
@@ -38,7 +36,7 @@
         </table>
     </div>
     <section>
-        @include('profile.partials.footer')
+    {{ $pedidoItems->links('pagination::bootstrap-4') }}
     </section>
 </body>
 </html>

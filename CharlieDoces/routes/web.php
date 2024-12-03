@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('carrinho/remover/{produto}', [CarrinhoController::class, 'removerDoCarrinho'])->name('carrinho.remover');
     Route::post('/carrinho/adicionar', [CarrinhoController::class, 'addCarrinho'])->name('carrinho.adicionar');
 
+   
 
     Route::post('/pedido/finalizar', [PedidoController::class, 'finalizarPedido'])->name('pedido.finalizar');
 
@@ -44,7 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']);
 
     // Rotas para perfil
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
@@ -86,3 +88,9 @@ require __DIR__ . '/auth.php';
 
 // Rota de busca
 Route::get('/search', [SearchController::class, 'results'])->name('search.results');
+
+
+
+
+
+

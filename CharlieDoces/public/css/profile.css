@@ -1,0 +1,18 @@
+
+.orientationProfile{
+    display: flex;
+}
+.btnEditar{
+    background-color: #FED336;
+    color: #591F12;
+    border-color: #FD7022;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+}
+.btnEditar:hover{
+    border-color: #FD7022;
+}
+.orientationModal{
+    display: flex;
+    flex-direction: column;
+}

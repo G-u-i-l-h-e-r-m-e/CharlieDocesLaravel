@@ -18,25 +18,26 @@ class PedidoItemController extends Controller
     }
 
     public function index()
-    {
-        $user = Auth::user();
+{
+    $user = Auth::user();
 
-        if (!$user) {
-            return redirect()->route('login');
-        }
-
-        $pedidos = Pedido::where('USUARIO_ID', $user->USUARIO_ID)->get();
-        $pedidoItems = PedidoItem::whereHas('pedido', function ($query) use ($user) {
-            $query->where('USUARIO_ID', $user->USUARIO_ID);
-        })->get();
-        $categorias = Categoria::all();
-        $produto = Produto::all();
-
-        return view('historico.index', [
-            'pedidoItems' => $pedidoItems,
-            'categorias' => $categorias,
-            'produto' => $produto,
-            'pedidos' => $pedidos
-        ]);
+    if (!$user) {
+        return redirect()->route('login');
     }
+
+    $pedidos = Pedido::where('USUARIO_ID', $user->USUARIO_ID)->get();
+    $pedidoItems = PedidoItem::whereHas('pedido', function ($query) use ($user) {
+        $query->where('USUARIO_ID', $user->USUARIO_ID);
+    })->paginate(10); // Adicionando paginação
+    $categorias = Categoria::all();
+    $produto = Produto::all();
+
+    return view('historico.index', [
+        'pedidoItems' => $pedidoItems,
+        'categorias' => $categorias,
+        'produto' => $produto,
+        'pedidos' => $pedidos
+    ]);
+}
+
 }

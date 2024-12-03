@@ -20,9 +20,15 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login-email');
     }
 
-    public function login(): View
+    public function login(): View|RedirectResponse
     {
-        return view('auth.login');
+        $email = session('auth_email_cpf');  
+        
+        if (!$email) {  
+            return redirect()->route('email');  
+        }  
+
+        return view('auth.login', ['email' => $email]);
     }
 
     public function emailAuthenticate(Request $request): RedirectResponse
@@ -31,8 +37,10 @@ class AuthenticatedSessionController extends Controller
         
         if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
             $user = User::where('USUARIO_EMAIL', $input)->first();
+            session(['auth_email_cpf' => $request->email]); 
         } else {
             $user = User::where('USUARIO_CPF', $input)->first();
+            session(['auth_email_cpf' => $request->email]); 
         }
 
         if ($user) {

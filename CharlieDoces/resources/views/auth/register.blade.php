@@ -24,7 +24,6 @@
                 <h2>Criar Conta</h2>
                 <form method="POST" action="{{ route('cadastro') }}">
                     @csrf
-
                     <div>
                         <label for="name">Nome Completo:</label>
                         <input type="text" id="name" name="name" oninput="validateName()" />
@@ -81,26 +80,6 @@
 
                     <h3>Endereço Completo</h3>
                     <div>
-                        <label for="estado">Estado:</label>
-                        <select id="estado" name="estado">
-                            <option></option>
-                            <option v-for="estado in estados" :key="estado.sigla" :value="estado.sigla">
-                                @{{ estado.sigla }} - @{{ estado.nome }}</option>
-                        </select>
-                        @error('estado')
-                            <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div>
-                        <label for="cidade">Cidade:</label>
-                        <input type="text" id="cidade" name="cidade" />
-                        @error('cidade')
-                            <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div>
                         <label for="cep">CEP:</label>
                         <input type="text" id="cep" name="cep" />
                         @error('cep')
@@ -136,6 +115,26 @@
                         <label for="bairro">Bairro:</label>
                         <input type="text" id="bairro" name="bairro" />
                         @error('bairro')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" id="cidade" name="cidade" />
+                        @error('cidade')
+                            <span class="text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="estado">Estado:</label>
+                        <select id="estado" name="estado">
+                            <option></option>
+                            <option v-for="estado in estados" :key="estado.sigla" :value="estado.sigla">
+                                @{{ estado.sigla }} - @{{ estado.nome }}</option>
+                        </select>
+                        @error('estado')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
                     </div>

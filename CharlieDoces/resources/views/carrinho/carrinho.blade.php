@@ -53,7 +53,7 @@
             <tbody>
                 @foreach ($items as $item)
                     <tr>
-                        <td>
+                        <td style="display: flex; justify-content: center; align-items: center; text-align: center; border 1px solid">
                             <img src="{{ $item->produto->produto_imagens->first()->IMAGEM_URL }}"
                                 alt="{{ $item->produto->PRODUTO_NOME }}" width="50">
                             {{ $item->produto->PRODUTO_NOME }}
@@ -190,7 +190,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Concluir Compra</button>
+                        <button type="submit" class="btn btn-success">Concluir Compra</button>
                     </div>
                 </form>
             </div>

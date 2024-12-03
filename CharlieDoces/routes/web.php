@@ -53,7 +53,6 @@ Route::middleware('auth')->group(function () {
 
 // Route::get('/acompanhar_pedido', [AcompanharController::class, 'index']);
 
-
 Route::get('/status', [StatusController::class, 'index']);
 
 // Rota para histórico de pedidos

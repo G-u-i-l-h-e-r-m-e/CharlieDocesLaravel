@@ -68,9 +68,6 @@ Route::get('/todos_produtos', [ProdutoController::class, 'todosProdutos'])->name
 // Rota para verificar o estoque (pública)
 Route::post('/verificar-estoque', [ProdutoController::class, 'verificarEstoque']);
 
-// Rota para logout usando LoginController
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
 // Rota extra para login (fora do middleware de autenticação)
 Route::get('enviado', [LoginController::class, 'sent']);
 

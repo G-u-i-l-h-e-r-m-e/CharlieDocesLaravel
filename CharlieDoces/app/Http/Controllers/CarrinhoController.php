@@ -34,8 +34,8 @@ class CarrinhoController extends Controller
 
         $estoqueQtd = $estoque->PRODUTO_QTD;
 
-        \Log::info('Stock quantity for produto_id ' . $produtoId . ': ' . $estoqueQtd);
-        \Log::info('Quantidade em estoque para produto_id ' . $produtoId . ': ' . $estoqueQtd);
+        Log::info('Stock quantity for produto_id ' . $produtoId . ': ' . $estoqueQtd);
+        Log::info('Quantidade em estoque para produto_id ' . $produtoId . ': ' . $estoqueQtd);
         Log::info('Stock quantity for produto_id ' . $produtoId . ': ' . $estoqueQtd);
 
         if ($estoqueQtd < $quantidade) {
@@ -81,7 +81,7 @@ class CarrinhoController extends Controller
     public function carrinho()
     {
         if (!Auth::check()) {
-            return redirect('/login');
+            return redirect('/email');
         }
 
         $usuarioId = Auth::id();

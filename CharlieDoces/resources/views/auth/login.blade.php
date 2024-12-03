@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> 
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
 
 <body>
     <section>
-        @include('profile.partials.header',['categorias' => \App\Models\Categoria::all()]);
+        @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()]);
     </section>
     <div class="login-container">
         <div class="login-form">
@@ -26,16 +26,14 @@
 
                 <div>
                     <label for="email">Email ou CPF</label>
-                    <input type="text" id="email" name="email" placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX"
+                    <input type="text" id="email" name="email"
+                        placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX"
                         value="{{ old('email') }}" readonly>
-                    @error('email')
-                        <p class="text-red-500">{{ $message }}</p>
-                    @enderror
                 </div>
                 <div>
                     <label for="password">Senha</label>
                     <input type="password" id="password" name="password" placeholder="*********">
-                    @error('password')
+                    @error('email')
                         <p class="text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
@@ -44,7 +42,6 @@
                 </div>
                 <div>
                     <button type="submit">Entrar</button>
-                    <hr>
                 </div>
             </form>
         </div>
@@ -54,4 +51,5 @@
         @include('profile.partials.footer');
     </section>
 </body>
+
 </html>

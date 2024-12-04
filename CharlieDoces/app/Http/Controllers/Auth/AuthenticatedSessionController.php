@@ -73,7 +73,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        // Redireciona para /home apÃ³s o logout
+        // Redireciona para /home após o logout
         return redirect('/home');
     }
 }

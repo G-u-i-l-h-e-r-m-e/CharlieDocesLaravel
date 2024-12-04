@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500&display=swap');
+
+/* Estilização geral da página de produtos */
+.produtos-page {
+    background-color: #EAEAEA;
+}
+
+/* Início da estilização de categorias */
+
+.filtro {
+    width: 320px;
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid #8E9090;
+    /* Stroke */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* Drop-shadow */
+}
+
+.filtro h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    font-weight: 100;
+    color: #591F12;
+    margin-bottom: 24px;
+    text-align: center;
+    width: 100%;
+    /* Para centralizar o texto */
+}
+
+.filtro label {
+    display: flex;
+    /* Alinha os itens em linha */
+    align-items: center;
+    /* Alinha verticalmente ao centro */
+    text-transform: uppercase;
+    /* Transforma o texto em maiúsculas */
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: #591F12;
+    margin-bottom: -12px;
+    /* Espaço entre cada categoria */
+    gap: 12px;
+    /* Espaço entre o rádio e o texto */
+}
+
+.filtro input[type="radio"] {
+    margin: 0;
+    /* Remove margens extras do input */
+    accent-color: #591F12;
+    /* Altera a cor do botão de seleção */
+}
+
+.categoria-radio {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: #591F12;
+}
+
+.filtro-ordenacao {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre o texto e o select */
+    margin: 20px 0;
+}
+
+.filtro-ordenacao p {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.filtro-ordenacao select {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #D94A4A;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 4px;
+    appearance: none; /* Remove a seta padrão em navegadores Webkit */
+    -webkit-appearance: none; /* Remove a seta padrão em navegadores Safari/Chrome */
+    -moz-appearance: none; /* Remove a seta padrão no Firefox */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333" d="M6 9.6L1.2 4.8l.8-.8L6 8l3.999-3.999.8.8z"/></svg>'); /* Adiciona uma seta customizada */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    cursor: pointer;
+}
+
+.filtro-ordenacao select:focus {
+    border-color: #666;
+    outline: none;
+}
+
+.filtro-ordenacao select option {
+    /* Limitado para estilizar o texto das opções */
+    color: #333;
+    background-color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+}
+
+/* Final estilização categorias */
+
+.orientationMain {
+    display: flex;
+    flex-direction: row;
+    gap: 170px;
+    margin-left: 24px;
+}
+
+.container-produtos-title-filter {
+    display: flex;
+    flex-direction: column;
+}
+
+.produtos-container {
+    width: 978px;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 48px;
+}
+
+.filtro-ordenacao {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.filtro-ordenacao p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: #591F12;
+    text-transform: uppercase;
+    margin-right: 10px;
+}
+
+.filtro-ordenacao select {
+    width: 243px;
+    height: 44px;
+    background-color: #FFFFFF;
+    border: 1px solid #591F12;
+    /* Stroke */
+    border-radius: 6px;
+}
+
+/* Título  */
+.container-produtos-title-filter h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    font-weight: 100;
+    color: #591F12;
+}
+
+
+#paginacao ul {
+    display: none;
+}
+
+#paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#ver-mais {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

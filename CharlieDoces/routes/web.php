@@ -15,6 +15,7 @@ use App\Http\Controllers\AcompanharController;
 use App\Http\Controllers\PedidoItemController;
 use App\Http\Controllers\StatusController;
 
+// Redirecionar raiz para home
 // Rota de teste
 Route::get('/teste-carousel', [TesteController::class, 'carregarProdutosCarousel'])->name('teste.carousel');
 
@@ -22,8 +23,30 @@ Route::get('/', function () {
     return redirect('/home');
 });
 // Rotas protegidas por autenticação
+
+// Rotas Públicas
+Route::group([], function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/todos_produtos', [ProdutoController::class, 'todosProdutos'])->name('produtos.todos');
+    Route::get('/produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');
+    Route::get('/categoria', [CategoriaController::class, 'index'])->name('categorias.index');
+    Route::get('/categoria/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
+    Route::get('/produtos/categoria/{nome}', [ProdutoController::class, 'filtrar'])->name('produtos.categoria');
+// Rotas protegidas por autenticação
 Route::get('/', [HomeController::class, 'index']);
 
+    // Rota para o método 'filtrar' no controlador
+    Route::get('/produtos/filtrar', [ProdutoController::class, 'filtrar'])->name('produtos.filtrar');
+
+    Route::post('/verificar-estoque', [ProdutoController::class, 'verificarEstoque']);
+    Route::get('/search', [SearchController::class, 'results'])->name('search.results');
+
+    // Rota para exibir o histórico de pedidos (opcional, dependendo da estrutura)
+    // Pode ser acessada via ProfileController@show
+    // Route::get('/historico', [PedidoItemController::class, 'index'])->name('historico.index');
+});
+
+// Rotas Protegidas por Autenticação
 Route::middleware('auth')->group(function () {
     // Rotas para carrinho
     Route::get('carrinho/{produto}', [CarrinhoController::class, 'addCarrinho']);
@@ -32,25 +55,27 @@ Route::middleware('auth')->group(function () {
     Route::post('carrinho/atualizar/{produto}', [CarrinhoController::class, 'atualizarCarrinho'])->name('carrinho.atualizar');
     Route::post('carrinho/remover/{produto}', [CarrinhoController::class, 'removerDoCarrinho'])->name('carrinho.remover');
     Route::post('/carrinho/adicionar', [CarrinhoController::class, 'addCarrinho'])->name('carrinho.adicionar');
-
    
 
     Route::post('/pedido/finalizar', [PedidoController::class, 'finalizarPedido'])->name('pedido.finalizar');
 
-
-
-    // Rotas para produtos individuais e categorias (protegidas)
-    Route::get('/produto/{produto}', [ProdutoController::class, 'show'])->name('produto.show');
-    Route::get('/categoria', [CategoriaController::class, 'index']);
-    Route::get('/categoria/{categoria}', [CategoriaController::class, 'show']);
-
     // Rotas para perfil
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/show', [ProfileController::class, 'show'])->name('profile.show'); // Nova rota para exibir o perfil
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Rota para Histórico de Pedidos
+    Route::get('/historico_pedidos', [PedidoItemController::class, 'index'])->name('historico_pedidos.index');
 });
 
+// Rotas públicas
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/todos_produtos', [ProdutoController::class, 'todosProdutos'])->name('produtos.todos');
+// Rotas de Autenticação
+require __DIR__ . '/auth.php';
 // Route::get('/acompanhar_pedido', [AcompanharController::class, 'index']);
 
 Route::get('/status', [StatusController::class, 'index']);
@@ -72,18 +97,6 @@ Route::post('/verificar-estoque', [ProdutoController::class, 'verificarEstoque']
 
 // Rota extra para login (fora do middleware de autenticação)
 Route::get('enviado', [LoginController::class, 'sent']);
-
-// Rota para buscar produtos por categoria (pública ou protegida conforme necessidade)
-Route::get('/produtos/categoria/{nome}', [ProdutoController::class, 'produtosPorCategoria'])->name('produtos.categoria');
-Route::get('/produtos/filtrar', [ProdutoController::class, 'produtosPorCategoria'])->name('produtos.filtrar');
-
-
-
-// Carregar rotas de autenticação padrão
-require __DIR__ . '/auth.php';
-
-// Rota de busca
-Route::get('/search', [SearchController::class, 'results'])->name('search.results');
 
 
 

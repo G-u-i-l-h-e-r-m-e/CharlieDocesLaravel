@@ -1,0 +1,8 @@
+/* resources/css/app.css */
+
+@import './breadcrumbs.css';
+
+/* Importando CSS adicional */
+@import 'animate.css/animate.min.css';
+
+

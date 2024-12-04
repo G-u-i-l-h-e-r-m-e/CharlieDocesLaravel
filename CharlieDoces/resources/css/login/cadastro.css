@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #eaeaea;
+    font-family: Arial, sans-serif;
+}
+
+section {
+    width: 100%;
+}
+
+.cadastro-container {
+    display: flex;
+    justify-content: center;
+    text-align: start;
+    width: 700px;
+    height: 1800px;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 105px;
+}
+
+.cadastro-container h2 {
+    font-size: 32px;
+    color: #4a2f25;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.cadastro-container h3 {
+    font-size: 32px;
+    color: #591f12;
+    font-weight: bold;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.cadastro-container label {
+    display: block;
+    font-size: 20px;
+    color: #8b4513;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.cadastro-container select {
+    width: 698px;
+    height: auto;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.cadastro-container input[type="email"],
+.cadastro-container input[type="password"],
+.cadastro-container input[type="text"] {
+    width: 698px;
+    height: 42px;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.cadastro-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 24px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cadastro-container button:hover {
+    background-color: #45a049;
+}
+
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 700px;
+}
+
+.cadastro-form h2 {
+    margin-bottom: 20px;
+    text-align: start;
+}
+
+.cadastro-form ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.cadastro-form li {
+    margin-bottom: 5px;
+}
+
+.cadastro-form li::marker {
+    color: black;
+}
+
+.senhaNaoValida {
+    color: #BF0B0B;
+    font-weight: 400;
+    line-height: 20px;
+    font-size: 16px;
+}
+
+.senhaValida {
+    color: #008827;
+    font-weight: 400;
+    line-height: 20px;
+    font-size: 16px;
+}

@@ -2,11 +2,25 @@
 <html lang="pt-BR">
 
 <head>
-    <!-- Cabeçalho da página -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $produto->PRODUTO_NOME }}</title>
-    <link rel="stylesheet" href="/css/produtoShow.css">
+    <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
+
+    @vite([
+    'resources/css/app.css',
+    'resources/js/app.js',
+    'resources/css/componentes-style/component-card.css',
+    'resources/css/header.css',
+    'resources/css/footer.css',
+    'resources/css/produtoShow.css',
+    'resources/js/header.js',
+])
+
+    <!-- Outros meta tags e links -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -31,7 +45,7 @@
                     <button class="carousel-btn prev">❮</button>
                     <div class="carousel-images">
                         @if($produto->produto_imagens && $produto->produto_imagens->isNotEmpty())
-                            @foreach($produto->produto_imagens as $imagem)
+                             @foreach($produto->produto_imagens as $imagem)
                                 <img class="imagemProduto" src="{{ $imagem->IMAGEM_URL }}" alt="Imagem do Produto">
                             @endforeach
                         @else

@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil do Usuário</title>
-
     <!-- Incluir os assets compilados pelo Vite -->
     @vite([
         'resources/css/profile.css',               // Novo CSS para o perfil
@@ -13,6 +12,7 @@
         'resources/css/header.css',
         'resources/css/footer.css',
         'resources/css/todos_produtos.css',
+        'resources/css/pagination.css',
         // JS files (se houver necessidade específica)
         'resources/js/app.js',
         'resources/js/componentes-produtos/component-card.js',
@@ -23,7 +23,9 @@
         'resources/js/produto.js',
         'resources/js/todos_produtos.js',
     ])
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    
     <!-- Incluir jQuery via CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -56,7 +58,7 @@
                     @else
                         <p>Sem endereço cadastrado.</p>
                     @endif
-                    <button type="button" class="btn btnEditar mt-3" data-bs-toggle="modal" data-bs-target="#editModal">
+                    <button type="button" class="btnEditar mt-3" data-bs-toggle="modal" data-bs-target="#editModal">
                         Editar Informações
                     </button>
                 </div>
@@ -137,7 +139,7 @@
                         
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btnEditar">Salvar Alterações</button>
+                            <button type="submit" class="btnEditar">Salvar Alterações</button>
                         </div>
                     </form>
                 </div>

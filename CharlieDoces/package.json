@@ -14,6 +14,6 @@
     },
     "dependencies": {
         "animate.css": "^4.1.1",
-        "bootstrap": "^5.3.0"
+        "bootstrap": "^5.3.3"
     }
 }

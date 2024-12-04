@@ -33,9 +33,12 @@ class ProfileController extends Controller
 
         $endereco = $user->endereco;
 
-        $pedidoItems = PedidoItem::whereHas('pedido', function ($query) use ($user) {
-            $query->where('USUARIO_ID', $user->USUARIO_ID);
-        })->paginate(6);
+        $pedidoItems = PedidoItem::join('PEDIDO', 'PEDIDO_ITEM.PEDIDO_ID', '=', 'PEDIDO.PEDIDO_ID') // Juntando a tabela PEDIDO
+    ->where('PEDIDO.USUARIO_ID', $user->USUARIO_ID) 
+    ->orderBy('PEDIDO.PEDIDO_DATA', 'desc') 
+    ->select('PEDIDO_ITEM.*') 
+    ->paginate(6); 
+
 
         return view('profile.show', compact('user', 'endereco', 'pedidoItems'));
     }

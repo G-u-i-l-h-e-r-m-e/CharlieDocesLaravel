@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/carrinho.css') }}">
     <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/header.css','resources/css/footer.css','resources/css/carrinho.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/header.css','resources/css/footer.css','resources/css/carrinho.css','resources/css/pagination.css'])
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -89,7 +89,6 @@
                 @endforeach
             </tbody>
         </table>
-
         <div class="carrinho-total">
             <p><strong>Total:</strong> R$
                 {{ number_format(
@@ -106,6 +105,9 @@
                 Compra</button>
         </div>
         @endif
+    </div>
+    <div class="orientationPaginacao">
+    {{ $items->links('pagination::bootstrap-4') }}
     </div>
 </div>
     <section>

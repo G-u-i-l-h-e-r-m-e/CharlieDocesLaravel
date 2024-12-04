@@ -1,4 +1,3 @@
-<!-- resources/views/auth/login.blade.php -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -6,26 +5,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('img/header/logo.svg') }}" sizes="64x64" type="image/svg">
-    
-    @vite(['resources/css/app.css', 'resources/css/header.css', 'resources/css/login/login.css'])
-    
-    <!-- Fonte do Google Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 
+    'resources/css/login/login.css', 
+    'resources/css/app.css',
+    'resources/css/componentes-style/component-card.css',
+    'resources/css/header.css',
+    'resources/css/footer.css',
+    'resources/css/todos_produtos.css',
+    'resources/css/card-produto-todos-produtos.css',
+    // JS files
+    'resources/js/app.js',
+    'resources/js/componentes-produtos/component-card.js',
+    'resources/js/carrousel-categoria.js',
+    'resources/js/categoria.js',
+    'resources/js/header.js',
+    'resources/js/login.js',
+    'resources/js/produto.js',
+    'resources/js/todos_produtos.js',])
 </head>
 
 <body>
-    <header>
-        @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()])
-    </header>
-
+    <section>
+        @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()]);
+    </section>
     <div class="login-container">
         <div class="login-form">
-            <h2>Entrar ou Criar Conta</h2>
+            <h2>Entrar</h2>
             <form id="login-form" class="login-form" method="POST" action="{{ route('login') }}">
                 @csrf
 
@@ -33,35 +43,28 @@
                     <label for="email">Email ou CPF</label>
                     <input type="text" id="email" name="email"
                         placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX"
-                        value="{{ old('email') }}" required>
-                    
+                        value="{{ old('email') }}" readonly>
+                </div>
+                <div>
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="*********">
                     @error('email')
                         <p class="text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
-                
                 <div>
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" placeholder="*********" required>
-                    
-                    @error('password')
-                        <p class="text-red-500">{{ $message }}</p>
-                    @enderror
+                    <a href="/forgot-password" class="forgot-password">Esqueceu a senha?</a>
                 </div>
-                
-                <div>
-                    <a href="{{ route('password.request') }}" class="forgot-password">Esqueceu a senha?</a>
-                </div>
-                
                 <div>
                     <button type="submit">Entrar</button>
                 </div>
             </form>
         </div>
     </div>
-    
-    <!-- Importando JS via Vite -->
-    @vite(['resources/js/login.js'])
+    </div>
+    <section>
+        @include('profile.partials.footer');
+    </section>
 </body>
 
 </html>

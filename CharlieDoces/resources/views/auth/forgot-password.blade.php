@@ -9,10 +9,9 @@
     <link rel="icon" href="{{ asset('img/header/logo.svg') }}" sizes="64x64" type="image/svg">
     
     <!-- Importando CSS via Vite -->
-    @vite(['resources/css/login/forgotPassword.css', 'resources/css/login/login.css', 'resources/css/app.css', 'resources/css/header.css'])
+    @vite(['resources/css/login/forgotPassword.css', 'resources/css/app.css', 'resources/css/header.css', 'resources/css/footer.css'])
 
     <!-- Fonte do Google Fonts -->
-    <link rel="stylesheet" href="{{ asset('css/login/forgotPassword.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
@@ -31,7 +30,7 @@
             </a>
         </form>
     </div>
-    <section>
+    <section class="footer">
         @include('profile.partials.footer');
     </section>
 </body>

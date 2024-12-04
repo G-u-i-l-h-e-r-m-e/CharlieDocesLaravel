@@ -68,13 +68,13 @@
                     </a>
                 @else
                     <!-- Exibe "Entre ou cadastre-se" quando não estiver logado -->
-                    <a href="{{ route('login') }}">
+                    <a href="{{ route('email') }}">
                         Entre ou cadastre-se
                     </a>
                 @endif
 
                 <!-- Ícone do carrinho -->
-                <a href="{{ Auth::check() ? route('carrinho.exibir') : route('login') }}" class="cart-link">
+                <a href="{{ Auth::check() ? route('carrinho.exibir') : route('email') }}" class="cart-link">
                     <box-icon name='cart' color='#591f12'></box-icon>
                     Carrinho
                     @if (Auth::check())

@@ -43,7 +43,7 @@
                     <label for="email">Email ou CPF</label>
                     <input type="text" id="email" name="email"
                         placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX"
-                        value="{{ old('email') }}" readonly>
+                        value="{{ old('email', session('auth_email')) }}" readonly>
                 </div>
                 <div>
                     <label for="password">Senha</label>

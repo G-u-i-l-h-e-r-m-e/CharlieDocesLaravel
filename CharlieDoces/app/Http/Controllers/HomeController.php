@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -33,7 +34,7 @@ class HomeController extends Controller
         // Recupera os produtos mais vendidos (Top 3) com as imagens
         $produtosMaisVendidos = Produto::with('produto_imagens') // Carrega as imagens relacionadas
             ->join('PEDIDO_ITEM', 'PRODUTO.PRODUTO_ID', '=', 'PEDIDO_ITEM.PRODUTO_ID')
-            ->select('PRODUTO.*', \DB::raw('SUM(PEDIDO_ITEM.ITEM_QTD) AS total_vendido'))
+            ->select('PRODUTO.*', DB::raw('SUM(PEDIDO_ITEM.ITEM_QTD) AS total_vendido'))
             ->groupBy('PRODUTO.PRODUTO_ID') 
             ->orderByDesc('total_vendido')
             ->limit(3)

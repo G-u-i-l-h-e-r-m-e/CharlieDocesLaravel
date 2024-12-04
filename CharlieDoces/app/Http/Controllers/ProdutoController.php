@@ -181,7 +181,7 @@ class ProdutoController extends Controller
         }
 
         // Paginar os resultados
-        $produtos = $query->paginate(9, ['*'], 'page', $page);
+        $produtos = $query->paginate(9, ['*'], 'page', $page)->appends($request->except('page'));
 
         // Breadcrumbs
         $breadcrumbs = [
@@ -199,7 +199,7 @@ class ProdutoController extends Controller
         $produtos_html = view('produto.produtos_list', ['produtos' => $produtos])->render();
 
         // Renderizar a paginação
-        $pagination_html = $produtos->links('pagination::bootstrap-4')->toHtml();
+        $pagination_html = $produtos->render('pagination::bootstrap-4');
 
         return response()->json([
             'breadcrumbs_html' => $breadcrumbs_html,

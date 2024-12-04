@@ -4,6 +4,10 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
+  build: {
+    chunkSizeWarningLimit: 3072, // 3MB
+    assetsInlineLimit: 0,
+  },
   plugins: [
     laravel({
       input: [
@@ -19,16 +23,16 @@ export default defineConfig({
         'resources/css/header.css',
         'resources/css/footer.css',
         'resources/css/todos_produtos.css',
-        'resources/css/profile.css',              
-        'resources/css/historicoPedidos.css',    
-        'resources/css/login/cadastro.css',       
-        'resources/css/login/forgotPassword.css',  
-        'resources/css/login/login.css',          
-        'resources/css/login/password.css',        
-        'resources/css/carrinho.css',              
-        'resources/css/pagination.css',              
+        'resources/css/profile.css',
+        'resources/css/historicoPedidos.css',
+        'resources/css/login/cadastro.css',
+        'resources/css/login/forgotPassword.css',
+        'resources/css/login/login.css',
+        'resources/css/login/password.css',
+        'resources/css/carrinho.css',
+        'resources/css/pagination.css',
         //'resources/css/bootstrap.css',          
-        'resources/css/card-produto-todos-produtos.css',   
+        'resources/css/card-produto-todos-produtos.css',
         'resources/css/produtoShow.css',
         // JS files
         'resources/js/app.js',
@@ -39,15 +43,19 @@ export default defineConfig({
         'resources/js/carrousel-categoria.js',
         'resources/js/categoria.js',
         'resources/js/header.js',
-        'resources/js/login.js',                   
+        'resources/js/login.js',
         'resources/js/produto.js',
         'resources/js/todos_produtos.js',
-        'resources/js/componentes-produtos/carrinho.js', 
-        // 'resources/js/AJAX/carrinho.js',           
-        'resources/js/bootstrap.js',              
+        'resources/js/componentes-produtos/carrinho.js',
+        'resources/js/AJAX/carrinho.js',
+        'resources/js/bootstrap.js',
       ],
       refresh: true,
     }),
-    
   ],
+  resolve: {
+    alias: {
+      '@': '/resources',
+    },
+  },
 });

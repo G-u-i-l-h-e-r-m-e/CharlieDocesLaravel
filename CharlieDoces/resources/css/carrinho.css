@@ -98,14 +98,12 @@ th, td {
     padding: 15px;
     text-align: center;
     border: 1px solid #ddd;
-    padding: 8px;
 }
 
 th {
     background-color: #591F12;
     color: white;
     font-size: 18px;
-    text-align: center;
 }
 
 tbody tr:nth-child(even) {
@@ -116,9 +114,30 @@ tbody tr:hover {
     background-color: #afafafb4;
 }
 
-tbody tr td img {
-    margin-right: 10px;
+/* .table {
+    width: 100%;
+    border-collapse: collapse;
 }
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table th {
+    background-color: #591F12;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table tr:hover {
+    background-color: #ddd;
+} */
 
 .btn-refresh {
     display: inline;
@@ -155,7 +174,7 @@ button.btn-refresh img {
     background: none;
     border: none;
     cursor: pointer;
-    margin-right: 10px;
+    margin-left: 8px;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -286,17 +305,57 @@ tbody tr:hover {
 }
 
 .carrinho-tabela {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.carrinho-tabela th, .carrinho-tabela td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.carrinho-tabela th {
+    background-color: #f2f2f2;
+}
+
+.carrinho-tabela tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.carrinho-tabela tr:hover {
+    background-color: #ddd;
+}
+
+.carrinho-tabela .quantidade-container {
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
 .carrinho-tabela input[type="number"] {
-    justify-content: center;
     text-align: center;
-    width: 140px;
+    width: 40px;
+}
+
+.carrinho-tabela .btn-refresh {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.carrinho-tabela .btn-refresh img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
 
 .carrinho-total button:hover {
     background-color: #45a049;
     outline: none;
+}
+.footer {
+    height: 350px;
+    width: 100%;
 }

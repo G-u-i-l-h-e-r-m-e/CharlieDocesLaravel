@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esqueceu a senha</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/css/header.css', 'resources/css/footer.css'])
     <style>
         * {
             margin: 0;
@@ -16,6 +17,7 @@
         body {
             display: flex;
             justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
             background-color: #FFFFFF;
@@ -28,6 +30,7 @@
             text-align: start;
             width: 700px;
             height: 700px;
+            margin-top: 40px;
             font-family: 'Poppins', sans-serif;
         }
 
@@ -79,10 +82,21 @@
             margin-bottom: 5px;
             color: #591F12;
         }
+
+        section {
+            width: 100%;
+        }
+        .footer {
+            width: 100%;
+            height: 350px;
+        }
     </style>
 </head>
 
 <body>
+    <section>
+        @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()])
+    </section>
     <div class="forgotpassword-container">
         <form>
             <h2>Esqueceu a senha</h2>
@@ -92,6 +106,9 @@
                 para garantir que você o receba.</label>
         </form>
     </div>
+    <section class="footer">
+        @include('profile.partials.footer');
+    </section>
 </body>
 
 </html>

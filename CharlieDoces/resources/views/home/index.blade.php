@@ -11,7 +11,9 @@
     <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
 
     <!-- Incluir os assets compilados pelo Vite -->
-    @vite([
+
+@vite([
+    'resources/css/login/login.css', 
     'resources/css/app.css',
     'resources/js/app.js',
     'resources/css/home-style.css',
@@ -23,7 +25,17 @@
     'resources/css/componentes-style/content-title.css',
     'resources/css/header.css',
     'resources/css/footer.css',
-])
+    'resources/css/todos_produtos.css',
+    'resources/css/card-produto-todos-produtos.css',
+    // JS files
+    'resources/js/app.js',
+    'resources/js/componentes-produtos/component-card.js',
+    'resources/js/carrousel-categoria.js',
+    'resources/js/categoria.js',
+    'resources/js/header.js',
+    'resources/js/login.js',
+    'resources/js/produto.js',
+    'resources/js/todos_produtos.js',])
 
     <!-- Outros meta tags e links -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -88,7 +100,9 @@
     </div>
 
     <!-- Inclui o footer -->
-    @include('profile.partials.footer')
+    <section>
+        @include('profile.partials.footer')
+    </section>
 
 
     @vite([

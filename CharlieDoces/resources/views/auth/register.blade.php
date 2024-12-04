@@ -5,7 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="{{ asset('css/login/cadastro.css') }}">
+    @vite([
+        'resources/css/app.css',
+        'resources/css/login/cadastro.css',
+        'resources/css/header.css',
+        'resources/css/footer.css',
+        'resources/css/todos_produtos.css',
+        'resources/css/card-produto-todos-produtos.css',
+        // JS files
+        'resources/js/app.js',
+        'resources/js/header.js',
+        'resources/js/login.js',
+        'resources/js/produto.js',
+        'resources/js/todos_produtos.js',
+    ])
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
@@ -16,7 +29,7 @@
     <div class="cadastro-container">
         <div class="cadastro-form">
             <h2>Criar Conta</h2>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('cadastro') }}">
                 @csrf
 
                 <div>

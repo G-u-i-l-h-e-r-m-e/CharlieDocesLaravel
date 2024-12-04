@@ -10,45 +10,56 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/login/login.css'])
+    @vite([
+        'resources/css/app.css',
+        'resources/css/login/login.css',
+        'resources/css/app.css',
+        'resources/css/componentes-style/component-card.css',
+        'resources/css/header.css',
+        'resources/css/footer.css',
+        'resources/css/todos_produtos.css',
+        'resources/css/card-produto-todos-produtos.css',
+        // JS files
+        'resources/js/app.js',
+        'resources/js/componentes-produtos/component-card.js',
+        'resources/js/carrousel-categoria.js',
+        'resources/js/categoria.js',
+        'resources/js/header.js',
+        'resources/js/login.js',
+        'resources/js/produto.js',
+        'resources/js/todos_produtos.js',
+    ])
 
 </head>
 
 <body>
-    @extends('layouts.app')
-
-    @section('title', 'Login')
-
-    @section('content')
+    <section>
         @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()]);
-        <div class="login-container">
-            <div class="login-form">
-                <h2>Entrar ou Criar Conta</h2>
-                <form id="login-form" class="login-form" method="POST" action="{{ route('email') }}">
-                    @csrf
-                    <div>
-                        <label for="email">Email ou CPF</label>
-                        <input type="text" id="email" name="email"
-                            placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX" value="{{ old('email') }}">
-                        @error('email')
-                            <p class="text-red-500">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div>
-                        <button type="submit">Entrar</button>
-                    </div>
-            </div>
-            </form>
+    </section>
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Entrar ou Criar Conta</h2>
+            <form id="login-form" class="login-form" method="POST" action="{{ route('email') }}">
+                @csrf
+                <div>
+                    <label for="email">Email ou CPF</label>
+                    <input type="text" id="email" name="email"
+                        placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX" value="{{ old('email') }}">
+                    @error('email')
+                        <p class="text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div>
+                    <button type="submit">Entrar</button>
+                </div>
         </div>
+        </form>
+    </div>
+
+    <section class="footer">
         @include('profile.partials.footer');
+    </section>
 
-        @push('styles')
-            @vite(['resources/css/login/login.css'])
-        @endpush
+</body>
 
-        @push('scripts')
-            @vite(['resources/js/login-emai.js']) <!-- Se existir, caso contrário, use login.js -->
-        @endpush
-    </body>
-
-    </html>
+</html>

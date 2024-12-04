@@ -22,10 +22,10 @@ class AuthenticatedSessionController extends Controller
 
     public function login(): View|RedirectResponse
     {
-        $email = session('auth_email');  
+        $email = session('auth_email');
         
         if (!$email) {  
-            return redirect()->route('email');  
+            return redirect()->intended(route('email'));
         }  
 
         return view('auth.login', ['email' => $email]);
@@ -73,7 +73,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        // Redireciona para /home após o logout
-        return redirect('/home');
+        // Redireciona para /home apï¿½s o logout
+        return redirect('/');
     }
 }

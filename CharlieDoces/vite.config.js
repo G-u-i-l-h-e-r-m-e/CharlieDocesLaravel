@@ -44,6 +44,7 @@ export default defineConfig({
         'resources/js/categoria.js',
         'resources/js/header.js',
         'resources/js/login.js',
+        'resources/js/login/cadastro.js',
         'resources/js/produto.js',
         'resources/js/todos_produtos.js',
         'resources/js/componentes-produtos/carrinho.js',

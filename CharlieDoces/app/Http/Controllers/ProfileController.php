@@ -33,9 +33,11 @@ class ProfileController extends Controller
 
         $endereco = $user->endereco;
 
-        $pedidoItems = PedidoItem::whereHas('pedido', function ($query) use ($user) {
-            $query->where('USUARIO_ID', $user->USUARIO_ID);
-        })->paginate(6);
+        $pedidoItems = PedidoItem::join('PEDIDO', 'PEDIDO_ITEM.PEDIDO_ID', '=', 'PEDIDO.PEDIDO_ID') // Juntando a tabela PEDIDO
+    ->where('PEDIDO.USUARIO_ID', $user->USUARIO_ID) 
+    ->orderBy('PEDIDO.PEDIDO_DATA', 'desc') 
+    ->select('PEDIDO_ITEM.*') 
+    ->paginate(6); 
 
         return view('profile.show', compact('user', 'endereco', 'pedidoItems'));
     }
@@ -46,7 +48,7 @@ class ProfileController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $user = Auth::user();
-    
+
         $request->validate([
             'USUARIO_NOME' => 'required|string|max:255',
             'USUARIO_EMAIL' => 'required|email|max:255|unique:usuario,USUARIO_EMAIL,' . $user->USUARIO_ID . ',USUARIO_ID',
@@ -59,9 +61,9 @@ class ProfileController extends Controller
             'ENDERECO_CIDADE' => 'required_if:endereco,1|string|max:100',
             'ENDERECO_ESTADO' => 'required_if:endereco,1|string|max:100',
         ]);
-    
+
         $user->update($request->only(['USUARIO_NOME', 'USUARIO_EMAIL', 'USUARIO_CPF']));
-    
+
         // Atualizar ou criar endereço
         $enderecoData = $request->only([
             'ENDERECO_LOGRADOURO', 'ENDERECO_NUMERO', 'ENDERECO_COMPLEMENTO', 
@@ -73,7 +75,7 @@ class ProfileController extends Controller
         } else {
             $user->endereco()->create($enderecoData);
         }
-    
+
         return redirect()->route('profile.show')->with('success', 'Informações atualizadas com sucesso.');
     }
 

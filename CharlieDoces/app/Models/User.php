@@ -1,16 +1,12 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
-
     protected $table = 'USUARIO';
     protected $primaryKey = 'USUARIO_ID';
     public $timestamps = false;
@@ -22,26 +18,23 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
+        'USUARIO_SENHA',
         'password',
         'remember_token',
     ];
-
 
     public function getAuthIdentifierName()
     {
         return 'USUARIO_ID'; 
     }
-
     public function getAuthPassword()
     {
         return $this->USUARIO_SENHA;
     }
     
 // app/Models/User.php
-
 public function endereco()
 {
     return $this->hasOne(Endereco::class, 'USUARIO_ID', 'USUARIO_ID');
 }
-
 }

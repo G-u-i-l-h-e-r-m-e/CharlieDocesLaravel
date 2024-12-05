@@ -1,5 +1,4 @@
-// Remove a declaração de importação
-// import axios from 'axios';
+// resources/js/componentes-produtos/component-card.js
 
 // Função para atualizar o contador do carrinho
 function updateCartItemCount(totalItems) {
@@ -19,27 +18,30 @@ function updateCartItemCount(totalItems) {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("component-card.js carregado");
+// Função de inicialização dos cartões de produto
+function initializeProductCards() {
+    console.log("Inicializando cartões de produto...");
 
-    const axios = window.axios; // Usa a instância global do axios
+    const axiosInstance = window.axios; // Usa a instância global do axios
 
     // Seleciona todos os botões "Adicionar ao carrinho"
     const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
 
     addToCartButtons.forEach(function (button) {
-        button.addEventListener("click", function (e) {
-            e.preventDefault();
+        // Evita múltiplas vinculações
+        if (!button.dataset.listener) {
+            button.addEventListener("click", function (e) {
+                e.preventDefault();
 
-            const cardContainer = this.closest(".card-container");
-            const productId = this.getAttribute("data-produto-id");
-            const countDisplay = cardContainer.querySelector(".countItens");
-            const quantidade = parseInt(countDisplay.textContent) || 1;
+                const cardContainer = this.closest(".card-container");
+                const productId = this.getAttribute("data-produto-id");
+                const countDisplay = cardContainer.querySelector(".countItens");
+                const quantidade = parseInt(countDisplay.textContent) || 1;
 
-            axios.post('/carrinho/adicionar', {
-                produto_id: productId,
-                quantidade: quantidade,
-            })
+                axiosInstance.post('/carrinho/adicionar', {
+                    produto_id: productId,
+                    quantidade: quantidade,
+                })
                 .then(response => {
                     // Exibir notificação de sucesso
                     Swal.fire({
@@ -60,7 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         text: 'Por favor, tente novamente.',
                     });
                 });
-        });
+            });
+            // Marca o botão como tendo um listener para evitar duplicações
+            button.dataset.listener = true;
+        }
     });
 
     // Controle de quantidade e outras funcionalidades
@@ -126,15 +131,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body: JSON.stringify({ produto_id: produtoId, quantidade: quantidade }),
             })
-                .then((response) => {
-                    console.log("Resposta recebida:", response);
-                    return response.json();
-                })
-                .then((data) => {
-                    console.log("Dados do estoque:", data);
-                    toggleAddToCartButton(data.estoqueDisponivel);
-                })
-                .catch((error) => console.error("Erro ao verificar o estoque:", error));
+            .then((response) => {
+                console.log("Resposta recebida:", response);
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Dados do estoque:", data);
+                toggleAddToCartButton(data.estoqueDisponivel);
+            })
+            .catch((error) => console.error("Erro ao verificar o estoque:", error));
         }
 
         // Função para redirecionar ao clicar nas áreas com data-url
@@ -142,9 +147,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         clickableElements.forEach(function (element) {
             element.style.cursor = 'pointer';
-            element.addEventListener('click', function () {
-                window.location.href = element.getAttribute('data-url');
-            });
+            // Evita múltiplas vinculações
+            if (!element.dataset.redirectListener) {
+                element.addEventListener('click', function () {
+                    window.location.href = element.getAttribute('data-url');
+                });
+                element.dataset.redirectListener = true;
+            }
         });
 
         // Controle do carrossel de imagens
@@ -152,41 +161,59 @@ document.addEventListener("DOMContentLoaded", function () {
         const carouselIndicators = cardContainer.querySelectorAll('.indicator');
 
         carouselIndicators.forEach(function (indicator) {
-            indicator.addEventListener('click', function (event) {
-                event.stopPropagation(); // Impede a propagação do evento para o pai
-                const index = parseInt(indicator.getAttribute('data-index'));
+            // Evita múltiplas vinculações
+            if (!indicator.dataset.carouselListener) {
+                indicator.addEventListener('click', function (event) {
+                    event.stopPropagation(); // Impede a propagação do evento para o pai
+                    const index = parseInt(indicator.getAttribute('data-index'));
 
-                // Remove 'active' de todas as imagens e indicadores
-                carouselImages.forEach(img => img.classList.remove('active'));
-                carouselIndicators.forEach(ind => ind.classList.remove('active'));
+                    // Remove 'active' de todas as imagens e indicadores
+                    carouselImages.forEach(img => img.classList.remove('active'));
+                    carouselIndicators.forEach(ind => ind.classList.remove('active'));
 
-                // Adiciona 'active' à imagem e indicador selecionados
-                if (carouselImages[index]) {
-                    carouselImages[index].classList.add('active');
-                }
-                indicator.classList.add('active');
-            });
+                    // Adiciona 'active' à imagem e indicador selecionados
+                    if (carouselImages[index]) {
+                        carouselImages[index].classList.add('active');
+                    }
+                    indicator.classList.add('active');
+                });
+                indicator.dataset.carouselListener = true;
+            }
         });
 
         // Incrementar a quantidade
-        incrementButton.addEventListener("click", function () {
-            quantidade++;
-            countDisplay.textContent = quantidade;
-
-            verificarEstoque(productId, quantidade);
-        });
-
-        // Decrementar a quantidade
-        decrementButton.addEventListener("click", function () {
-            if (quantidade > 1) { // Impede que a quantidade fique abaixo de 1
-                quantidade--;
+        if (!incrementButton.dataset.listener) {
+            incrementButton.addEventListener("click", function () {
+                quantidade++;
                 countDisplay.textContent = quantidade;
 
                 verificarEstoque(productId, quantidade);
-            }
-        });
+            });
+            incrementButton.dataset.listener = true;
+        }
+
+        // Decrementar a quantidade
+        if (!decrementButton.dataset.listener) {
+            decrementButton.addEventListener("click", function () {
+                if (quantidade > 1) { // Impede que a quantidade fique abaixo de 1
+                    quantidade--;
+                    countDisplay.textContent = quantidade;
+
+                    verificarEstoque(productId, quantidade);
+                }
+            });
+            decrementButton.dataset.listener = true;
+        }
 
         // Inicializa o estado do botão com a quantidade inicial
         verificarEstoque(productId, quantidade);
     });
+}
+
+// Expor a função para o escopo global
+window.initializeProductCards = initializeProductCards;
+
+// Inicializar os cartões de produto na carga inicial da página
+document.addEventListener("DOMContentLoaded", function () {
+    initializeProductCards();
 });

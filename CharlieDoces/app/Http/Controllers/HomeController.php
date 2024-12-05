@@ -10,10 +10,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Carregar produtos da categoria "Natal" com paginação
+        // Carregar todos os produtos da categoria "Natal"
         $produtosNatal = Produto::whereHas('categoria', function ($query) {
             $query->where('CATEGORIA_NOME', 'natal');
-        })->paginate(3);
+        })->get();
+
 
         // Carregar produtos de chocolate com paginação
         $produtosChocolate = Produto::where('CATEGORIA_ID', 66)
@@ -26,15 +27,17 @@ class HomeController extends Controller
         $produtosMaisVendidos = Produto::with('produto_imagens') // Carrega as imagens relacionadas
             ->join('PEDIDO_ITEM', 'PRODUTO.PRODUTO_ID', '=', 'PEDIDO_ITEM.PRODUTO_ID')
             ->select('PRODUTO.*', \DB::raw('SUM(PEDIDO_ITEM.ITEM_QTD) AS total_vendido'))
-            ->groupBy('PRODUTO.PRODUTO_ID') 
+            ->groupBy('PRODUTO.PRODUTO_ID')
             ->orderByDesc('total_vendido')
             ->limit(3)
             ->get();
-        
+
         // Recuperar na ordem correta
         $produtosMaisVendidos = $produtosMaisVendidos->sortBy(function ($produto, $key) {
-            if ($key == 1) return 0; // Segundo mais vendido
-            if ($key == 0) return 1; // Mais vendido
+            if ($key == 1)
+                return 0; // Segundo mais vendido
+            if ($key == 0)
+                return 1; // Mais vendido
             return 2;                // Terceiro mais vendido
         })->values(); // Reindexa os índices da coleção
 
@@ -48,7 +51,7 @@ class HomeController extends Controller
         return view('home.index', [
             'produtosNatal' => $produtosNatal,
             'produtosChocolate' => $produtosChocolate,
-            'produtosMaisVendidos' => $produtosMaisVendidos, 
+            'produtosMaisVendidos' => $produtosMaisVendidos,
             'produtos' => $produtos,
             'categoriaChocolate' => $categoriaChocolate,
             'categoriaNatal' => $categoriaNatal,

@@ -26,7 +26,7 @@ class PedidoItemController extends Controller
 
         $pedidoItems = PedidoItem::whereHas('pedido', function ($query) use ($user) {
             $query->where('USUARIO_ID', $user->USUARIO_ID);
-        })->paginate(6); // Alterar a quantidade conforme necessidade
+        })->paginate(6);
 
         // Renderizar apenas os itens de pedido para resposta AJAX
         $pedidoItems_html = view('historico.partials.pedido_items', ['pedidoItems' => $pedidoItems])->render();

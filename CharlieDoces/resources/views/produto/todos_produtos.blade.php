@@ -96,7 +96,7 @@
 
             <section id="paginacao" data-current-page="{{ $produtos->currentPage() }}">
             {{ $produtos->links('pagination::bootstrap-4') }}
-            <button id="ver-mais" type="button">Ver Mais</button>
+            <button id="ver-mais" type="button">CARREGAR MAIS PRODUTOS</button>
         </section>
 
         </section>

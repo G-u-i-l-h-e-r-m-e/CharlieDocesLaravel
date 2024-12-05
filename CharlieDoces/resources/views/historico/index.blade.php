@@ -40,10 +40,8 @@
             </tbody>
         </table>
     </div>
-    <section id="paginacao" data-current-page="{{ $pedidoItems->currentPage() }}">
-        {{ $pedidoItems->links('pagination::bootstrap-4') }}
-        <!-- Botão "Ver Mais" para carregar mais pedidos -->
-        <button id="ver-mais" type="button">Ver Mais</button>
+    <section>
+    {{ $pedidoItems->links('pagination::bootstrap-4') }}
     </section>
 </body>
 </html>

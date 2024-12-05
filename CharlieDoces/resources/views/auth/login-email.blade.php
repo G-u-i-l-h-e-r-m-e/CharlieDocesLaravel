@@ -1,34 +1,63 @@
-<!-- resources/views/auth/login-emai.blade.php -->
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('title', 'Login')
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('img/header/logo.svg') }}" sizes="64x64" type="image/svg">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Scripts -->
+    @vite([
+        'resources/css/app.css',
+        'resources/css/login/login.css',
+        'resources/css/app.css',
+        'resources/css/componentes-style/component-card.css',
+        'resources/css/header.css',
+        'resources/css/footer.css',
+        'resources/css/todos_produtos.css',
+        'resources/css/card-produto-todos-produtos.css',
+        // JS files
+        'resources/js/app.js',
+        'resources/js/componentes-produtos/component-card.js',
+        'resources/js/carrousel-categoria.js',
+        'resources/js/categoria.js',
+        'resources/js/header.js',
+        'resources/js/login.js',
+        'resources/js/produto.js',
+        'resources/js/todos_produtos.js',
+    ])
 
-@section('content')
+</head>
+<body>
+    <section>
+        @include('profile.partials.header', ['categorias' => \App\Models\Categoria::all()]);
+    </section>
     <div class="login-container">
         <div class="login-form">
             <h2>Entrar ou Criar Conta</h2>
             <form id="login-form" class="login-form" method="POST" action="{{ route('email') }}">
                 @csrf
-                <div class="form-group">
+                <div>
                     <label for="email">Email ou CPF</label>
-                    <input type="text" id="email" name="email" class="form-control" placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX"
-                        value="{{ old('email') }}" required>
+                    <input type="text" id="email" name="email"
+                        placeholder="exemplo@exemplo.com.br ou XXX.XXX.XXX-XX" value="{{ old('email') }}">
                     @error('email')
-                        <p class="text-danger">{{ $message }}</p>
+                        <p class="text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Entrar</button>
+                <div>
+                    <button type="submit">Entrar</button>
                 </div>
-            </form>
         </div>
+        </form>
     </div>
-@endsection
 
-@push('styles')
-    @vite(['resources/css/login/login.css'])
-@endpush
+    <section class="footer">
+        @include('profile.partials.footer');
+    </section>
+</body>
 
-@push('scripts')
-    @vite(['resources/js/login-emai.js']) <!-- Se existir, caso contrário, use login.js -->
-@endpush
+</html>

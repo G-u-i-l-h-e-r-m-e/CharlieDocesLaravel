@@ -86,4 +86,7 @@ $(document).ready(function () {
         var nextPage = parseInt($('#paginacao').data('current-page')) + 1;
         carregarProdutos(nextPage, true);
     });
+
+    // Inicializar os cartões de produto na carga inicial
+    initializeProductCards();
 });

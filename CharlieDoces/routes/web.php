@@ -28,15 +28,14 @@ Route::group([], function () {
     Route::get('/categoria/{categoria}', [CategoriaController::class, 'show'])->name('categorias.show');
     Route::get('/produtos/categoria/{nome}', [ProdutoController::class, 'filtrar'])->name('produtos.categoria');
 
+
     // Rota para o método 'filtrar' no controlador
     Route::get('/produtos/filtrar', [ProdutoController::class, 'filtrar'])->name('produtos.filtrar');
 
     Route::post('/verificar-estoque', [ProdutoController::class, 'verificarEstoque']);
     Route::get('/search', [SearchController::class, 'results'])->name('search.results');
 
-    // Rota para exibir o histórico de pedidos (opcional, dependendo da estrutura)
-    // Pode ser acessada via ProfileController@show
-    // Route::get('/historico', [PedidoItemController::class, 'index'])->name('historico.index');
+
 });
 
 // Rotas Protegidas por Autenticação

@@ -1,12 +1,18 @@
-// resources/js/componentes-produtos/carousel-natal.js
+// resources/js/componentes-produtos/carousel-relacionados.js
 
 document.addEventListener('DOMContentLoaded', function () {
-    const track = document.querySelector('.carousel-natal-track');
-    const prevButton = document.querySelector('.carouselNatal-button.left');
-    const nextButton = document.querySelector('.carouselNatal-button.right');
-    const slides = track.querySelectorAll('.carousel-natal-slide');
+    const container = document.querySelector('.carousel-relacionados-container');
+    if (!container) {
+        console.warn('Carousel relacionados-container não encontrado.');
+        return;
+    }
+
+    const track = container.querySelector('.carousel-relacionados-track');
+    const prevButton = container.querySelector('.carouselRelacionados-button.left');
+    const nextButton = container.querySelector('.carouselRelacionados-button.right');
+    const slides = track.querySelectorAll('.carousel-relacionados-slide');
     const totalSlides = slides.length;
-    const totalProdutos = parseInt(document.querySelector('.carousel-natal-container').dataset.totalProdutos, 10);
+    const totalProdutos = parseInt(container.dataset.totalProdutos, 10);
 
     // Verificar se os elementos foram encontrados
     console.log('Track:', track);

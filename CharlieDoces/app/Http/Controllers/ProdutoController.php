@@ -8,6 +8,7 @@ use App\Models\Categoria;
 
 class ProdutoController extends Controller
 {
+    // Exibe a lista de produtos destacados na home
     public function index()
     {
         $produtos = Produto::whereIn('PRODUTO_ID', [278, 279, 280])
@@ -29,8 +30,10 @@ class ProdutoController extends Controller
         return view('produto.index', ['produtos' => $produtos, 'breadcrumbs' => $breadcrumbs]);
     }
 
+    // Exibe os detalhes do produto individual
     public function show(Produto $produto)
     {
+        // Carregar os detalhes do produto, imagens e estoque
         $produto = Produto::with([
             'produto_imagens' => function ($query) {
                 $query->orderBy('IMAGEM_ORDEM', 'asc');
@@ -39,6 +42,7 @@ class ProdutoController extends Controller
             'estoque'
         ])->findOrFail($produto->PRODUTO_ID);
 
+        // Produtos relacionados
         $produtosRelacionados = Produto::with([
             'produto_imagens' => function ($query) {
                 $query->orderBy('IMAGEM_ORDEM', 'asc')->limit(1);
@@ -63,6 +67,7 @@ class ProdutoController extends Controller
         ]);
     }
 
+    // Exibe todos os produtos
     public function todosProdutos(Request $request)
     {
         $query = $request->input('query');
@@ -98,6 +103,7 @@ class ProdutoController extends Controller
         return view('produto.todos_produtos', compact('produtos', 'categorias', 'breadcrumbs'));
     }
 
+    // Método de busca de produtos
     public function buscar(Request $request)
     {
         $termo = $request->input('q');
@@ -108,6 +114,7 @@ class ProdutoController extends Controller
         return response()->json($produtos);
     }
 
+    // Verifica a disponibilidade de estoque
     public function verificarEstoque(Request $request)
     {
         $validated = $request->validate([
@@ -127,18 +134,17 @@ class ProdutoController extends Controller
         return response()->json(['estoqueDisponivel' => true], 200);
     }
 
-    // Método 'filtrar' 
     public function filtrar(Request $request)
     {
         $categoriaSelecionada = $request->input('categoria', '');
         $ordenacao = $request->input('ordenacao', 'menor_preco');
         $page = $request->input('page', 1);
-
+    
         if ($categoriaSelecionada) {
             // Buscar a categoria pelo nome
             $categoria = Categoria::where('CATEGORIA_NOME', $categoriaSelecionada)->first();
         }
-
+    
         // Query base
         $query = Produto::with([
             'produto_imagens' => function ($query) {
@@ -146,7 +152,7 @@ class ProdutoController extends Controller
             },
             'estoque'
         ]);
-
+    
         if (isset($categoria)) {
             // Filtrar os produtos pela categoria
             $query->where('CATEGORIA_ID', $categoria->CATEGORIA_ID);
@@ -155,7 +161,7 @@ class ProdutoController extends Controller
             // Se nenhuma categoria selecionada, mostrar 'Todos os Produtos'
             $titulo_categoria = 'Todos os Produtos';
         }
-
+    
         // Aplicar ordenação
         switch ($ordenacao) {
             case 'menor_preco':
@@ -174,27 +180,31 @@ class ProdutoController extends Controller
                 $query->orderBy('PRODUTO_PRECO', 'asc');
                 break;
         }
-
+    
         // Paginar os resultados
         $produtos = $query->paginate(9, ['*'], 'page', $page);
-
+    
         // Breadcrumbs
         $breadcrumbs = [
             ['title' => 'Home', 'url' => route('home')],
             ['title' => 'Todos os Produtos', 'url' => route('produtos.todos')],
         ];
-
+    
         if (isset($categoria)) {
             $breadcrumbs[] = ['title' => $categoria->CATEGORIA_NOME, 'url' => '#'];
         }
-
+    
         // Renderizar os breadcrumbs e os produtos como HTML
         $breadcrumbs_html = view('components.breadcrumbs', compact('breadcrumbs'))->render();
-        $produtos_html = view('produto.produtos_list', ['produtos' => $produtos])->render();
-
+        // Passar o contexto 'todos_produtos' para a view produtos_list
+        $produtos_html = view('produto.produtos_list', [
+            'produtos' => $produtos,
+            'contexto' => 'todos_produtos' // Adicione esta linha
+        ])->render();
+    
         // Renderizar a paginação
         $pagination_html = $produtos->links('pagination::bootstrap-4')->toHtml();
-
+    
         return response()->json([
             'breadcrumbs_html' => $breadcrumbs_html,
             'produtos_html' => $produtos_html,

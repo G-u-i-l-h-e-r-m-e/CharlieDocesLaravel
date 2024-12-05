@@ -83,9 +83,10 @@ class CarrinhoController extends Controller
 
         $usuarioId = Auth::id();
 
-        $items = Carrinho::where('USUARIO_ID', $usuarioId)
-            ->with('produto.produto_imagens', 'produto.estoque')
-            ->get();
+        // Exibe 10 produtos por página
+    $items = Carrinho::where('USUARIO_ID', $usuarioId)
+    ->with('produto.produto_imagens', 'produto.estoque')
+    ->paginate(6); // 6 itens por página
 
         return view('carrinho.carrinho', ['items' => $items]);
     }
